@@ -1,0 +1,97 @@
+﻿@model StajYonetimBilgiSistemi.Models.Entity.STAJYER_TANIM
+@{
+    ViewBag.Title = "StajyerEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <form action="/StajyerTanim/StajyerEkle2/">
+
+        <div class="form-group">
+            <label>Adı</label>
+            <input type="text" name="ADI" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label>Soyad</label>
+            <input type="text" name="SOYADI" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label>Üniversite</label>
+            @Html.DropDownListFor(m => m.Uni.UniName, (List<SelectListItem>)ViewBag.dgr4, "---Seçiniz---", new { @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            <label>üniversite No</label>
+            <input type="text" name="UNIV_NO" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label>Bölümü</label>
+
+            @Html.DropDownListFor(m => m.Bolumler.BolumName, (List<SelectListItem>)ViewBag.dgr5, "---Seçiniz---", new { @class = "form-control" })
+
+
+        </div>
+        <div class="form-group">
+            <label>Sınıfı</label>
+            <input type="text" name="SINIFI" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="EMAIL" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label>Telefon</label>
+            <input type="text" name="TELEFON" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label>Staj Yılı</label>
+            <input type="text" name="STAJ_YILI" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label>Staj Başlama Tarihi</label>
+            @*@Html.TextBoxFor(x => x.STAJ_BAS_TARIHI, new { @class = "form-control", type = "date" })*@
+            @Html.TextBoxFor(m => m.STAJ_BAS_TARIHI, "{0:dd/MM/yyyy}", new { @class = "form-control", type = "date" })
+            @*<input type="date" name="STAJ_BAS_TARIHI" class="form-control" />*@
+        </div>
+        <div class="form-group">
+            <label>Staj Bitiş Tarihi</label>
+            @Html.TextBoxFor(m => m.STAJ_BIT_TARIHI, "{0:dd/MM/yyyy}", new { @class = "form-control", type = "date" })
+            @*@Html.TextBoxFor(x => x.STAJ_BIT_TARIHI, new { @class = "form-control", type = "date" })*@
+        </div>
+
+        <div class="form-group">
+            <label>Kurum Staj Sorumlusu</label>
+            @Html.DropDownListFor(m => m.KURUM_ST_SORUMLUSU, (List<SelectListItem>)ViewBag.dgr, "---Seçiniz---", new { @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            <label>Kurum Onaylayan Kişi</label>
+            @Html.DropDownListFor(m => m.KURUM_ONAY_KISI, (List<SelectListItem>)ViewBag.dgr1, "---Seçiniz---", new { @class = "form-control" })
+
+
+        </div>
+        <div class="form-group">
+            <label>Staj Kurumu</label>
+            @Html.DropDownListFor(m => m.FK_STAJ_KURUM, (List<SelectListItem>)ViewBag.dgr2, "---Seçiniz---", new { @class = "form-control" })
+
+
+        </div>
+        <div class="form-group">
+            <label>Departman</label>
+            @Html.DropDownListFor(m => m.FK_DEPARTMAN, (List<SelectListItem>)ViewBag.dgr3, "---Seçiniz---", new { @class = "form-control" })
+
+
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success">Stajyer Ekle</button>
+            <a href="/StajyerTanim/Index/">Ana Sayfa </a>
+        </div>
+    </form>
+</div>

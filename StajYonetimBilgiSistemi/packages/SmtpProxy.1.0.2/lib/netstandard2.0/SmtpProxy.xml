@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SmtpProxy</name>
+    </assembly>
+    <members>
+        <member name="T:SmtpProxy.DefaultSmtpClientFactory">
+            <summary>
+            A default factory to create an ISmtpClient instance.
+            </summary>
+        </member>
+        <member name="M:SmtpProxy.DefaultSmtpClientFactory.CreateSmtpClient">
+            <summary>
+            Provides a default implementation of ISmtpClient by using configuration file settings.
+            </summary>
+            <see cref="!:http://msdn.microsoft.com/en-us/library/w355a94k(v=vs.110).aspx"/>
+            <returns>A new instance of SmtpClientProxy.</returns>
+        </member>
+        <member name="M:SmtpProxy.DefaultSmtpClientFactory.CreateSmtpClient(System.String)">
+            <summary>
+            Provides a default implementation of ISmtpClient.
+            </summary>
+            <param name="host">A string that contains the name or IP address of the host computer used for SMTP transactions.</param>
+            <param name="port">An int greater than zero that contains the port to be used on the host.</param>
+            <returns>A new instance of SmtpClientProxy.</returns>
+        </member>
+        <member name="M:SmtpProxy.DefaultSmtpClientFactory.CreateSmtpClient(System.String,System.Int32)">
+            <summary>
+            Provides a default implementation of ISmtpClient.
+            </summary>
+            <param name="host">A string that contains the name or IP address of the host computer used for SMTP transactions.</param>
+            <param name="port">An int greater than zero that contains the port to be used on the host.</param>
+            <returns>A new instance of SmtpClientProxy.</returns>
+        </member>
+        <member name="T:SmtpProxy.ISmtpClient">
+            <summary>
+            An implementation of ISmtpClient used to send email.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.ClientCertificates">
+            <summary>
+            Specify which certificates should be used to establish the Secure Sockets Layer.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.Credentials">
+            <summary>
+            Gets or sets the credentials used to authenticate the sender.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.DeliveryFormat">
+            <summary>
+            Gets or sets the delivery format used by System.Net.Mail.SmtpClient to send e-mail.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.DeliveryMethod">
+            <summary>
+             how outgoing email messages will be handled.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.EnableSsl">
+            <summary>
+            Specify whether the System.Net.Mail.SmtpClient uses Secure Sockets Layer (SSL) to encrypt the connection.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.Host">
+            <summary>
+            Gets or sets the name or IP address of the host used for SMTP transactions.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.PickupDirectoryLocation">
+            <summary>
+            Gets or sets the folder where applications save mail messages to be processed by the local SMTP server.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.Port">
+            <summary>
+            Gets or sets the port used for SMTP transactions.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.ServicePoint">
+            <summary>
+            Gets the network connection used to transmit the e-mail message.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.Timeout">
+            <summary>
+            Gets or sets a value that specifies the amount of time after which a synchronous Send call times out.
+            </summary>
+        </member>
+        <member name="P:SmtpProxy.ISmtpClient.UseDefaultCredentials">
+            <summary>
+            Gets or sets a System.Boolean value that controls whether the System.Net.CredentialCache.DefaultCredentials are sent with requests.
+            </summary>
+        </member>
+        <member name="M:SmtpProxy.ISmtpClient.Send(System.String,System.String,System.String,System.String)">
+            <summary>
+            Sends the specified e-mail message to an SMTP server for delivery. The message
+            sender, recipients, subject, and message body are specified using System.String
+            objects.
+            </summary>
+            <param name="from">A System.String that contains the address information of the message sender.</param>
+            <param name="recipients"></param>
+            <param name="subject">A System.String that contains the subject line for the message.</param>
+            <param name="body">A System.String that contains the message body.</param>
+        </member>
+        <member name="M:SmtpProxy.ISmtpClient.Send(System.Net.Mail.MailMessage)">
+            <summary>
+            Sends the specified message to an SMTP server for delivery.
+            </summary>
+            <param name="message">A System.Net.Mail.MailMessage that contains the message to send.</param>
+        </member>
+        <member name="M:SmtpProxy.ISmtpClient.SendAsync(System.String,System.String,System.String,System.String,System.Object)">
+            <summary>
+            Sends an e-mail message to an SMTP server for delivery. The message sender, recipients,
+            subject, and message body are specified using System.String objects. This method
+            does not block the calling thread and allows the caller to pass an object to
+            the method that is invoked when the operation completes.
+            </summary>
+            <param name="from">A System.String that contains the address information of the message sender.</param>
+            <param name="recipients"></param>
+            <param name="subject">A System.String that contains the subject line for the message.</param>
+            <param name="body">A System.String that contains the message body.</param>
+            <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
+        </member>
+        <member name="M:SmtpProxy.ISmtpClient.SendAsync(System.Net.Mail.MailMessage,System.Object)">
+            <summary>
+            Sends the specified e-mail message to an SMTP server for delivery. This method
+            does not block the calling thread and allows the caller to pass an object to
+            the method that is invoked when the operation completes.
+            </summary>
+            <param name="message">A System.Net.Mail.MailMessage that contains the message to send.</param>
+            <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
+        </member>
+        <member name="M:SmtpProxy.ISmtpClient.SendMailAsync(System.Net.Mail.MailMessage)">
+            <summary>
+            Sends the specified message to an SMTP server for delivery as an asynchronous operation.
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmtpProxy.ISmtpClient.SendMailAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            Sends the specified message to an SMTP server for delivery as an asynchronous
+            operation. . The message sender, recipients, subject, and message body are specified
+            using System.String objects.
+            </summary>
+            <param name="from">A System.String that contains the address information of the message sender.</param>
+            <param name="recipients"></param>
+            <param name="subject">A System.String that contains the subject line for the message.</param>
+            <param name="body">A System.String that contains the message body.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmtpProxy.ISmtpClient.SendAsyncCancel">
+            <summary>
+            Cancels an asynchronous operation to send an e-mail message.
+            </summary>
+        </member>
+        <member name="E:SmtpProxy.ISmtpClient.SendCompleted">
+            <summary>
+            Occurs when an asynchronous e-mail send operation completes.
+            </summary>
+        </member>
+        <member name="T:SmtpProxy.ISmtpClientFactory">
+            <summary>
+            A factory interface used to generate an instance of ISmtpClient.
+            </summary>
+        </member>
+        <member name="M:SmtpProxy.ISmtpClientFactory.CreateSmtpClient">
+            <summary>
+            Provides a default implementation of ISmtpClient by using configuration file settings.
+            </summary>
+            <see cref="!:http://msdn.microsoft.com/en-us/library/w355a94k(v=vs.110).aspx"/>
+            <returns>A new instance of ISmtpClient.</returns>
+        </member>
+        <member name="M:SmtpProxy.ISmtpClientFactory.CreateSmtpClient(System.String)">
+            <summary>
+            Provides a default implementation of ISmtpClient.
+            </summary>
+            <param name="host">A string that contains the name or IP address of the host computer used for SMTP transactions.</param>
+            <param name="port">An int greater than zero that contains the port to be used on the host.</param>
+            <returns>A new instance of ISmtpClient.</returns>
+        </member>
+        <member name="M:SmtpProxy.ISmtpClientFactory.CreateSmtpClient(System.String,System.Int32)">
+            <summary>
+            Provides a default implementation of ISmtpClient.
+            </summary>
+            <param name="host">A string that contains the name or IP address of the host computer used for SMTP transactions.</param>
+            <param name="port">An int greater than zero that contains the port to be used on the host.</param>
+            <returns>A new instance of ISmtpClient.</returns>
+        </member>
+        <member name="T:SmtpProxy.SmtpClientProxy">
+            <summary>
+            Allows applications to send e-mail by using the Simple Mail Transfer Protocol (SMTP).
+            </summary>
+        </member>
+        <member name="M:SmtpProxy.SmtpClientProxy.#ctor">
+            <summary>
+            Initializes a new instance of SmtpClientProxy by using configuration file settings.
+            </summary>
+        </member>
+        <member name="M:SmtpProxy.SmtpClientProxy.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of SmtpClientProxy by using a specified SMTP server.
+            </summary>
+            <param name="host">A string that contains the name or IP address of the host computer used for SMTP transactions.</param>
+        </member>
+        <member name="M:SmtpProxy.SmtpClientProxy.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of SmtpClientProxy by using a specified SMTP server and port.
+            </summary>
+            <param name="host">A string that contains the name or IP address of the host computer used for SMTP transactions.</param>
+            <param name="port">An int greater than zero that contains the port to be used on the host.</param>
+        </member>
+    </members>
+</doc>

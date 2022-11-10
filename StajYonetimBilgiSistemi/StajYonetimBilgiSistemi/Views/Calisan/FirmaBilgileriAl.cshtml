@@ -1,0 +1,63 @@
+﻿@using StajYonetimBilgiSistemi.Models.Entity
+@model StajYonetimBilgiSistemi.Roller.FirmaBilgileri
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Çalıştığınız kurum bilgileri</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+
+            <td>
+                Firma Adı
+            </td>
+            <td>
+                Firma Yektilisi
+            </td>
+            <td>
+                Firma Adresi
+            </td>
+            <td>
+                Telefon
+            </td>
+            <td>
+                Email
+            </td>
+           
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.kurum_personel)
+
+        {
+            if (@item.EMAIL == User.Identity.Name)
+            {
+
+                foreach (var item2 in Model.kurum_tanım)
+                {
+                    if (item.FK_KURUM_TANIM == item2.PK_KURUM_TANIM)
+                    {
+
+                        <tr>
+                            <td>@item2.FIRMA_ADI</td>
+                            <td>@item2.FIRMA_YEKTILISI</td>
+                            <td>@item2.FIRMA_ADRESİ</td>
+                            <td>@item2.TELEFON</td>
+                            <td>@item2.EMAIL</td>
+
+                        </tr>
+
+                    }
+                }
+                <a href="/Calisan/PersonelBilgileriniAl/@item.FK_KURUM_TANIM">Şirketteki Personelleri Görüntüle &nbsp;</a>
+                <a href="/Calisan/StajerBilgileriniAl/@item.FK_KURUM_TANIM">Şirketteki Stajerleri Görüntüle &nbsp;</a>
+
+            }
+
+        }
+    </tbody>
+</table>

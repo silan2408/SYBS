@@ -1,0 +1,58 @@
+﻿
+@using StajYonetimBilgiSistemi.Models.Entity
+@model List<StajYonetimBilgiSistemi.Models.Entity.GUNLUK_CALISMA>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Günlük Çalışma Sayfası</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Stajyer
+            </td>
+            <td>
+                Tarih
+            </td>
+            <td>
+                Açıklama
+            </td>
+
+            <td>
+                Sil
+            </td>
+            <td>
+                Güncelle
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@item.PK_GUNLUK_CALISMA</td>
+                    <td>@item.STAJYER_TANIM.ADI</td>
+                    <td>@item.TARIH</td>
+                    <td>@item.ACIKLAMA</td>
+
+                    <td><a href="/GunlukCalisma/SilBilgiGetir/@item.PK_GUNLUK_CALISMA" class="btn btn-danger">Sil</a></td>
+                    <td><a href="/GunlukCalisma/GuncelleBilgiGetir/@item.PK_GUNLUK_CALISMA" class="btn btn-warning">Güncelle</a></td>
+
+                </tr>
+
+
+        }
+    </tbody>
+
+
+</table>
+<a href="/GunlukCalisma/GunlukCalismaEkle/" class="btn btn-success" style="margin-top:auto">Günlük Çalışma Ekle</a>

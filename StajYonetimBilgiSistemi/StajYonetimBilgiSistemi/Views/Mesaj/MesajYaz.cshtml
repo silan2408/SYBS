@@ -1,0 +1,123 @@
+﻿
+
+@{
+    ViewBag.Title = "MesajDetaylari";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using StajYonetimBilgiSistemi.Models.Entity
+@model List<StajYonetimBilgiSistemi.Models.Entity.MesajBilgileri>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Compose Message</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link href="~/Css/all.min.css" rel="stylesheet" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link href="~/Css/adminlte.min.css" rel="stylesheet" />
+    <!-- summernote -->
+    <link href="~/Css/summernote-bs4.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        @Html.Action("MesajListesiMenusu", "Mesaj")
+
+                        <!-- /.col -->
+                        <form class="login100-form validate-form" method="post" action="/Mesaj/MesajYaz2/">
+
+                            <div class="col-md-9">
+                                <div class="card card-primary card-outline">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Compose New Message</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Alıcı" name="AlıcıMail">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Konu:" name="Konu">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea id="compose-textarea" class="form-control" name="MesajIcerigi" style="height: 300px">
+                                       
+                                         </textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="btn btn-default btn-file">
+                                                <i class="fas fa-paperclip"></i> Attachment
+                                                <input type="file" name="attachment">
+                                            </div>
+                                            <p class="help-block">Max. 32MB</p>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
+                                            <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
+                                        </div>
+                                        <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
+                                    </div>
+
+
+
+
+                                    <!-- /.card-footer -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col -->
+                        </form>
+
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/js/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Summernote -->
+    <script src="~/js/summernote-bs4.min.js"></script>
+    <!-- Page Script -->
+    <script>
+        $(function () {
+            //Add text editor
+            $('#compose-textarea').summernote()
+        })</script>
+</body>
+</html>

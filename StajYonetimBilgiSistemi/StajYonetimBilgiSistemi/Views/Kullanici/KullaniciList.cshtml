@@ -1,0 +1,76 @@
+﻿
+@using StajYonetimBilgiSistemi.Models.Entity
+@model List<StajYonetimBilgiSistemi.Models.Entity.Kullanicilar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kullanıcı Listesi</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Kullanıcı Adı
+            </td>
+            <td>
+                Ad Soyad
+            </td>
+            <td>
+                Email
+            </td>
+            <td>
+                Sifre
+            </td>
+            <td>
+                Sifre Kontrol
+            </td>
+            <td>
+                Kayıt Tarihi
+            </td>
+            <td>
+                Rol
+            </td>
+            <td>
+               Şirketi
+            </td>
+            <td>
+                Departmanı
+            </td>
+            <td>
+                Personel İsmi
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.KullaniciAdi</td>
+                <td>@item.AdiSoyadi</td>
+
+
+                <td>@item.Email</td>
+                <td>@item.Sifre</td>
+                <td>@item.SifreKontrol</td>
+
+                <td>@item.KayitTarihi.ToShortDateString()</td>
+                <td>@item.Rol</td>
+
+                <td>@item.CalisanDepartman</td>
+                <td>@item.CalisanKurumTanim</td>
+
+                <td>@item.CalisanPersonel</td>
+                <td><a href="/Kullanici/SilBilgiGetir/@item.Id" class="btn btn-warning">Sil</a></td>
+                <td><a href="/Kullanici/GuncelleBilgiGetir/@item.Id" class="btn btn-warning">Güncelle</a></td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

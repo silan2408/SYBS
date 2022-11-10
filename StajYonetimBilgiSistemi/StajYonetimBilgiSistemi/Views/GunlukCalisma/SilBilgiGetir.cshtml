@@ -1,0 +1,29 @@
+﻿@model StajYonetimBilgiSistemi.Models.Entity.GUNLUK_CALISMA
+@{
+    ViewBag.Title = "SilBilgiGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SilBilgiGetir</h2>
+<div class="container">
+    @using (Html.BeginForm("Sil", "GunlukCalisma"))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x=>x.PK_GUNLUK_CALISMA)
+            <b> @Html.LabelFor(x => x.STAJYER_TANIM.ADI):</b> 
+            @Html.DisplayFor(x => x.STAJYER_TANIM.ADI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b>@Html.LabelFor(x => x.TARIH):</b> 
+            @Html.DisplayFor(x => x.TARIH, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b>@Html.LabelFor(x => x.ACIKLAMA):</b>
+            @Html.DisplayFor(x => x.ACIKLAMA, new { @class = "form-control" })
+        </div>
+        <div>
+            <button class="btn btn-danger">Günlük Çalışma Sil</button>
+            <a href="/Kullanici/KullaniciList/">Ana Sayfa </a>
+        </div>
+    }
+</div>

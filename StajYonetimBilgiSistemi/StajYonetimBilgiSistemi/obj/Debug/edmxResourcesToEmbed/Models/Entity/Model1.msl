@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SBYSModelStoreContainer" CdmEntityContainer="SBYSEntities12">
+    <EntitySetMapping Name="Bolumler">
+      <EntityTypeMapping TypeName="SBYSModel.Bolumler">
+        <MappingFragment StoreEntitySet="Bolumler">
+          <ScalarProperty Name="BolumId" ColumnName="BolumId" />
+          <ScalarProperty Name="BolumName" ColumnName="BolumName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Event">
+      <EntityTypeMapping TypeName="SBYSModel.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="Son" ColumnName="Son" />
+          <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+          <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GUNLUK_CALISMA">
+      <EntityTypeMapping TypeName="SBYSModel.GUNLUK_CALISMA">
+        <MappingFragment StoreEntitySet="GUNLUK_CALISMA">
+          <ScalarProperty Name="PK_GUNLUK_CALISMA" ColumnName="PK_GUNLUK_CALISMA" />
+          <ScalarProperty Name="FK_STAJYER_TANIM" ColumnName="FK_STAJYER_TANIM" />
+          <ScalarProperty Name="TARIH" ColumnName="TARIH" />
+          <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
+          <ScalarProperty Name="kullaniciadi" ColumnName="kullaniciadi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanicilar">
+      <EntityTypeMapping TypeName="SBYSModel.Kullanicilar">
+        <MappingFragment StoreEntitySet="Kullanicilar">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="AdiSoyadi" ColumnName="AdiSoyadi" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+          <ScalarProperty Name="SifreKontrol" ColumnName="SifreKontrol" />
+          <ScalarProperty Name="CalisanKurumTanim" ColumnName="CalisanKurumTanim" />
+          <ScalarProperty Name="CalisanDepartman" ColumnName="CalisanDepartman" />
+          <ScalarProperty Name="CalisanPersonel" ColumnName="CalisanPersonel" />
+          <ScalarProperty Name="rememberme" ColumnName="rememberme" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KURUM_DEPARTMAN">
+      <EntityTypeMapping TypeName="SBYSModel.KURUM_DEPARTMAN">
+        <MappingFragment StoreEntitySet="KURUM_DEPARTMAN">
+          <ScalarProperty Name="PK_KURUM_DEPARTMAN" ColumnName="PK_KURUM_DEPARTMAN" />
+          <ScalarProperty Name="FK_KURUM_TANIM" ColumnName="FK_KURUM_TANIM" />
+          <ScalarProperty Name="ADI" ColumnName="ADI" />
+          <ScalarProperty Name="AKTIF" ColumnName="AKTIF" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KURUM_PERSONEL">
+      <EntityTypeMapping TypeName="SBYSModel.KURUM_PERSONEL">
+        <MappingFragment StoreEntitySet="KURUM_PERSONEL">
+          <ScalarProperty Name="PK_KURUM_PERSONEL" ColumnName="PK_KURUM_PERSONEL" />
+          <ScalarProperty Name="FK_KURUM_DEPARTMAN" ColumnName="FK_KURUM_DEPARTMAN" />
+          <ScalarProperty Name="ADI" ColumnName="ADI" />
+          <ScalarProperty Name="SOYADI" ColumnName="SOYADI" />
+          <ScalarProperty Name="UNVAN" ColumnName="UNVAN" />
+          <ScalarProperty Name="GSM" ColumnName="GSM" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="FK_KURUM_TANIM" ColumnName="FK_KURUM_TANIM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KURUM_TANIM">
+      <EntityTypeMapping TypeName="SBYSModel.KURUM_TANIM">
+        <MappingFragment StoreEntitySet="KURUM_TANIM">
+          <ScalarProperty Name="PK_KURUM_TANIM" ColumnName="PK_KURUM_TANIM" />
+          <ScalarProperty Name="FIRMA_ADI" ColumnName="FIRMA_ADI" />
+          <ScalarProperty Name="FIRMA_YEKTILISI" ColumnName="FIRMA_YEKTILISI" />
+          <ScalarProperty Name="FIRMA_ADRESİ" ColumnName="FIRMA_ADRESİ" />
+          <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="Calisanlar" ColumnName="Calisanlar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MesajBilgileri">
+      <EntityTypeMapping TypeName="SBYSModel.MesajBilgileri">
+        <MappingFragment StoreEntitySet="MesajBilgileri">
+          <ScalarProperty Name="MesajBilgileriId" ColumnName="MesajBilgileriId" />
+          <ScalarProperty Name="GönderenMail" ColumnName="GönderenMail" />
+          <ScalarProperty Name="AlıcıMail" ColumnName="AlıcıMail" />
+          <ScalarProperty Name="Konu" ColumnName="Konu" />
+          <ScalarProperty Name="MesajIcerigi" ColumnName="MesajIcerigi" />
+          <ScalarProperty Name="MesajTarihi" ColumnName="MesajTarihi" />
+          <ScalarProperty Name="SilindiMi" ColumnName="SilindiMi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STAJYER_TANIM">
+      <EntityTypeMapping TypeName="SBYSModel.STAJYER_TANIM">
+        <MappingFragment StoreEntitySet="STAJYER_TANIM">
+          <ScalarProperty Name="PK_STAJYER_TANIM" ColumnName="PK_STAJYER_TANIM" />
+          <ScalarProperty Name="ADI" ColumnName="ADI" />
+          <ScalarProperty Name="SOYADI" ColumnName="SOYADI" />
+          <ScalarProperty Name="UNIVERSITE" ColumnName="UNIVERSITE" />
+          <ScalarProperty Name="UNIV_NO" ColumnName="UNIV_NO" />
+          <ScalarProperty Name="BOLUMU" ColumnName="BOLUMU" />
+          <ScalarProperty Name="SINIFI" ColumnName="SINIFI" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+          <ScalarProperty Name="STAJ_YILI" ColumnName="STAJ_YILI" />
+          <ScalarProperty Name="STAJ_BAS_TARIHI" ColumnName="STAJ_BAS_TARIHI" />
+          <ScalarProperty Name="STAJ_BIT_TARIHI" ColumnName="STAJ_BIT_TARIHI" />
+          <ScalarProperty Name="KURUM_ST_SORUMLUSU" ColumnName="KURUM_ST_SORUMLUSU" />
+          <ScalarProperty Name="KURUM_ONAY_KISI" ColumnName="KURUM_ONAY_KISI" />
+          <ScalarProperty Name="FK_STAJ_KURUM" ColumnName="FK_STAJ_KURUM" />
+          <ScalarProperty Name="FK_DEPARTMAN" ColumnName="FK_DEPARTMAN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SBYSModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uni">
+      <EntityTypeMapping TypeName="SBYSModel.Uni">
+        <MappingFragment StoreEntitySet="Uni">
+          <ScalarProperty Name="UniId" ColumnName="UniId" />
+          <ScalarProperty Name="UniName" ColumnName="UniName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

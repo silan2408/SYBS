@@ -1,0 +1,68 @@
+﻿@model StajYonetimBilgiSistemi.Models.Entity.Kullanicilar
+@{
+    ViewBag.Title = "SilBilgiGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+
+<div class="container">
+    @using (Html.BeginForm("Sil", "Kullanici"))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x => x.Id)
+            <b>Adı Soyadı:</b>
+            @Html.DisplayFor(x => x.AdiSoyadi, new { @class = "form-control" })
+        </div>
+        <br />
+        <div class="form-group">
+            <b>Kullanıcı Adı:</b>
+            @Html.DisplayFor(x => x.KullaniciAdi, new { @class = "form-control" })
+        </div>
+        <br />
+
+        <div class="form-group">
+            <b>Email:</b>
+            @Html.DisplayFor(x => x.Email, new { @class = "form-control" })
+        </div>
+        <br />
+
+        <div class="form-group">
+            <b>Şifre:</b>
+            @Html.DisplayFor(x => x.Sifre, new { @class = "form-control" })
+        </div>
+        <br />
+        <div class="form-group">
+            <b>Rol:</b>
+            @Html.DisplayFor(x => x.Rol, new { @class = "form-control" })
+        </div>
+        <br />
+        <div class="form-group">
+            <b>Kayıt Tarihi:</b>
+            @Html.DisplayFor(x => x.KayitTarihi, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b>Çalışan Kurum</b>
+
+            @Html.DisplayFor(x => x.KURUM_TANIM.FIRMA_ADI, new { @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            <b>Çalışan Departman </b>
+
+            @Html.DisplayFor(x => x.KURUM_DEPARTMAN.ADI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b>Çalışan Personel </b>
+            @Html.DisplayFor(x => x.KURUM_PERSONEL.ADI, new { @class = "form-control" })
+        </div>
+        <br />
+
+        <div>
+            <button class="btn btn-danger">Kişi Sil </button>
+            &nbsp;
+            <a href="/Kullanici/KullaniciList/">Ana Sayfa </a>
+        </div>
+    }
+</div>

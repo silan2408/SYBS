@@ -1,0 +1,30 @@
+﻿@model StajYonetimBilgiSistemi.Models.Entity.KURUM_DEPARTMAN
+@{
+    ViewBag.Title = "SilBilgiGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SilBilgiGetir</h2>
+
+<div class="container">
+    @using (Html.BeginForm("Sil", "KurumDepartman"))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x => x.PK_KURUM_DEPARTMAN)
+            <b> @Html.LabelFor(x => x.KURUM_TANIM.FIRMA_ADI):</b>
+            @Html.DisplayFor(x => x.KURUM_TANIM.FIRMA_ADI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b> @Html.LabelFor(x => x.ADI):</b>
+            @Html.DisplayFor(x => x.ADI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b> @Html.LabelFor(x => x.AKTIF):</b>
+            @Html.DisplayFor(x => x.AKTIF, new { @class = "form-control" })
+        </div>
+        <div>
+            <button class="btn btn-danger">Kurum Departman Sil</button>
+            <a href="/GunlukCalisma/Index/">Ana Sayfa </a>
+        </div>
+    }
+</div>

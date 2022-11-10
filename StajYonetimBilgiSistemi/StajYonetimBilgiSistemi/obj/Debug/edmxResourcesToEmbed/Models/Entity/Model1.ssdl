@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SBYSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bolumler">
+    <Key>
+      <PropertyRef Name="BolumId" />
+    </Key>
+    <Property Name="BolumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BolumName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Start" Type="datetime" Nullable="false" />
+    <Property Name="Son" Type="datetime" />
+    <Property Name="ThemeColor" Type="nvarchar" MaxLength="10" />
+    <Property Name="IsFullDay" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GUNLUK_CALISMA">
+    <Key>
+      <PropertyRef Name="PK_GUNLUK_CALISMA" />
+    </Key>
+    <Property Name="PK_GUNLUK_CALISMA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_STAJYER_TANIM" Type="int" Nullable="false" />
+    <Property Name="TARIH" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="ACIKLAMA" Type="varchar" MaxLength="4000" />
+    <Property Name="kullaniciadi" Type="int" />
+  </EntityType>
+  <EntityType Name="Kullanicilar">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AdiSoyadi" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Sifre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Rol" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="KayitTarihi" Type="date" Nullable="false" />
+    <Property Name="SifreKontrol" Type="varchar" MaxLength="50" />
+    <Property Name="CalisanKurumTanim" Type="int" />
+    <Property Name="CalisanDepartman" Type="int" />
+    <Property Name="CalisanPersonel" Type="int" />
+    <Property Name="rememberme" Type="bit" />
+  </EntityType>
+  <EntityType Name="KURUM_DEPARTMAN">
+    <Key>
+      <PropertyRef Name="PK_KURUM_DEPARTMAN" />
+    </Key>
+    <Property Name="PK_KURUM_DEPARTMAN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_KURUM_TANIM" Type="int" Nullable="false" />
+    <Property Name="ADI" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="AKTIF" Type="int" />
+  </EntityType>
+  <EntityType Name="KURUM_PERSONEL">
+    <Key>
+      <PropertyRef Name="PK_KURUM_PERSONEL" />
+    </Key>
+    <Property Name="PK_KURUM_PERSONEL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_KURUM_DEPARTMAN" Type="int" Nullable="false" />
+    <Property Name="ADI" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SOYADI" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UNVAN" Type="varchar" MaxLength="100" />
+    <Property Name="GSM" Type="varchar" MaxLength="100" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="200" />
+    <Property Name="FK_KURUM_TANIM" Type="int" />
+  </EntityType>
+  <EntityType Name="KURUM_TANIM">
+    <Key>
+      <PropertyRef Name="PK_KURUM_TANIM" />
+    </Key>
+    <Property Name="PK_KURUM_TANIM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIRMA_ADI" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="FIRMA_YEKTILISI" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="FIRMA_ADRESİ" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="TELEFON" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="100" />
+    <Property Name="Calisanlar" Type="int" />
+  </EntityType>
+  <EntityType Name="MesajBilgileri">
+    <Key>
+      <PropertyRef Name="MesajBilgileriId" />
+    </Key>
+    <Property Name="MesajBilgileriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GönderenMail" Type="varchar" MaxLength="50" />
+    <Property Name="AlıcıMail" Type="varchar" MaxLength="50" />
+    <Property Name="Konu" Type="varchar" MaxLength="100" />
+    <Property Name="MesajIcerigi" Type="varchar" MaxLength="500" />
+    <Property Name="MesajTarihi" Type="datetime" />
+    <Property Name="SilindiMi" Type="bit" />
+  </EntityType>
+  <EntityType Name="STAJYER_TANIM">
+    <Key>
+      <PropertyRef Name="PK_STAJYER_TANIM" />
+    </Key>
+    <Property Name="PK_STAJYER_TANIM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ADI" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SOYADI" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UNIVERSITE" Type="int" />
+    <Property Name="UNIV_NO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BOLUMU" Type="int" />
+    <Property Name="SINIFI" Type="varchar" MaxLength="500" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="100" />
+    <Property Name="TELEFON" Type="varchar" MaxLength="100" />
+    <Property Name="STAJ_YILI" Type="int" />
+    <Property Name="STAJ_BAS_TARIHI" Type="date" />
+    <Property Name="STAJ_BIT_TARIHI" Type="date" />
+    <Property Name="KURUM_ST_SORUMLUSU" Type="int" Nullable="false" />
+    <Property Name="KURUM_ONAY_KISI" Type="int" Nullable="false" />
+    <Property Name="FK_STAJ_KURUM" Type="int" Nullable="false" />
+    <Property Name="FK_DEPARTMAN" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Uni">
+    <Key>
+      <PropertyRef Name="UniId" />
+    </Key>
+    <Property Name="UniId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UniName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_GUNLUK_CALISMA_Kullanicilar">
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+    <End Role="GUNLUK_CALISMA" Type="Self.GUNLUK_CALISMA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanicilar">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GUNLUK_CALISMA">
+        <PropertyRef Name="kullaniciadi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GUNLUK_CALISMA_STAJYER_TANIM">
+    <End Role="STAJYER_TANIM" Type="Self.STAJYER_TANIM" Multiplicity="1" />
+    <End Role="GUNLUK_CALISMA" Type="Self.GUNLUK_CALISMA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STAJYER_TANIM">
+        <PropertyRef Name="PK_STAJYER_TANIM" />
+      </Principal>
+      <Dependent Role="GUNLUK_CALISMA">
+        <PropertyRef Name="FK_STAJYER_TANIM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kullanicilar_KURUM_DEPARTMAN">
+    <End Role="KURUM_DEPARTMAN" Type="Self.KURUM_DEPARTMAN" Multiplicity="0..1" />
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUM_DEPARTMAN">
+        <PropertyRef Name="PK_KURUM_DEPARTMAN" />
+      </Principal>
+      <Dependent Role="Kullanicilar">
+        <PropertyRef Name="CalisanDepartman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kullanicilar_KURUM_PERSONEL">
+    <End Role="KURUM_PERSONEL" Type="Self.KURUM_PERSONEL" Multiplicity="0..1" />
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUM_PERSONEL">
+        <PropertyRef Name="PK_KURUM_PERSONEL" />
+      </Principal>
+      <Dependent Role="Kullanicilar">
+        <PropertyRef Name="CalisanPersonel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kullanicilar_KURUM_TANIM">
+    <End Role="KURUM_TANIM" Type="Self.KURUM_TANIM" Multiplicity="0..1" />
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUM_TANIM">
+        <PropertyRef Name="PK_KURUM_TANIM" />
+      </Principal>
+      <Dependent Role="Kullanicilar">
+        <PropertyRef Name="CalisanKurumTanim" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KURUM_DEPARTMAN_KURUM_TANIM">
+    <End Role="KURUM_TANIM" Type="Self.KURUM_TANIM" Multiplicity="1" />
+    <End Role="KURUM_DEPARTMAN" Type="Self.KURUM_DEPARTMAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUM_TANIM">
+        <PropertyRef Name="PK_KURUM_TANIM" />
+      </Principal>
+      <Dependent Role="KURUM_DEPARTMAN">
+        <PropertyRef Name="FK_KURUM_TANIM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KURUM_PERSONEL_KURUM_DEPARTMAN">
+    <End Role="KURUM_DEPARTMAN" Type="Self.KURUM_DEPARTMAN" Multiplicity="1" />
+    <End Role="KURUM_PERSONEL" Type="Self.KURUM_PERSONEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUM_DEPARTMAN">
+        <PropertyRef Name="PK_KURUM_DEPARTMAN" />
+      </Principal>
+      <Dependent Role="KURUM_PERSONEL">
+        <PropertyRef Name="FK_KURUM_DEPARTMAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KURUM_PERSONEL_KURUM_TANIM">
+    <End Role="KURUM_TANIM" Type="Self.KURUM_TANIM" Multiplicity="0..1" />
+    <End Role="KURUM_PERSONEL" Type="Self.KURUM_PERSONEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUM_TANIM">
+        <PropertyRef Name="PK_KURUM_TANIM" />
+      </Principal>
+      <Dependent Role="KURUM_PERSONEL">
+        <PropertyRef Name="FK_KURUM_TANIM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STAJYER_TANIM_Bolumler">
+    <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="0..1" />
+    <End Role="STAJYER_TANIM" Type="Self.STAJYER_TANIM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bolumler">
+        <PropertyRef Name="BolumId" />
+      </Principal>
+      <Dependent Role="STAJYER_TANIM">
+        <PropertyRef Name="BOLUMU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STAJYER_TANIM_KURUM_DEPARTMAN">
+    <End Role="KURUM_DEPARTMAN" Type="Self.KURUM_DEPARTMAN" Multiplicity="1" />
+    <End Role="STAJYER_TANIM" Type="Self.STAJYER_TANIM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUM_DEPARTMAN">
+        <PropertyRef Name="PK_KURUM_DEPARTMAN" />
+      </Principal>
+      <Dependent Role="STAJYER_TANIM">
+        <PropertyRef Name="FK_DEPARTMAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STAJYER_TANIM_KURUM_PERSONEL">
+    <End Role="KURUM_PERSONEL" Type="Self.KURUM_PERSONEL" Multiplicity="1" />
+    <End Role="STAJYER_TANIM" Type="Self.STAJYER_TANIM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUM_PERSONEL">
+        <PropertyRef Name="PK_KURUM_PERSONEL" />
+      </Principal>
+      <Dependent Role="STAJYER_TANIM">
+        <PropertyRef Name="KURUM_ST_SORUMLUSU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STAJYER_TANIM_KURUM_PERSONEL1">
+    <End Role="KURUM_PERSONEL" Type="Self.KURUM_PERSONEL" Multiplicity="1" />
+    <End Role="STAJYER_TANIM" Type="Self.STAJYER_TANIM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUM_PERSONEL">
+        <PropertyRef Name="PK_KURUM_PERSONEL" />
+      </Principal>
+      <Dependent Role="STAJYER_TANIM">
+        <PropertyRef Name="KURUM_ONAY_KISI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STAJYER_TANIM_KURUM_TANIM">
+    <End Role="KURUM_TANIM" Type="Self.KURUM_TANIM" Multiplicity="1" />
+    <End Role="STAJYER_TANIM" Type="Self.STAJYER_TANIM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUM_TANIM">
+        <PropertyRef Name="PK_KURUM_TANIM" />
+      </Principal>
+      <Dependent Role="STAJYER_TANIM">
+        <PropertyRef Name="FK_STAJ_KURUM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STAJYER_TANIM_Uni">
+    <End Role="Uni" Type="Self.Uni" Multiplicity="0..1" />
+    <End Role="STAJYER_TANIM" Type="Self.STAJYER_TANIM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uni">
+        <PropertyRef Name="UniId" />
+      </Principal>
+      <Dependent Role="STAJYER_TANIM">
+        <PropertyRef Name="UNIVERSITE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SBYSModelStoreContainer">
+    <EntitySet Name="Bolumler" EntityType="Self.Bolumler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GUNLUK_CALISMA" EntityType="Self.GUNLUK_CALISMA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KURUM_DEPARTMAN" EntityType="Self.KURUM_DEPARTMAN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KURUM_PERSONEL" EntityType="Self.KURUM_PERSONEL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KURUM_TANIM" EntityType="Self.KURUM_TANIM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MesajBilgileri" EntityType="Self.MesajBilgileri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STAJYER_TANIM" EntityType="Self.STAJYER_TANIM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Uni" EntityType="Self.Uni" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_GUNLUK_CALISMA_Kullanicilar" Association="Self.FK_GUNLUK_CALISMA_Kullanicilar">
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+      <End Role="GUNLUK_CALISMA" EntitySet="GUNLUK_CALISMA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GUNLUK_CALISMA_STAJYER_TANIM" Association="Self.FK_GUNLUK_CALISMA_STAJYER_TANIM">
+      <End Role="STAJYER_TANIM" EntitySet="STAJYER_TANIM" />
+      <End Role="GUNLUK_CALISMA" EntitySet="GUNLUK_CALISMA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kullanicilar_KURUM_DEPARTMAN" Association="Self.FK_Kullanicilar_KURUM_DEPARTMAN">
+      <End Role="KURUM_DEPARTMAN" EntitySet="KURUM_DEPARTMAN" />
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kullanicilar_KURUM_PERSONEL" Association="Self.FK_Kullanicilar_KURUM_PERSONEL">
+      <End Role="KURUM_PERSONEL" EntitySet="KURUM_PERSONEL" />
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kullanicilar_KURUM_TANIM" Association="Self.FK_Kullanicilar_KURUM_TANIM">
+      <End Role="KURUM_TANIM" EntitySet="KURUM_TANIM" />
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KURUM_DEPARTMAN_KURUM_TANIM" Association="Self.FK_KURUM_DEPARTMAN_KURUM_TANIM">
+      <End Role="KURUM_TANIM" EntitySet="KURUM_TANIM" />
+      <End Role="KURUM_DEPARTMAN" EntitySet="KURUM_DEPARTMAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KURUM_PERSONEL_KURUM_DEPARTMAN" Association="Self.FK_KURUM_PERSONEL_KURUM_DEPARTMAN">
+      <End Role="KURUM_DEPARTMAN" EntitySet="KURUM_DEPARTMAN" />
+      <End Role="KURUM_PERSONEL" EntitySet="KURUM_PERSONEL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KURUM_PERSONEL_KURUM_TANIM" Association="Self.FK_KURUM_PERSONEL_KURUM_TANIM">
+      <End Role="KURUM_TANIM" EntitySet="KURUM_TANIM" />
+      <End Role="KURUM_PERSONEL" EntitySet="KURUM_PERSONEL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STAJYER_TANIM_Bolumler" Association="Self.FK_STAJYER_TANIM_Bolumler">
+      <End Role="Bolumler" EntitySet="Bolumler" />
+      <End Role="STAJYER_TANIM" EntitySet="STAJYER_TANIM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STAJYER_TANIM_KURUM_DEPARTMAN" Association="Self.FK_STAJYER_TANIM_KURUM_DEPARTMAN">
+      <End Role="KURUM_DEPARTMAN" EntitySet="KURUM_DEPARTMAN" />
+      <End Role="STAJYER_TANIM" EntitySet="STAJYER_TANIM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STAJYER_TANIM_KURUM_PERSONEL" Association="Self.FK_STAJYER_TANIM_KURUM_PERSONEL">
+      <End Role="KURUM_PERSONEL" EntitySet="KURUM_PERSONEL" />
+      <End Role="STAJYER_TANIM" EntitySet="STAJYER_TANIM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STAJYER_TANIM_KURUM_PERSONEL1" Association="Self.FK_STAJYER_TANIM_KURUM_PERSONEL1">
+      <End Role="KURUM_PERSONEL" EntitySet="KURUM_PERSONEL" />
+      <End Role="STAJYER_TANIM" EntitySet="STAJYER_TANIM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STAJYER_TANIM_KURUM_TANIM" Association="Self.FK_STAJYER_TANIM_KURUM_TANIM">
+      <End Role="KURUM_TANIM" EntitySet="KURUM_TANIM" />
+      <End Role="STAJYER_TANIM" EntitySet="STAJYER_TANIM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STAJYER_TANIM_Uni" Association="Self.FK_STAJYER_TANIM_Uni">
+      <End Role="Uni" EntitySet="Uni" />
+      <End Role="STAJYER_TANIM" EntitySet="STAJYER_TANIM" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,56 @@
+﻿@using StajYonetimBilgiSistemi.Models.Entity
+@model List<StajYonetimBilgiSistemi.Models.Entity.KURUM_TANIM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kurum Tanımlama Sayfası</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Firma Adı
+            </td>
+            <td>
+                Firma Yektilisi
+            </td>
+            <td>
+                Firma Adresi 
+            </td>
+            <td>
+                Telefon
+            </td>
+            <td>
+                Email
+            </td>
+         <td>
+             Sil
+         </td>
+            <td>
+                Güncelle
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.PK_KURUM_TANIM</td>
+                <td>@item.FIRMA_ADI</td>
+                <td>@item.FIRMA_YEKTILISI</td>
+                <td>@item.FIRMA_ADRESİ</td>
+                <td>@item.TELEFON</td>
+                <td>@item.EMAIL</td>
+                <td><a href="/KurumTanim/SilBilgiGetir/@item.PK_KURUM_TANIM" class="btn btn-danger">Sil</a></td>
+                <td><a href="/KurumTanim/GuncelleBilgiGetir/@item.PK_KURUM_TANIM" class="btn btn-warning">Güncelle</a></td>
+
+            </tr>
+            }
+    </tbody>
+</table>
+<a href="/KurumTanim/KurumEkle/" class="btn btn-success" style="margin-top">Kurum Ekle</a>

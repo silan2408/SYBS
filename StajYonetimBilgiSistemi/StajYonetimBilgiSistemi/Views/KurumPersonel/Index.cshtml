@@ -1,0 +1,60 @@
+﻿@using StajYonetimBilgiSistemi.Models.Entity
+@model List<StajYonetimBilgiSistemi.Models.Entity.KURUM_PERSONEL>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kurum Personel Sayfası</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>
+               ID
+            </td>
+            <td>
+             Departman
+            </td>
+            <td>
+                Adı
+            </td>
+            <td>
+                Soyadı
+            </td>
+            <td>
+                Unvan 
+            </td>
+            <td>
+                GSM
+            </td>
+            <td>
+                Email
+            </td>
+            <td>
+                Sil
+            </td>
+            <td>
+                Güncelle
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.PK_KURUM_PERSONEL</td>
+                <td>@item.KURUM_DEPARTMAN.ADI</td>
+                <td>@item.ADI</td>
+                <td>@item.SOYADI</td>
+                <td>@item.UNVAN</td>
+                <td>@item.GSM</td>
+                <td>@item.EMAIL</td>
+                <td><a href="/KurumPersonel/SilBilgiGetir/@item.PK_KURUM_PERSONEL" class="btn btn-danger">Sil</a></td>
+                <td><a href="/KurumPersonel/GuncelleBilgiGetir/@item.PK_KURUM_PERSONEL" class="btn btn-warning">Güncelle</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/KurumPersonel/PersonelEkle/" class="btn btn-success" >Personel Ekle</a>

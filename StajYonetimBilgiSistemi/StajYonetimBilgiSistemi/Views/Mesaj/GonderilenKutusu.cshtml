@@ -1,0 +1,192 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using StajYonetimBilgiSistemi.Models.Entity
+@model List<StajYonetimBilgiSistemi.Models.Entity.MesajBilgileri>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Mailbox</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link href="~/Css/all.min.css" rel="stylesheet" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link href="~/Css/icheck-bootstrap.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="~/Css/adminlte.min.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+
+                    @Html.Action("MesajListesiMenusu", "Mesaj")
+                    <!-- /.col -->
+                    <div class="col-md-9">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">Gönderilen Postalar</h3>
+
+                                @using (Html.BeginForm())
+                                {
+
+                                    <div class="card-tools" style="float:right;">
+                                        <div class="input-group input-group-sm ">
+                                            <div style="width: 70%; float: right; margin-right: 0px;">
+                                                @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Email " })
+                                            </div>
+                                            <div style="margin-right:0px;caret-color:blue">
+
+                                                @Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                
+                                <div class="table-responsive mailbox-messages">
+                                    <table class="table table-hover table-striped">
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+
+                                                    @*fa-star yıldızlı yapar*@
+                                                    <td class="mailbox-star"><a href="/Mesaj/MesajDetaylari/"><i class="fas fa-star-o text-warning"></i></a></td>
+                                                    <td class="mailbox-name">
+                                                        <a href="/Mesaj/MesajDetaylari/@item.MesajBilgileriId">
+                                                            Kime: @item.AlıcıMail
+                                                        </a>
+                                                    </td>
+                                                    <td class="mailbox-subject">
+                                                        <b>@item.Konu</b>- @item.MesajIcerigi.Substring(0, 10)......
+                                                    </td>
+                                                    <td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
+                                                    <td class="mailbox-date">@item.MesajTarihi</td>
+                                                    <td>
+                                                        <i class="far fa-trash-alt">
+                                                            @Html.ActionLink("Sil", "Index3", "Mesaj", new { id = @item.MesajBilgileriId }, null)
+                                                        </i>
+
+
+                                                    </td>
+
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                    <!-- /.table -->
+                                </div>
+                                <!-- /.mail-box-messages -->
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer p-0">
+                                <div class="mailbox-controls">
+                                    <!-- Check all button -->
+                                  
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-sm" ><i class="fas fa-reply"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm" ><i class="fas fa-share" ></i></button>
+                                    </div>
+                                    <!-- /.btn-group -->
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+                                    <div class="float-right">
+                                        1-50/200
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+                                            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+                                        </div>
+                                        <!-- /.btn-group -->
+                                    </div>
+                                    <!-- /.float-right -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </div>
+
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- Page Script -->
+    <script>
+        $(function () {
+            //Enable check and uncheck all functionality
+            $('.checkbox-toggle').click(function () {
+                var clicks = $(this).data('clicks')
+                if (clicks) {
+                    //Uncheck all checkboxes
+                    $('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
+                    $('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
+                } else {
+                    //Check all checkboxes
+                    $('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
+                    $('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
+                }
+                $(this).data('clicks', !clicks)
+            })
+
+            //Handle starring for glyphicon and font awesome
+            $('.mailbox-star').click(function (e) {
+                e.preventDefault()
+                //detect type
+                var $this = $(this).find('a > i')
+                var glyph = $this.hasClass('glyphicon')
+                var fa = $this.hasClass('fa')
+
+                //Switch states
+                if (glyph) {
+                    $this.toggleClass('glyphicon-star')
+                    $this.toggleClass('glyphicon-star-empty')
+                }
+
+                if (fa) {
+                    $this.toggleClass('fa-star')
+                    $this.toggleClass('fa-star-o')
+                }
+            })
+        })</script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/js/demo.js"></script>
+</body>
+</html>

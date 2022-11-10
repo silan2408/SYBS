@@ -1,0 +1,145 @@
+﻿@using StajYonetimBilgiSistemi.Models.Entity
+@*@model List<StajYonetimBilgiSistemi.Models.Entity.STAJYER_TANIM>*@
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.STAJYER_TANIM>
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
+}
+<script src="~/vendor/jquery/jquery-1.10.2.min.js"></script>
+
+@*<div class="container left-0">
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <div style="width:25%;float:left;">
+                @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Ad Soyad ,üniversite ara" })
+            </div>
+            <div style="float:left;margin-left:0px">
+
+                @Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })
+            </div>
+        </div>
+    }
+</div>*@
+
+<p style="text-align:center;font-size:large;">STAJER LİSTESİ</p>
+@*@grid.GetHtml(
+    columns: grid.Columns(
+    grid.Column("PK_STAJYER_TANIM", "Id"),
+    grid.Column("ADI", "Adı"),
+    grid.Column("SOYADI", "Soyadı"),
+    grid.Column("UNIVERSITE", "Üniversite"),
+    grid.Column("UNIV_NO", "Üniversite Numarası"),
+    grid.Column("BOLUMU", "Bölümü"),
+    grid.Column("SINIFI", "Sınıfı"),
+    grid.Column("EMAIL", "Email"),
+    grid.Column("TELEFON", "Telefon"),
+    grid.Column("STAJ_YILI", "Staj Yılı"),
+    grid.Column("STAJ_BAS_TARIHI", "Staj Başlama Tarihi", format: x => x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
+    grid.Column("STAJ_BIT_TARIHI", "Staj Bitiş Tarihi", format: x => x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
+    grid.Column("KURUM_PERSONEL.ADI", "Kurum Staj Sorumlusu"),
+    grid.Column("KURUM_PERSONEL1.ADI", "Kurum Onay Kişi"),
+    grid.Column("KURUM_TANIM.FIRMA_ADI", "Staj Kurumu"),
+    grid.Column("KURUM_DEPARTMAN.ADI", "Staj Departmanı")
+    )
+    )*@
+<table class="table table-bordered " border="1" cellpadding = "3" cellspacing = "3">
+    <thead>
+        <tr  style="text-align:center;font-size:medium">
+            <td>
+                ID
+            </td>
+            <td>
+                Adı
+            </td>
+            <td>
+                Soyadı
+            </td>
+            <td>
+                Üniversite
+            </td>
+            <td>
+                Üniversite No
+            </td>
+            <td>
+                Bölümü
+            </td>
+            <td>
+                Sınıfı
+            </td>
+            <td>
+                Email
+            </td>
+            <td>
+                Telefon
+            </td>
+            <td>
+                Staj Yılı
+            </td>
+            <td>
+                Staj Başlama Tarihi
+            </td>
+            <td>
+                Staj Bitiş Tarihi
+            </td>
+            <td>
+                Kurum Staj Sorumlusu
+            </td>
+            <td>
+                Kurum Onaylayan Kisi
+            </td>
+            <td>
+                Staj Kurum
+            </td>
+            <td>
+                Staj Departman
+            </td>
+            @*<td>
+                Sil
+            </td>
+            <td>
+                Güncelle
+            </td>*@
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+            <tr style="text-align: center; font-size: medium">
+                <td>@item.PK_STAJYER_TANIM</td>
+                <td>@item.ADI</td>
+                <td>@item.SOYADI</td>
+                <td>@item.Uni.UniName</td>
+                <td>@item.UNIV_NO</td>
+                <td>@item.Bolumler.BolumName</td>
+                <td>@item.SINIFI</td>
+                <td>@item.EMAIL</td>
+                <td>@item.TELEFON</td>
+                <td>@item.STAJ_YILI</td>
+                <td>@item.STAJ_BAS_TARIHI.Value.ToShortDateString()</td>
+                <td>@item.STAJ_BIT_TARIHI.Value.ToShortDateString()</td>
+                <td>@item.KURUM_PERSONEL.ADI</td>
+                <td>@item.KURUM_PERSONEL.ADI</td>
+                <td>@item.KURUM_TANIM.FIRMA_ADI</td>
+                <td>@item.KURUM_DEPARTMAN.ADI</td>
+                @*<td><a href="/StajyerTanim/SilBilgiGetir/@item.PK_STAJYER_TANIM" class="btn btn-danger">Sil</a></td>
+                <td><a href="/StajyerTanim/GuncelleBilgiGetir/@item.PK_STAJYER_TANIM" class="btn btn-warning">Güncelle</a></td>*@
+
+            </tr>
+
+        }
+    </tbody>
+
+
+</table>
+
+
+@*<b>Şuan ki stajyer sayısı : @ViewBag.Count</b>*@
+<br />
+@*<p>
+    @Html.ActionLink("PDF'e Dönüştür", "ExportToPdf")
+</p>
+<a href="/StajyerTanim/StajyerEkle/" class="btn btn-success" style="margin-top">Stajyer Ekle</a>*@

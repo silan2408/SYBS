@@ -1,0 +1,42 @@
+﻿@model StajYonetimBilgiSistemi.Models.Entity.GUNLUK_CALISMA
+@{
+    ViewBag.Title = "GuncelleBilgiGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GuncelleBilgiGetir</h2>
+
+
+<div class="container">
+    <form action="/GunlukCalisma/Guncelle/">
+       
+        @Html.HiddenFor(x => x.PK_GUNLUK_CALISMA)
+        <div class="form-group">
+            <b>Stajyer : </b>
+            @Html.DisplayFor(m => m.STAJYER_TANIM.ADI, new { @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            <label for="TARIH">Tarih :</label>
+           
+            @Html.TextBoxFor(x => x.TARIH, "{0:yyyy-MM-ddTHH:mm:ss}", new
+                        {
+                            @class = "form-control",
+                            required = "required",
+                            @type = "datetime-local"
+                        })
+
+        </div>
+        <div class="form-group">
+            <b>Açıklama</b>
+
+            @Html.TextAreaFor(x => x.ACIKLAMA, new { @class = "form-control"  })
+
+        </div>
+        <div>
+            <button class="btn btn-primary"> Günlük Çalışma Güncelle</button>
+            <a href="/GunlukCalisma/Index/">Geri Dön </a>
+
+        </div>
+    </form>
+</div>
