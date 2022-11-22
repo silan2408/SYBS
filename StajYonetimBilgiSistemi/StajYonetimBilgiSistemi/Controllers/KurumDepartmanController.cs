@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace StajYonetimBilgiSistemi.Controllers
@@ -11,8 +10,7 @@ namespace StajYonetimBilgiSistemi.Controllers
     [Authorize(Roles = "Admin,Calisan")]
     public class KurumDepartmanController : Controller
     {
-        SBYSEntities12 db = new SBYSEntities12();
-        // GET: KurumDepartman
+        SBYSEntities14 db = new SBYSEntities14();
         public ActionResult Index()
         {
             return View(db.KURUM_DEPARTMAN.ToList());

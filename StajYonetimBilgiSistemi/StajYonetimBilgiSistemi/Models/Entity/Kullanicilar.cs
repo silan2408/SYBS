@@ -18,6 +18,7 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public Kullanicilar()
         {
             this.GUNLUK_CALISMA = new HashSet<GUNLUK_CALISMA>();
+            this.STAJYER_TANIM = new HashSet<STAJYER_TANIM>();
         }
     
         public int Id { get; set; }
@@ -32,11 +33,15 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public Nullable<int> CalisanDepartman { get; set; }
         public Nullable<int> CalisanPersonel { get; set; }
         public Nullable<bool> rememberme { get; set; }
+        public string Kod { get; set; }
+        public Nullable<bool> kodOnay { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GUNLUK_CALISMA> GUNLUK_CALISMA { get; set; }
         public virtual KURUM_DEPARTMAN KURUM_DEPARTMAN { get; set; }
         public virtual KURUM_PERSONEL KURUM_PERSONEL { get; set; }
         public virtual KURUM_TANIM KURUM_TANIM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<STAJYER_TANIM> STAJYER_TANIM { get; set; }
     }
 }

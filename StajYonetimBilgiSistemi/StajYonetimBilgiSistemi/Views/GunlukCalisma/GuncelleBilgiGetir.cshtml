@@ -13,6 +13,7 @@
         @Html.HiddenFor(x => x.PK_GUNLUK_CALISMA)
         <div class="form-group">
             <b>Stajyer : </b>
+            @Html.HiddenFor(m => m.FK_STAJYER_TANIM, new { @class = "form-control" })
             @Html.DisplayFor(m => m.STAJYER_TANIM.ADI, new { @class = "form-control" })
 
         </div>

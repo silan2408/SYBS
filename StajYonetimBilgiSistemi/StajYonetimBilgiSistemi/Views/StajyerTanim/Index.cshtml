@@ -9,7 +9,20 @@
 <script src="~/vendor/jquery/jquery-1.10.2.min.js"></script>
 
 
+<div  style="text-align:center">
+    @using (Html.BeginForm())
+    {
+        <div class="form-group" style="width: 50%; align-self: normal;">
+            <div style="width:50%;float:left;">
+                @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Ad Soyad Ara" })
+            </div>
+            <div style="margin:-10px">
 
+                @Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })
+            </div>
+        </div>
+    }
+</div>
 @using (Html.BeginForm())
 {
     <br />
@@ -46,43 +59,9 @@
 
 }
 
-<div class="container left-0">
-    @using (Html.BeginForm())
-    {
-        <div class="form-group" style="width:50%;">
-            <div style="width:50%;float:left;">
-                @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Ad Soyad Ara" })
-            </div>
-            <div style="margin-left:0px">
 
-                @Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })
-            </div>
-        </div>
-    }
-</div>
-
-@*@grid.GetHtml(
-    columns: grid.Columns(
-    grid.Column("PK_STAJYER_TANIM", "Id"),
-    grid.Column("ADI","Adı"),
-    grid.Column("SOYADI","Soyadı"),
-    grid.Column("UNIVERSITE","Üniversite"),
-    grid.Column("UNIV_NO", "Üniversite Numarası"),
-    grid.Column("BOLUMU", "Bölümü"),
-    grid.Column("SINIFI", "Sınıfı"),
-    grid.Column("EMAIL", "Email"),
-    grid.Column("TELEFON", "Telefon"),
-    grid.Column("STAJ_YILI", "Staj Yılı"),
-    grid.Column("STAJ_BAS_TARIHI", "Staj Başlama Tarihi",format:x=>x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
-    grid.Column("STAJ_BIT_TARIHI", "Staj Bitiş Tarihi", format: x => x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
-    grid.Column("KURUM_PERSONEL.ADI", "Kurum Staj Sorumlusu"),
-    grid.Column("KURUM_PERSONEL1.ADI", "Kurum Onay Kişi"),
-    grid.Column("KURUM_TANIM.FIRMA_ADI", "Staj Kurumu"),
-    grid.Column("KURUM_DEPARTMAN.ADI", "Staj Departmanı")
-    )
-    )*@
-
-<table class="table table-bordered ">
+<h3 style="text-align:center;">Stajerler Listesi</h3>
+<table class="table table-bordered " style=" display: block; overflow-x: auto; white-space: nowrap;">
     <thead>
         <tr >
             <td>
@@ -150,7 +129,7 @@
                 <td>@item.PK_STAJYER_TANIM</td>
                 <td>@item.ADI</td>
                 <td>@item.SOYADI</td>
-                <td>@item.Uni.UniName.ToLower()</td>
+                <td>@item.Uni.UniName.ToString()</td>
                 <td>@item.UNIV_NO</td>
                 <td>@item.Bolumler.BolumName</td>
                 <td>@item.SINIFI</td>

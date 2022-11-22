@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace StajYonetimBilgiSistemi.Controllers
@@ -11,7 +10,7 @@ namespace StajYonetimBilgiSistemi.Controllers
     [Authorize(Roles = "Admin,Calisan")]
     public class KurumPersonelController : Controller
     {
-        SBYSEntities12 db = new SBYSEntities12();
+        SBYSEntities14 db = new SBYSEntities14();
         public ActionResult Index()
         {
             return View(db.KURUM_PERSONEL.ToList());
@@ -26,6 +25,14 @@ namespace StajYonetimBilgiSistemi.Controllers
 
                                              }).ToList();
             ViewBag.dgr = degerler;
+            List<SelectListItem> degerler1 = (from i in db.KURUM_TANIM.ToList()
+                                             select new SelectListItem
+                                             {
+                                                 Text = i.FIRMA_ADI,
+                                                 Value = i.PK_KURUM_TANIM.ToString()
+
+                                             }).ToList();
+            ViewBag.dgr1 = degerler1;
             return View();
         }
         public ActionResult PersonelEkle2(KURUM_PERSONEL p)
@@ -54,7 +61,7 @@ namespace StajYonetimBilgiSistemi.Controllers
 
                                              }).ToList();
             ViewBag.dgr = degerler;
-         
+
             return View(model);
         }
         public ActionResult Guncelle(KURUM_PERSONEL p)

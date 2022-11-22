@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Security;
 
 namespace StajYonetimBilgiSistemi.Roller
 {
- 
+
     public class KullaniciRolleri : RoleProvider
     {
         public override string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -36,13 +35,13 @@ namespace StajYonetimBilgiSistemi.Roller
         {
             throw new NotImplementedException();
         }
-        SBYSEntities12 db = new SBYSEntities12();
+        SBYSEntities14 db = new SBYSEntities14();
         public override string[] GetRolesForUser(string username)
         {
             //var kullanici = db.Kullanicilar.FirstOrDefault(x => x.Email == username);
             //return new string[] { kullanici.Rol };
 
-            List<Kullanicilar> kullaniciRolleri = db.Kullanicilar.Where(x => x.Email == username).ToList();
+            List<Kullanicilar> kullaniciRolleri = db.Kullanicilar.Where(x => (x.Email == username) || (x.KullaniciAdi == username)).ToList();
 
             string[] roller = new string[kullaniciRolleri.Count];
             if (kullaniciRolleri.Count > 0)

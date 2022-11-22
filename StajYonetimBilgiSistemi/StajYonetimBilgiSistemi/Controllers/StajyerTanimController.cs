@@ -1,28 +1,27 @@
-﻿using StajYonetimBilgiSistemi.Models.Entity;
+﻿using Rotativa;
+using StajYonetimBilgiSistemi.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Rotativa;
 
 namespace StajYonetimBilgiSistemi.Controllers
 {
-    [Authorize(Roles ="Admin,Calisan")]
+    [Authorize(Roles = "Admin")]
     public class StajyerTanimController : Controller
     {
-        SBYSEntities12 db = new SBYSEntities12();
+        SBYSEntities14 db = new SBYSEntities14();
         // GET: StajyerTanim
 
 
-        public ActionResult Index(string ara, string SelectOption,string SelectOption2)
+        public ActionResult Index(string ara, string SelectOption, string SelectOption2)
         {
             var model = db.STAJYER_TANIM.ToList();
-            if(!string.IsNullOrEmpty(ara))
+            if (!string.IsNullOrEmpty(ara))
             {
-            ara = ara.ToLower();
-                model = model.Where(x => x.ADI.ToLower().Contains(ara) || x.SOYADI.ToLower().Contains(ara) ).ToList();
+                ara = ara.ToLower();
+                model = model.Where(x => x.ADI.ToLower().Contains(ara) || x.SOYADI.ToLower().Contains(ara)).ToList();
             }
 
 
@@ -31,10 +30,10 @@ namespace StajYonetimBilgiSistemi.Controllers
 
                 SelectOption = SelectOption.ToLower();
                 model = model.Where(a => a.UNIVERSITE.ToString().Contains(SelectOption)).ToList();
-                return View (model);
+                return View(model);
 
             }
-           else if (!String.IsNullOrEmpty(SelectOption2) && SelectOption2 != "null")
+            else if (!String.IsNullOrEmpty(SelectOption2) && SelectOption2 != "null")
             {
 
                 SelectOption2 = SelectOption2.ToLower();
@@ -45,10 +44,10 @@ namespace StajYonetimBilgiSistemi.Controllers
             {
                 return View(model);
             }
-            
-           
+
+
         }
-    
+
         public ActionResult StajyerEkle()
         {
 
@@ -62,30 +61,30 @@ namespace StajYonetimBilgiSistemi.Controllers
             ViewBag.dgr = degerler;
 
             List<SelectListItem> degerler1 = (from i in db.KURUM_PERSONEL.ToList()
-                                             select new SelectListItem
-                                             {
-                                                 Text = i.ADI,
-                                                 Value = i.PK_KURUM_PERSONEL.ToString()
+                                              select new SelectListItem
+                                              {
+                                                  Text = i.ADI,
+                                                  Value = i.PK_KURUM_PERSONEL.ToString()
 
-                                             }).ToList();
+                                              }).ToList();
             ViewBag.dgr1 = degerler1;
 
             List<SelectListItem> degerler2 = (from i in db.KURUM_TANIM.ToList()
-                                             select new SelectListItem
-                                             {
-                                                 Text = i.FIRMA_ADI,
-                                                 Value = i.PK_KURUM_TANIM.ToString()
+                                              select new SelectListItem
+                                              {
+                                                  Text = i.FIRMA_ADI,
+                                                  Value = i.PK_KURUM_TANIM.ToString()
 
-                                             }).ToList();
+                                              }).ToList();
             ViewBag.dgr2 = degerler2;
 
             List<SelectListItem> degerler3 = (from i in db.KURUM_DEPARTMAN.ToList()
-                                             select new SelectListItem
-                                             {
-                                                 Text = i.ADI,
-                                                 Value = i.PK_KURUM_DEPARTMAN.ToString()
+                                              select new SelectListItem
+                                              {
+                                                  Text = i.ADI,
+                                                  Value = i.PK_KURUM_DEPARTMAN.ToString()
 
-                                             }).ToList();
+                                              }).ToList();
             ViewBag.dgr3 = degerler3;
             List<SelectListItem> degerler4 = (from i in db.Uni.ToList()
                                               select new SelectListItem
@@ -161,12 +160,12 @@ namespace StajYonetimBilgiSistemi.Controllers
                                               }).ToList();
             ViewBag.dgr3 = degerler3;
             List<SelectListItem> degerler4 = (from i in db.Uni.ToList()
-                                             select new SelectListItem
-                                             {
-                                                 Text = i.UniName,
-                                                 Value = i.UniId.ToString()
+                                              select new SelectListItem
+                                              {
+                                                  Text = i.UniName,
+                                                  Value = i.UniId.ToString()
 
-                                             }).ToList();
+                                              }).ToList();
             ViewBag.dgr4 = degerler4;
             List<SelectListItem> degerler5 = (from i in db.Bolumler.ToList()
                                               select new SelectListItem
@@ -196,6 +195,38 @@ namespace StajYonetimBilgiSistemi.Controllers
             db.Entry(p).State = System.Data.Entity.EntityState.Deleted;
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult GetAll()
+        {
+
+
+            var model = db.STAJYER_TANIM.ToList();
+
+
+            return View(model);
+
+        }
+        public ActionResult ExportToPdf()
+        {
+            bool k = true;
+            if (k)
+            {
+                var q = new ActionAsPdf("GetAll");
+                {
+                    //q.PageWidth = 560;
+                    //q.PageHeight = 360;
+                    q.PageSize = Rotativa.Options.Size.A4;
+                    //q.PageMargins.Left = 25;
+                    //q.PageMargins.Right= 25;
+                    q.IsJavaScriptDisabled = true;
+
+
+                }
+                return q;
+
+            }
+
+            return RedirectToAction("StajyerTanim", "Index");
         }
     }
 }

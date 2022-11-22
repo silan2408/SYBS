@@ -1,57 +1,52 @@
-﻿using Microsoft.Ajax.Utilities;
-using Rotativa;
+﻿using Rotativa;
 using StajYonetimBilgiSistemi.Models.Entity;
-using StajYonetimBilgiSistemi.Roller;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace StajYonetimBilgiSistemi.Controllers
 {
-    [Authorize(Roles = "Stajyer,Calisan")]
+    [Authorize(Roles = "Calisan")]
     public class CalisanController : Controller
     {
-        SBYSEntities12 db = new SBYSEntities12();
+        SBYSEntities14 db = new SBYSEntities14();
         // GET: Calisan
-        public ActionResult Index()
-        {
-            return View();
-        }
+
         [HttpGet]
         public ActionResult FirmaBilgileriAl()
         {
-            //string a = User.Identity.Name;
-            FirmaBilgileri firma = new FirmaBilgileri();
-            firma.kurum_tanım = db.KURUM_TANIM.ToList();
-            firma.kurum_personel = db.KURUM_PERSONEL.ToList();
-            ////var model = db.KURUM_PERSONEL.Where(x => x.EMAIL == User.Identity.Name);
-            //var sorgu = from d1 in db.KURUM_TANIM
-            //            join d2 in db.KURUM_PERSONEL
-            //            on d1.PK_KURUM_TANIM equals d2.FK_KURUM_TANIM
-            //            select d1;
+            var a = (from c in db.Kullanicilar
+                     where c.Email == User.Identity.Name
+                     select c).SingleOrDefault();
+
+            var model = db.KURUM_TANIM.Where(x => x.PK_KURUM_TANIM == a.CalisanKurumTanim).ToList();
 
 
-
-            return View(firma);
+            return View(model);
 
         }
         [HttpGet]
-        public ActionResult PersonelBilgileriniAl(int id )
+        public ActionResult PersonelBilgileriniAl()
         {
-            var model = db.KURUM_PERSONEL.Where(x => x.FK_KURUM_TANIM == id).ToList();
+            var a = (from c in db.Kullanicilar
+                     where c.Email == User.Identity.Name
+                     select c).SingleOrDefault();
 
+            var model = db.KURUM_PERSONEL.Where(x => x.FK_KURUM_TANIM == a.CalisanKurumTanim).ToList();
 
 
             return View(model);
 
         }
 
-        public ActionResult StajerBilgileriniAl(int id, string ara, string SelectOption, string SelectOption2)
+        public ActionResult StajerBilgileriniAl(string ara, string SelectOption, string SelectOption2)
         {
-            var model = db.STAJYER_TANIM.Where(x => x.FK_STAJ_KURUM == id).ToList();
+            var a = (from c in db.Kullanicilar
+                     where c.Email == User.Identity.Name
+                     select c).SingleOrDefault();
+
+            var model = db.STAJYER_TANIM.Where(x => x.FK_STAJ_KURUM == a.CalisanKurumTanim).ToList();
 
 
 
@@ -66,7 +61,7 @@ namespace StajYonetimBilgiSistemi.Controllers
             {
 
                 SelectOption = SelectOption.ToLower();
-                model = model.Where(a => a.UNIVERSITE.ToString().Contains(SelectOption)).ToList();
+                model = model.Where(x => x.UNIVERSITE.ToString().Contains(SelectOption)).ToList();
                 return View(model);
 
             }
@@ -74,7 +69,7 @@ namespace StajYonetimBilgiSistemi.Controllers
             {
 
                 SelectOption2 = SelectOption2.ToLower();
-                model = model.Where(a => a.BOLUMU.ToString().Contains(SelectOption2)).ToList();
+                model = model.Where(x => x.BOLUMU.ToString().Contains(SelectOption2)).ToList();
                 return View(model);
             }
             else
@@ -83,12 +78,26 @@ namespace StajYonetimBilgiSistemi.Controllers
             }
 
         }
+        public ActionResult GetAll()
+        {
+
+            var a = (from c in db.Kullanicilar
+                     where c.Email == User.Identity.Name
+                     select c).SingleOrDefault();
+
+            var model = db.STAJYER_TANIM.Where(x => x.FK_STAJ_KURUM == a.CalisanKurumTanim).ToList();
+
+
+
+            return View(model);
+
+        }
         public ActionResult ExportToPdf()
         {
             bool k = true;
             if (k)
             {
-                var q = new ActionAsPdf("StajerBilgileriniAl");
+                var q = new ActionAsPdf("GetAll");
                 {
                     //q.PageWidth = 560;
                     //q.PageHeight = 360;

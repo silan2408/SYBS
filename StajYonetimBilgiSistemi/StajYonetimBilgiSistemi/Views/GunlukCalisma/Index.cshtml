@@ -46,6 +46,7 @@
 
                     <td><a href="/GunlukCalisma/SilBilgiGetir/@item.PK_GUNLUK_CALISMA" class="btn btn-danger">Sil</a></td>
                     <td><a href="/GunlukCalisma/GuncelleBilgiGetir/@item.PK_GUNLUK_CALISMA" class="btn btn-warning">Güncelle</a></td>
+                    <td><a href="/GunlukCalisma/ExportToPdf2/@item.PK_GUNLUK_CALISMA" class="btn btn-warning">Pdf çıktısını al</a></td>
 
                 </tr>
 
@@ -55,4 +56,9 @@
 
 
 </table>
+
 <a href="/GunlukCalisma/GunlukCalismaEkle/" class="btn btn-success" style="margin-top:auto">Günlük Çalışma Ekle</a>
+<br />
+<p>
+    @Html.ActionLink("Tüm günleri PDF'e Dönüştür", "ExportToPdf")
+</p>

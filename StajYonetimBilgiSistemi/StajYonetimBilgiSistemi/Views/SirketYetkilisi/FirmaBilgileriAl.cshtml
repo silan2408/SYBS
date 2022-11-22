@@ -1,0 +1,59 @@
+﻿
+@using StajYonetimBilgiSistemi.Models.Entity
+@model List<StajYonetimBilgiSistemi.Models.Entity.KURUM_TANIM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Çalıştığınız kurum bilgileri</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+
+            <td>
+                Firma Adı
+            </td>
+            <td>
+                Firma Yektilisi
+            </td>
+            <td>
+                Firma Adresi
+            </td>
+            <td>
+                Telefon
+            </td>
+            <td>
+                Email
+            </td>
+          
+            <td>
+                Güncelle
+            </td>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@item.FIRMA_ADI</td>
+                <td>@item.FIRMA_YEKTILISI</td>
+                <td>@item.FIRMA_ADRESİ</td>
+                <td>@item.TELEFON</td>
+                <td>@item.EMAIL</td>
+
+                <td><a href="/SirketYetkilisi/GuncelleBilgiGetirFirma/@item.PK_KURUM_TANIM" class="btn btn-warning">Güncelle</a></td>
+            </tr>
+
+        }
+
+
+     
+
+
+    </tbody>
+</table>

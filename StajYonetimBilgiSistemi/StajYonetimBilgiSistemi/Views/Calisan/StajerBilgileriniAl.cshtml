@@ -66,16 +66,16 @@
 @grid.GetHtml(
     columns: grid.Columns(
     grid.Column("PK_STAJYER_TANIM", "Id"),
-    grid.Column("ADI","Adı"),
-    grid.Column("SOYADI","Soyadı"),
-    grid.Column("UNIVERSITE","Üniversite"),
+    grid.Column("ADI", "Adı"),
+    grid.Column("SOYADI", "Soyadı"),
+    grid.Column("UNIVERSITE", "Üniversite"),
     grid.Column("UNIV_NO", "Üniversite Numarası"),
     grid.Column("BOLUMU", "Bölümü"),
     grid.Column("SINIFI", "Sınıfı"),
     grid.Column("EMAIL", "Email"),
     grid.Column("TELEFON", "Telefon"),
     grid.Column("STAJ_YILI", "Staj Yılı"),
-    grid.Column("STAJ_BAS_TARIHI", "Staj Başlama Tarihi",format:x=>x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
+    grid.Column("STAJ_BAS_TARIHI", "Staj Başlama Tarihi", format: x => x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
     grid.Column("STAJ_BIT_TARIHI", "Staj Bitiş Tarihi", format: x => x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
     grid.Column("KURUM_PERSONEL.ADI", "Kurum Staj Sorumlusu"),
     grid.Column("KURUM_PERSONEL1.ADI", "Kurum Onay Kişi"),
@@ -85,99 +85,103 @@
     )
 
 @*<table class="table table-bordered ">
-    <thead>
-        <tr>
-            <td>
-                ID
-            </td>
-            <td>
-                Adı
-            </td>
-            <td>
-                Soyadı
-            </td>
-            <td>
-                Üniversite
-            </td>
-            <td>
-                Üniversite No
-            </td>
-            <td>
-                Bölümü
-            </td>
-            <td>
-                Sınıfı
-            </td>
-            <td>
-                Email
-            </td>
-            <td>
-                Telefon
-            </td>
-            <td>
-                Staj Yılı
-            </td>
-            <td>
-                Staj Başlama Tarihi
-            </td>
-            <td>
-                Staj Bitiş Tarihi
-            </td>
-            <td>
-                Kurum Staj Sorumlusu
-            </td>
-            <td>
-                Kurum Onaylayan Kisi
-            </td>
-            <td>
-                Staj Kurum
-            </td>
-            <td>
-                Staj Departman
-            </td>
-            <td>
-                Sil
-            </td>
-            <td>
-                Güncelle
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var item in Model)
-        {
-
+        <thead>
             <tr>
-                <td>@item.PK_STAJYER_TANIM</td>
-                <td>@item.ADI</td>
-                <td>@item.SOYADI</td>
-                <td>@item.Uni.UniName</td>
-                <td>@item.UNIV_NO</td>
-                <td>@item.Bolumler.BolumName</td>
-                <td>@item.SINIFI</td>
-                <td>@item.EMAIL</td>
-                <td>@item.TELEFON</td>
-                <td>@item.STAJ_YILI</td>
-                <td>@item.STAJ_BAS_TARIHI.Value.ToShortDateString()</td>
-                <td>@item.STAJ_BIT_TARIHI.Value.ToShortDateString()</td>
-                <td>@item.KURUM_PERSONEL.ADI</td>
-                <td>@item.KURUM_PERSONEL.ADI</td>
-                <td>@item.KURUM_TANIM.FIRMA_ADI</td>
-                <td>@item.KURUM_DEPARTMAN.ADI</td>
-                <td><a href="/StajyerTanim/SilBilgiGetir/@item.PK_STAJYER_TANIM" class="btn btn-danger">Sil</a></td>
-                <td><a href="/StajyerTanim/GuncelleBilgiGetir/@item.PK_STAJYER_TANIM" class="btn btn-warning">Güncelle</a></td>
-
+                <td>
+                    ID
+                </td>
+                <td>
+                    Adı
+                </td>
+                <td>
+                    Soyadı
+                </td>
+                <td>
+                    Üniversite
+                </td>
+                <td>
+                    Üniversite No
+                </td>
+                <td>
+                    Bölümü
+                </td>
+                <td>
+                    Sınıfı
+                </td>
+                <td>
+                    Email
+                </td>
+                <td>
+                    Telefon
+                </td>
+                <td>
+                    Staj Yılı
+                </td>
+                <td>
+                    Staj Başlama Tarihi
+                </td>
+                <td>
+                    Staj Bitiş Tarihi
+                </td>
+                <td>
+                    Kurum Staj Sorumlusu
+                </td>
+                <td>
+                    Kurum Onaylayan Kisi
+                </td>
+                <td>
+                    Staj Kurum
+                </td>
+                <td>
+                    Staj Departman
+                </td>
+                <td>
+                    Sil
+                </td>
+                <td>
+                    Güncelle
+                </td>
             </tr>
+        </thead>
+        <tbody>
 
-        }
-    </tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@item.PK_STAJYER_TANIM</td>
+                    <td>@item.ADI</td>
+                    <td>@item.SOYADI</td>
+                    <td>@item.Uni.UniName</td>
+                    <td>@item.UNIV_NO</td>
+                    <td>@item.Bolumler.BolumName</td>
+                    <td>@item.SINIFI</td>
+                    <td>@item.EMAIL</td>
+                    <td>@item.TELEFON</td>
+                    <td>@item.STAJ_YILI</td>
+                    <td>@item.STAJ_BAS_TARIHI.Value.ToShortDateString()</td>
+                    <td>@item.STAJ_BIT_TARIHI.Value.ToShortDateString()</td>
+                    <td>@item.KURUM_PERSONEL.ADI</td>
+                    <td>@item.KURUM_PERSONEL.ADI</td>
+                    <td>@item.KURUM_TANIM.FIRMA_ADI</td>
+                    <td>@item.KURUM_DEPARTMAN.ADI</td>
+                    <td><a href="/StajyerTanim/SilBilgiGetir/@item.PK_STAJYER_TANIM" class="btn btn-danger">Sil</a></td>
+                    <td><a href="/StajyerTanim/GuncelleBilgiGetir/@item.PK_STAJYER_TANIM" class="btn btn-warning">Güncelle</a></td>
+
+                </tr>
+
+            }
+        </tbody>
 
 
-</table>*@
+    </table>*@
 
 @*<b>Şuan ki stajyer sayısı : @ViewBag.Count</b>*@
 <br />
 
-
+<p>
+    @Html.ActionLink("PDF'e Dönüştür", "ExportToPdf")
+</p>
 @*<a href="/StajyerTanim/StajyerEkle/" class="btn btn-success" style="margin-top:auto">Stajyer Ekle</a>*@
+
+<a href="/Calisan/StajerBilgileriniAl/" class="btn btn-success" style="margin-top:auto">Yenile</a>

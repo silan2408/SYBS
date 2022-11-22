@@ -5,16 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Kurum Personel Sayfası</h2>
+<h3 style="text-align:center;">Kurum Personel Sayfası</h3>
 
 <table class="table table-bordered">
     <thead>
         <tr>
             <td>
-               ID
+                ID
             </td>
             <td>
-             Departman
+                Departman
             </td>
             <td>
                 Adı
@@ -23,13 +23,16 @@
                 Soyadı
             </td>
             <td>
-                Unvan 
+                Unvan
             </td>
             <td>
                 GSM
             </td>
             <td>
                 Email
+            </td>
+            <td>
+                Kurumu
             </td>
             <td>
                 Sil
@@ -50,6 +53,7 @@
                 <td>@item.UNVAN</td>
                 <td>@item.GSM</td>
                 <td>@item.EMAIL</td>
+                <td>@item.KURUM_TANIM.FIRMA_ADI</td>
                 <td><a href="/KurumPersonel/SilBilgiGetir/@item.PK_KURUM_PERSONEL" class="btn btn-danger">Sil</a></td>
                 <td><a href="/KurumPersonel/GuncelleBilgiGetir/@item.PK_KURUM_PERSONEL" class="btn btn-warning">Güncelle</a></td>
 

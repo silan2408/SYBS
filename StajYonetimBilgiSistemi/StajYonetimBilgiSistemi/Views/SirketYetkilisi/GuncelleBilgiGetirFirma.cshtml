@@ -1,0 +1,53 @@
+﻿@model StajYonetimBilgiSistemi.Models.Entity.KURUM_TANIM
+@{
+    ViewBag.Title = "GuncelleBilgiGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GuncelleBilgiGetir</h2>
+
+<div class="container">
+    <form action="/SirketYetkilisi/GuncelleFirma/">
+        @*<div class="form-group">
+                <b>Kurum Departman ID </b>
+
+                @Html.TextBoxFor(x => x.PK_KURUM_DEPARTMAN, new { @class = "form-control" })
+
+            </div>*@
+        @Html.HiddenFor(x => x.PK_KURUM_TANIM)
+        <div class="form-group">
+            <b>Firma Adı </b>
+
+            @Html.TextBoxFor(x => x.FIRMA_ADI, new { @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            <b>Firma Yektilisi </b>
+
+            @Html.TextBoxFor(x => x.FIRMA_YEKTILISI, new { @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            <b>Firma Adresi</b>
+
+            @Html.TextBoxFor(x => x.FIRMA_ADRESİ, new { @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            <b>Telefon </b>
+
+            @Html.TextBoxFor(x => x.TELEFON, new { @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            <b>Email</b>
+
+            @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control" })
+
+        </div>
+        <div>
+            <button class="btn btn-primary">Kurum Tanım Güncelle</button>
+            <a href="/SirketYetkilisi/FirmaBilgileriAl/">Ana Sayfa </a>
+        </div>
+    </form>
+</div>

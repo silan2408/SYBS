@@ -1,0 +1,74 @@
+﻿@using StajYonetimBilgiSistemi.Models.Entity
+@*@model List<StajYonetimBilgiSistemi.Models.Entity.STAJYER_TANIM>*@
+@model List<StajYonetimBilgiSistemi.Models.Entity.Kullanicilar>
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
+}
+<script src="~/vendor/jquery/jquery-1.10.2.min.js"></script>
+
+<p style="text-align:center;font-size:large;">KULLANICILAR LİSTESİ</p>
+
+<table class="table table-bordered " border="1" cellpadding="3" cellspacing="3" style="margin:auto;">
+    <thead>
+        <tr style="text-align:center;font-size:medium">
+
+            <td>
+                Adı Soyadı
+            </td>
+            <td>
+                Email
+            </td>
+            <td>
+                Rolü
+            </td>
+            <td>
+                Çalıştığı Kurum
+            </td>
+            <td>
+                Çalıştığı Departman
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+            <tr style="text-align: center; font-size: medium">
+                <td>@item.AdiSoyadi</td>
+                <td>@item.Email</td>
+                <td>@item.Rol</td>
+
+                @if (@item.CalisanKurumTanim != null)
+                {
+                    <td>@item.KURUM_TANIM.FIRMA_ADI</td>
+
+                }
+                @if (@item.CalisanKurumTanim == null)
+                {
+                    <td></td>
+                }
+                @if (@item.CalisanDepartman != null)
+                {
+                    <td>@item.KURUM_DEPARTMAN.ADI</td>
+
+                }
+                @if (@item.CalisanDepartman == null)
+                {
+                    <td></td>
+                }
+            </tr>
+
+        }
+    </tbody>
+
+
+</table>
+
+
+@*<b>Şuan ki stajyer sayısı : @ViewBag.Count</b>*@
+<br />
+<a href="/Mesaj/MesajYaz/" style="color:deeppink;margin-left:400px;">Geriye Dön</a>
+

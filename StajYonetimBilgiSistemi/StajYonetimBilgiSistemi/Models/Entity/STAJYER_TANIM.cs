@@ -29,13 +29,14 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public string SINIFI { get; set; }
         public string EMAIL { get; set; }
         public string TELEFON { get; set; }
-        public Nullable<int> STAJ_YILI { get; set; }
+        public int STAJ_YILI { get; set; }
         public Nullable<System.DateTime> STAJ_BAS_TARIHI { get; set; }
         public Nullable<System.DateTime> STAJ_BIT_TARIHI { get; set; }
         public int KURUM_ST_SORUMLUSU { get; set; }
         public int KURUM_ONAY_KISI { get; set; }
         public int FK_STAJ_KURUM { get; set; }
         public int FK_DEPARTMAN { get; set; }
+        public Nullable<int> kullaniciId { get; set; }
     
         public virtual Bolumler Bolumler { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -45,5 +46,6 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public virtual KURUM_PERSONEL KURUM_PERSONEL1 { get; set; }
         public virtual KURUM_TANIM KURUM_TANIM { get; set; }
         public virtual Uni Uni { get; set; }
+        public virtual Kullanicilar Kullanicilar { get; set; }
     }
 }

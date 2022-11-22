@@ -6,9 +6,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Kullanıcı Listesi</h2>
+<h3 style="text-align:center;">Kullanıcı Listesi</h3>
 
-<table class="table table-bordered">
+<table class="table table-bordered"  style=" display: block; overflow-x: auto; white-space: nowrap;">
     <thead>
         <tr>
             <td>
@@ -62,10 +62,34 @@
                 <td>@item.KayitTarihi.ToShortDateString()</td>
                 <td>@item.Rol</td>
 
-                <td>@item.CalisanDepartman</td>
-                <td>@item.CalisanKurumTanim</td>
+                @if (@item.CalisanKurumTanim != null)
+                {
+                    <td>@item.KURUM_TANIM.FIRMA_ADI</td>
 
-                <td>@item.CalisanPersonel</td>
+                }
+                @if (@item.CalisanKurumTanim == null)
+                {
+                    <td></td>
+                }
+                @if (@item.CalisanDepartman != null)
+                {
+                    <td>@item.KURUM_DEPARTMAN.ADI</td>
+
+                }
+                @if (@item.CalisanDepartman == null)
+                {
+                    <td></td>
+                }
+                @if (@item.CalisanPersonel != null)
+                {
+                    <td>@item.KURUM_PERSONEL.ADI</td>
+
+                }
+                @if (@item.CalisanPersonel == null)
+                {
+                    <td></td>
+                }
+
                 <td><a href="/Kullanici/SilBilgiGetir/@item.Id" class="btn btn-warning">Sil</a></td>
                 <td><a href="/Kullanici/GuncelleBilgiGetir/@item.Id" class="btn btn-warning">Güncelle</a></td>
             </tr>

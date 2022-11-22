@@ -1,0 +1,85 @@
+﻿@model StajYonetimBilgiSistemi.Models.Entity.STAJYER_TANIM
+@{
+    ViewBag.Title = "SilBilgiGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SilBilgiGetir</h2>
+
+
+<div class="container">
+    @using (Html.BeginForm("Sil", "SirketYetkilisi"))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x => x.PK_STAJYER_TANIM)
+            <b>@Html.LabelFor(x => x.ADI):</b>
+            @Html.DisplayFor(x => x.ADI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b> @Html.LabelFor(x => x.SOYADI):</b>
+            @Html.DisplayFor(x => x.SOYADI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b> @Html.LabelFor(x => x.UNIVERSITE):</b>
+            @Html.DisplayFor(x => x.Uni.UniName, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b> @Html.LabelFor(x => x.UNIV_NO):</b>
+            @Html.DisplayFor(x => x.UNIV_NO, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b>@Html.LabelFor(x => x.BOLUMU):</b>
+            @Html.DisplayFor(x => x.Bolumler.BolumName, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b>@Html.LabelFor(x => x.SINIFI):</b>
+            @Html.DisplayFor(x => x.SINIFI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b> @Html.LabelFor(x => x.EMAIL):</b>
+            @Html.DisplayFor(x => x.EMAIL, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b> @Html.LabelFor(x => x.TELEFON):</b>
+            @Html.DisplayFor(x => x.TELEFON, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b> @Html.LabelFor(x => x.STAJ_YILI):</b>
+            @Html.DisplayFor(x => x.STAJ_YILI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b>@Html.LabelFor(x => x.STAJ_BAS_TARIHI):</b>
+            @Html.DisplayFor(x => x.STAJ_BAS_TARIHI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b>@Html.LabelFor(x => x.STAJ_BIT_TARIHI):</b>
+            @Html.DisplayFor(x => x.STAJ_BIT_TARIHI, "{0:yyyy-MM-dd}", new
+  {
+  @class = "form-control",
+  required = "required",
+  @type = "date"
+  })
+        </div>
+        <div class="form-group">
+            <b> Kurum Staj Sorumlusu:</b>
+            @Html.DisplayFor(x => x.KURUM_PERSONEL.ADI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b> Kurum Onaylan Kişi:</b>
+            @Html.DisplayFor(x => x.KURUM_PERSONEL1.ADI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b>Staj Yapılan:</b>
+            @Html.DisplayFor(x => x.KURUM_TANIM.FIRMA_ADI, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <b>Staj Yapılan Departman:</b>
+            @Html.DisplayFor(x => x.KURUM_DEPARTMAN.ADI, new { @class = "form-control" })
+        </div>
+
+        <div>
+            <button class="btn btn-danger">Stajyer SiL</button>
+            <a href="/SirketYetkilisi/StajerBilgileriniAl/">Ana Sayfa </a>
+        </div>
+    }
+</div>

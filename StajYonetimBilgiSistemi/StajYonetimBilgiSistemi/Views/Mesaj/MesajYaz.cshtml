@@ -26,6 +26,8 @@
     <link href="~/Css/summernote-bs4.css" rel="stylesheet" />
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -39,17 +41,19 @@
                 <div class="container-fluid">
                     <div class="row">
                         @Html.Action("MesajListesiMenusu", "Mesaj")
-
-                        <!-- /.col -->
-                        <form class="login100-form validate-form" method="post" action="/Mesaj/MesajYaz2/">
+                        @using (Html.BeginForm("MesajYaz2", "Mesaj", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <!-- /.col -->
+                            @*<form class="login100-form validate-form" method="post" action="/Mesaj/MesajYaz2/" enctype="multipart/form-data">*@
 
                             <div class="col-md-9">
                                 <div class="card card-primary card-outline">
                                     <div class="card-header">
-                                        <h3 class="card-title">Compose New Message</h3>
+                                        <h3 class="card-title">Yeni bir mesaj oluştur</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <div class="card-body">
+                                    <div class="card-body" style="background-color: rgba(0,0,0,.03);">
+                                        <a href="/Mesaj/GetAll/">Kullanıcılar Listesi</a>
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Alıcı" name="AlıcıMail">
                                         </div>
@@ -61,10 +65,25 @@
                                        
                                          </textarea>
                                         </div>
+                                        <h6>Tek seferde en fazla 3 öğe gönderilebilir.</h6>
                                         <div class="form-group">
                                             <div class="btn btn-default btn-file">
-                                                <i class="fas fa-paperclip"></i> Attachment
-                                                <input type="file" name="attachment">
+                                                <i class="fas fa-paperclip"></i> Gönderi 1
+                                                <input type="file" name="Dosyalar" accept=".png,.jpg,.jpeg,.gif,.tif,.pdf,.doc,.docx" multiple>
+                                            </div>
+                                            <p class="help-block">Max. 32MB</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="btn btn-default btn-file">
+                                                <i class="fas fa-paperclip"></i> Gönderi 2
+                                                <input type="file" name="Dosyalar2" accept=".png,.jpg,.jpeg,.gif,.tif,.pdf,.doc,.docx" multiple>
+                                            </div>
+                                            <p class="help-block">Max. 32MB</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="btn btn-default btn-file">
+                                                <i class="fas fa-paperclip"></i> Gönderi 3
+                                                <input type="file" name="Dosyalar3" accept=".png,.jpg,.jpeg,.gif,.tif,.pdf,.doc,.docx" multiple>
                                             </div>
                                             <p class="help-block">Max. 32MB</p>
                                         </div>
@@ -72,10 +91,10 @@
                                     <!-- /.card-body -->
                                     <div class="card-footer">
                                         <div class="float-right">
-                                            <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
-                                            <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
+                                        
+                                            <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Gönder</button>
                                         </div>
-                                        <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
+                                        <a href="/Mesaj/MesajYaz/" class="btn btn-default"><i class="fas fa-times"></i> Sil</a>
                                     </div>
 
 
@@ -86,7 +105,8 @@
                                 <!-- /.card -->
                             </div>
                             <!-- /.col -->
-                        </form>
+                            @*</form>*@
+                        }
 
                     </div>
                     <!-- /.row -->
@@ -96,14 +116,10 @@
         </div>
 
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+   
     </div>
     <!-- ./wrapper -->
-    <!-- jQuery -->
+    <!--<!-- jQuery -->
     <script src="~/js/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/js/bootstrap.bundle.min.js"></script>

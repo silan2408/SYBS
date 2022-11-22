@@ -21,5 +21,8 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public string MesajIcerigi { get; set; }
         public Nullable<System.DateTime> MesajTarihi { get; set; }
         public Nullable<bool> SilindiMi { get; set; }
+        public string Dosyalar { get; set; }
+        public string Dosyalar2 { get; set; }
+        public string Dosyalar3 { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace StajYonetimBilgiSistemi.Models.Entity
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SBYSEntities12 : DbContext
+    public partial class SBYSEntities14 : DbContext
     {
-        public SBYSEntities12()
-            : base("name=SBYSEntities12")
+        public SBYSEntities14()
+            : base("name=SBYSEntities14")
         {
         }
     
@@ -26,7 +26,6 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         }
     
         public virtual DbSet<Bolumler> Bolumler { get; set; }
-        public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<GUNLUK_CALISMA> GUNLUK_CALISMA { get; set; }
         public virtual DbSet<Kullanicilar> Kullanicilar { get; set; }
         public virtual DbSet<KURUM_DEPARTMAN> KURUM_DEPARTMAN { get; set; }
@@ -34,7 +33,8 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public virtual DbSet<KURUM_TANIM> KURUM_TANIM { get; set; }
         public virtual DbSet<MesajBilgileri> MesajBilgileri { get; set; }
         public virtual DbSet<STAJYER_TANIM> STAJYER_TANIM { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Uni> Uni { get; set; }
+        public virtual DbSet<Event> Event { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

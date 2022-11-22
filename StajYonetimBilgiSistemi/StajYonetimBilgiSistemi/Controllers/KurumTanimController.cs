@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using StajYonetimBilgiSistemi.Models.Entity;
+using System;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using StajYonetimBilgiSistemi.Models.Entity;
 
 namespace StajYonetimBilgiSistemi.Controllers
 {
     [Authorize(Roles = "Admin,Calisan")]
     public class KurumTanimController : Controller
     {
-        SBYSEntities12 db = new SBYSEntities12();
-        // GET: KurumTanim
+        SBYSEntities14 db = new SBYSEntities14();
         public ActionResult Index()
         {
-            
+
             return View(db.KURUM_TANIM.ToList());
         }
         public ActionResult KurumEkle()

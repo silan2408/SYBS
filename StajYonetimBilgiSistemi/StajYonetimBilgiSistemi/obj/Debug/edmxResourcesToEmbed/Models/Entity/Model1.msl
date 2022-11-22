@@ -1,24 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="SBYSModelStoreContainer" CdmEntityContainer="SBYSEntities12">
+  <EntityContainerMapping StorageEntityContainer="SBYSModelStoreContainer" CdmEntityContainer="SBYSEntities14">
     <EntitySetMapping Name="Bolumler">
       <EntityTypeMapping TypeName="SBYSModel.Bolumler">
         <MappingFragment StoreEntitySet="Bolumler">
           <ScalarProperty Name="BolumId" ColumnName="BolumId" />
           <ScalarProperty Name="BolumName" ColumnName="BolumName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Event">
-      <EntityTypeMapping TypeName="SBYSModel.Event">
-        <MappingFragment StoreEntitySet="Event">
-          <ScalarProperty Name="EventID" ColumnName="EventID" />
-          <ScalarProperty Name="Subject" ColumnName="Subject" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Start" ColumnName="Start" />
-          <ScalarProperty Name="Son" ColumnName="Son" />
-          <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
-          <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -48,6 +35,8 @@
           <ScalarProperty Name="CalisanDepartman" ColumnName="CalisanDepartman" />
           <ScalarProperty Name="CalisanPersonel" ColumnName="CalisanPersonel" />
           <ScalarProperty Name="rememberme" ColumnName="rememberme" />
+          <ScalarProperty Name="Kod" ColumnName="Kod" />
+          <ScalarProperty Name="kodOnay" ColumnName="kodOnay" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -84,7 +73,6 @@
           <ScalarProperty Name="FIRMA_ADRESİ" ColumnName="FIRMA_ADRESİ" />
           <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
           <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-          <ScalarProperty Name="Calisanlar" ColumnName="Calisanlar" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -98,12 +86,16 @@
           <ScalarProperty Name="MesajIcerigi" ColumnName="MesajIcerigi" />
           <ScalarProperty Name="MesajTarihi" ColumnName="MesajTarihi" />
           <ScalarProperty Name="SilindiMi" ColumnName="SilindiMi" />
+          <ScalarProperty Name="Dosyalar" ColumnName="Dosyalar" />
+          <ScalarProperty Name="Dosyalar2" ColumnName="Dosyalar2" />
+          <ScalarProperty Name="Dosyalar3" ColumnName="Dosyalar3" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="STAJYER_TANIM">
       <EntityTypeMapping TypeName="SBYSModel.STAJYER_TANIM">
         <MappingFragment StoreEntitySet="STAJYER_TANIM">
+          <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
           <ScalarProperty Name="PK_STAJYER_TANIM" ColumnName="PK_STAJYER_TANIM" />
           <ScalarProperty Name="ADI" ColumnName="ADI" />
           <ScalarProperty Name="SOYADI" ColumnName="SOYADI" />
@@ -123,22 +115,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="SBYSModel.sysdiagrams">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Uni">
       <EntityTypeMapping TypeName="SBYSModel.Uni">
         <MappingFragment StoreEntitySet="Uni">
           <ScalarProperty Name="UniId" ColumnName="UniId" />
           <ScalarProperty Name="UniName" ColumnName="UniName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Event">
+      <EntityTypeMapping TypeName="SBYSModel.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+          <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+          <ScalarProperty Name="End" ColumnName="End" />
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SBYSModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -29,7 +29,6 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public string FIRMA_ADRESİ { get; set; }
         public string TELEFON { get; set; }
         public string EMAIL { get; set; }
-        public Nullable<int> Calisanlar { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Kullanicilar> Kullanicilar { get; set; }
