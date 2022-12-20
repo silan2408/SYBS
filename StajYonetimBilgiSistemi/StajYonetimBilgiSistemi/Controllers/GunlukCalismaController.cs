@@ -1,9 +1,13 @@
-﻿using Rotativa;
+﻿//using DocumentFormat.OpenXml.EMMA;
+//using DocumentFormat.OpenXml.Vml;
+using Rotativa;
+using StajYonetimBilgiSistemi.Models;
 using StajYonetimBilgiSistemi.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 
@@ -12,44 +16,129 @@ namespace StajYonetimBilgiSistemi.Controllers
     [Authorize(Roles = "Stajyer")]
     public class GunlukCalismaController : Controller
     {
-        SBYSEntities14 db = new SBYSEntities14();
+        SBYSEntities db = new SBYSEntities();
         // GET: GunlukCalisma
-        [HttpGet]
-        public ActionResult Index()
+        public ActionResult Charts()
         {
-            try
+
+            if (User.Identity.IsAuthenticated)
             {
-                var model = db.GUNLUK_CALISMA.Where(x => x.Kullanicilar.Email == User.Identity.Name).ToList();
+                return View();
+            }
+            return View("~/Views/Shared/Error.cshtml");
+        }
+ 
+        public ActionResult Index(string ara)
+        {
+       
+                var model = db.GUNLUK_CALISMA.Where(x => x.Kullanicilar.Email == User.Identity.Name || x.Kullanicilar.KullaniciAdi == User.Identity.Name).OrderByDescending(x => x.PK_GUNLUK_CALISMA).ToList();
+                 if (!string.IsNullOrEmpty(ara))
+            {
+                ara = ara.ToLower();
+                model = model.Where(x => x.Baslik.ToLower().Contains(ara) ).ToList();
 
                 return View(model);
             }
-            catch (DbEntityValidationException e)
-            {
-                Console.WriteLine(e);
-                return View();
-            }
+           
+                return View(model);
+       
 
         }
 
+        public ActionResult StajBilgileri()
+        {
+            var bul = db.STAJYER_TANIM.Where(x => (x.Kullanicilar.Email == User.Identity.Name || x.Kullanicilar.KullaniciAdi == User.Identity.Name)).FirstOrDefault();
+     
+            var model = db.Stajlar.Where(x =>( x.Pk_Staj_Id == bul.StajId )).FirstOrDefault();
+        
 
+            return View(model);
+
+
+        }
+        [HttpGet]
+        public ActionResult FirmaBilgileriAl()
+        {
+            var b = (from c in db.Kullanicilar
+                     where c.Email == User.Identity.Name || c.KullaniciAdi == User.Identity.Name
+                     select c).SingleOrDefault();
+
+            var model = db.KURUM_TANIM.First(x => x.PK_KURUM_TANIM == b.CalisanKurumTanim);
+            
+
+            return View(model);
+
+        }
+        public JsonResult BarChartDataEF()
+        {
+            var b = (from c in db.Kullanicilar
+                     where c.Email == User.Identity.Name || c.KullaniciAdi == User.Identity.Name
+                     select c).SingleOrDefault();
+
+            var stajyerler = db.STAJYER_TANIM.Where(x=>x.FK_STAJ_KURUM == b.CalisanKurumTanim).ToList();
+            Chart _chart = new Chart();
+            _chart.labels = stajyerler.Select(x => x.Bolumler.BolumName).Distinct().ToArray();
+            _chart.datasets = new List<Datasets>();
+
+
+            List<Datasets> _dataSet = new List<Datasets>();
+            _dataSet.Add(new Datasets()
+            {
+                label = "İş Yerindeki Stajerlerin Bölüm Grafiği",
+                //data = stajyerler.Select(x => x.BOLUMU.Value).ToArray(),
+                data = stajyerler.GroupBy(a => a.BOLUMU).Select(a => a.Count()).ToArray(),
+                backgroundColor = new string[] { "#4EF0EE" },
+                borderColor = new string[] { "#000000" },
+                borderWidth = "1"
+
+            });
+            _chart.datasets = _dataSet;
+            return Json(_chart, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult BarChartDataEFUni()
+        {
+            var b = (from c in db.Kullanicilar
+                     where c.Email == User.Identity.Name || c.KullaniciAdi == User.Identity.Name
+                     select c).SingleOrDefault();
+
+            var stajyerler = db.STAJYER_TANIM.Where(x => x.FK_STAJ_KURUM == b.CalisanKurumTanim).ToList();
+            Chart _chart = new Chart();
+            _chart.labels = stajyerler.Select(x => x.Uni.UniName).Distinct().ToArray();
+            _chart.datasets = new List<Datasets>();
+
+
+            List<Datasets> _dataSet = new List<Datasets>();
+            _dataSet.Add(new Datasets()
+            {
+                label = "İş Yerindeki Stajerlerin Üniversite Grafiği",
+                //data = stajyerler.Select(x => x.BOLUMU.Value).ToArray(),
+                data = stajyerler.GroupBy(a => a.UNIVERSITE).Select(a => a.Count()).ToArray(),
+                backgroundColor = new string[] { "#4EF0EE" },
+                borderColor = new string[] { "#000000" },
+                borderWidth = "1"
+
+            });
+            _chart.datasets = _dataSet;
+            return Json(_chart, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpGet]
         public ActionResult GunlukCalismaEkle()
         {
             var a = (from c in db.Kullanicilar
-                     where c.Email == User.Identity.Name
+                     where c.Email == User.Identity.Name || c.KullaniciAdi == User.Identity.Name
                      select c).SingleOrDefault();
 
             var b = (from c in db.STAJYER_TANIM
-                     where c.PK_STAJYER_TANIM == a.Id
+                     where c.kullaniciId == a.Id
                      select c).SingleOrDefault();
-            ViewBag.stajyer = b.ADI;
+            ViewBag.stajyer = b.ADI + " " + b.SOYADI;
             List<SelectListItem> degerler = (from i in db.STAJYER_TANIM.ToList()
                                              select new SelectListItem
 
 
                                              {
-                                                 Text = i.ADI,
+                                                 Text = i.ADI +" " + i.SOYADI,
                                                  Value = i.PK_STAJYER_TANIM.ToString()
 
                                              }).ToList();
@@ -57,16 +146,27 @@ namespace StajYonetimBilgiSistemi.Controllers
 
             return View();
         }
-        [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult GunlukCalismaEkle2(GUNLUK_CALISMA kp)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GunlukCalismaEkle2(GUNLUK_CALISMA kp )
         {
-
+            if (kp.ACIKLAMA == null)
+            {
+                TempData["mesaj"] = "Açıklama boş olamaz!";
+                return RedirectToAction("GunlukCalismaEkle", TempData["mesaj"]);
+            }
+            if (kp.Baslik.Length>100 || kp.Baslik.Length<3 || kp.ACIKLAMA.Length<9 || kp.ACIKLAMA.Length>2000)
+            {
+                TempData["mesaj"] = "Alanlar istenen ölçüde değil!";
+                return RedirectToAction("GunlukCalismaEkle", TempData["mesaj"]);
+            }
+         
             var a = (from c in db.Kullanicilar
-                     where c.Email == User.Identity.Name
+                     where c.Email == User.Identity.Name || c.KullaniciAdi == User.Identity.Name
                      select c).SingleOrDefault();
 
             var b = (from c in db.STAJYER_TANIM
-                     where c.PK_STAJYER_TANIM == a.Id
+                     where c.kullaniciId == a.Id
                      select c).SingleOrDefault();
             kp.FK_STAJYER_TANIM = b.PK_STAJYER_TANIM;
             kp.kullaniciadi = a.Id;
@@ -83,24 +183,38 @@ namespace StajYonetimBilgiSistemi.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult GuncelleBilgiGetir(int id)
+        public ActionResult GuncelleBilgiGetir(int id,string V)
         {
 
             var model = db.GUNLUK_CALISMA.Find(id);
             List<SelectListItem> degerler = (from i in db.STAJYER_TANIM.ToList()
                                              select new SelectListItem
                                              {
-                                                 Text = i.ADI,
+                                                 Text = i.ADI ,
                                                  Value = i.PK_STAJYER_TANIM.ToString()
 
                                              }).ToList();
             ViewBag.dgr = degerler;
+            TempData["V"] = V;
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Guncelle(GUNLUK_CALISMA p)
         {
-            var a = (from c in db.Kullanicilar
-                     where c.Email == User.Identity.Name
+    
+            if (p.ACIKLAMA == null)
+            {
+                TempData["mesaj"] = "Açıklama boş olamaz!";
+                return RedirectToAction("GunlukCalismaEkle", TempData["mesaj"]);
+            }
+            if (p.Baslik.Length > 100 || p.Baslik.Length < 3 || p.ACIKLAMA.Length < 9 || p.ACIKLAMA.Length > 2000)
+            {
+                TempData["mesaj"] = "Alanlar istenen ölçüde değil!";
+                return RedirectToAction("GunlukCalismaEkle", TempData["mesaj"]);
+            }
+                var a = (from c in db.Kullanicilar
+                     where c.Email == User.Identity.Name || c.KullaniciAdi == User.Identity.Name
                      select c).SingleOrDefault();
             p.kullaniciadi = a.Id;
 
@@ -139,7 +253,7 @@ namespace StajYonetimBilgiSistemi.Controllers
         [HttpGet]
         public JsonResult GetEvents()
         {
-            using (SBYSEntities14 dc = new SBYSEntities14())
+            using (SBYSEntities dc = new SBYSEntities())
             {
                 var events = dc.Event.ToList();
                 return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -150,7 +264,7 @@ namespace StajYonetimBilgiSistemi.Controllers
         public JsonResult SaveEvent(Event e)
         {
             var status = false;
-            using (SBYSEntities14 dc = new SBYSEntities14())
+            using (SBYSEntities dc = new SBYSEntities())
             {
                 if (e.EventID > 0)
                 {
@@ -184,7 +298,7 @@ namespace StajYonetimBilgiSistemi.Controllers
         public JsonResult DeleteEvent(int eventID)
         {
             var status = false;
-            using (SBYSEntities14 dc = new SBYSEntities14())
+            using (SBYSEntities dc = new SBYSEntities())
             {
                 var v = dc.Event.Where(a => a.EventID == eventID).FirstOrDefault();
                 if (v != null)
@@ -201,7 +315,7 @@ namespace StajYonetimBilgiSistemi.Controllers
         {
 
 
-            var model = db.GUNLUK_CALISMA.Where(x => x.Kullanicilar.Email == User.Identity.Name).ToList();
+            var model = db.GUNLUK_CALISMA.Where(x => x.Kullanicilar.Email == User.Identity.Name || x.Kullanicilar.KullaniciAdi == User.Identity.Name).ToList();
 
 
             return View(model);
@@ -254,5 +368,79 @@ namespace StajYonetimBilgiSistemi.Controllers
 
             return RedirectToAction("StajyerTanim", "Index");
         }
+        [HttpGet]
+        public ActionResult Basvurular()
+        {
+            var a = (from c in db.Kullanicilar
+                     where c.Email == User.Identity.Name || c.KullaniciAdi == User.Identity.Name
+                     select c).SingleOrDefault();
+            var b = (from c in db.STAJYER_TANIM
+                     where c.kullaniciId == a.Id
+                     select c).SingleOrDefault();
+
+            var model = db.Basvuru.Where(x => x.Fk_Stajyer_Id == b.PK_STAJYER_TANIM).ToList();
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult BasvurDetayları(int id)
+        {
+            var model = db.Basvuru.Find(id);
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult BasvuruList()
+        {
+            var model = db.STAJYER_TANIM.Where(x => (x.Kullanicilar.Email == User.Identity.Name || x.Kullanicilar.KullaniciAdi == User.Identity.Name) && x.StajId != null).FirstOrDefault();
+            if (model != null)
+            {
+                ViewBag.Bilgi = "Zaten devam eden stajınız bulunmaktadır";
+              return  RedirectToAction("AktifStajlar", new { bilgi = ViewBag.Bilgi });
+                
+            }
+            List<SelectListItem> degerler4 = (from i in db.Uni.ToList()
+                                              select new SelectListItem
+                                              {
+                                                  Text = i.UniName,
+                                                  Value = i.UniId.ToString()
+
+                                              }).ToList();
+            ViewBag.dgr4 = degerler4;
+            List<SelectListItem> degerler5 = (from i in db.Bolumler.ToList()
+                                              select new SelectListItem
+                                              {
+                                                  Text = i.BolumName,
+                                                  Value = i.BolumId.ToString()
+
+                                              }).ToList();
+            ViewBag.dgr5 = degerler5;
+            var model2 = db.Basvuru.FirstOrDefault();
+            return View(model2);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BasvuruList(Basvuru  b)
+        {
+            db.Basvuru.Add(b);
+            try
+            {
+                db.SaveChanges();
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return RedirectToAction("BasvuruList");
+
+        }
+        [HttpGet]
+        public ActionResult AktifStajlar(string Bilgi)
+        {
+            ViewBag.Bilgi = Bilgi;
+            var model = db.Stajlar.Where(x=>x.Aktiflik==true).ToList();
+            return View(model);
+        }
+    
     }
 }

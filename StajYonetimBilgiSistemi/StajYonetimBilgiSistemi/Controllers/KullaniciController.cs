@@ -10,15 +10,23 @@ namespace StajYonetimBilgiSistemi.Controllers
     [Authorize(Roles = "Admin")]
     public class KullaniciController : Controller
     {
-        SBYSEntities14 db = new SBYSEntities14();
+        SBYSEntities db = new SBYSEntities();
         // GET: Kullanici
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult KullaniciList()
+        public ActionResult KullaniciList(string ara)
         {
             var model = db.Kullanicilar.ToList();
+            if (!string.IsNullOrEmpty(ara))
+            {
+                ara = ara.ToLower();
+                model = model.Where(x => x.AdiSoyadi.ToLower().Contains(ara) || x.KullaniciAdi.ToLower().Contains(ara)).ToList();
+
+                return View(model);
+            }
+
             return View(model);
         }
 
@@ -44,7 +52,7 @@ namespace StajYonetimBilgiSistemi.Controllers
             List<SelectListItem> degerler3 = (from i in db.KURUM_PERSONEL.ToList()
                                               select new SelectListItem
                                               {
-                                                  Text = i.ADI,
+                                                  Text = i.ADI +" "+i.SOYADI,
                                                   Value = i.PK_KURUM_PERSONEL.ToString()
 
                                               }).ToList();
@@ -52,6 +60,8 @@ namespace StajYonetimBilgiSistemi.Controllers
 
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Guncelle(Kullanicilar k)
         {
             if (User.IsInRole("Stajyer"))
@@ -84,7 +94,7 @@ namespace StajYonetimBilgiSistemi.Controllers
                 Console.WriteLine(e);
             }
 
-            return RedirectToAction("KullaniciList", "Home");
+            return RedirectToAction("KullaniciList", "Kullanici");
         }
 
         public ActionResult SilBilgiGetir(int id)
@@ -102,6 +112,18 @@ namespace StajYonetimBilgiSistemi.Controllers
 
 
             return RedirectToAction("KullaniciList", "Kullanici");
+        }
+        public ActionResult Stajlar()
+        {
+            var model = db.Stajlar.ToList();
+
+            return View(model);
+        }
+        public ActionResult Basvurular()
+        {
+            var model = db.Basvuru.ToList();
+          
+            return View(model);
         }
     }
 }

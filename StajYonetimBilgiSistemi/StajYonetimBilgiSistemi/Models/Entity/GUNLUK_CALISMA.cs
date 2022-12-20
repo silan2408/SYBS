@@ -19,6 +19,7 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public System.DateTime TARIH { get; set; }
         public string ACIKLAMA { get; set; }
         public Nullable<int> kullaniciadi { get; set; }
+        public string Baslik { get; set; }
     
         public virtual Kullanicilar Kullanicilar { get; set; }
         public virtual STAJYER_TANIM STAJYER_TANIM { get; set; }

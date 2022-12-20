@@ -17,10 +17,11 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KURUM_TANIM()
         {
-            this.Kullanicilar = new HashSet<Kullanicilar>();
             this.KURUM_DEPARTMAN = new HashSet<KURUM_DEPARTMAN>();
             this.KURUM_PERSONEL = new HashSet<KURUM_PERSONEL>();
+            this.Stajlar = new HashSet<Stajlar>();
             this.STAJYER_TANIM = new HashSet<STAJYER_TANIM>();
+            this.Kullanicilar = new HashSet<Kullanicilar>();
         }
     
         public int PK_KURUM_TANIM { get; set; }
@@ -31,12 +32,14 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public string EMAIL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Kullanicilar> Kullanicilar { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KURUM_DEPARTMAN> KURUM_DEPARTMAN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KURUM_PERSONEL> KURUM_PERSONEL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Stajlar> Stajlar { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STAJYER_TANIM> STAJYER_TANIM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kullanicilar> Kullanicilar { get; set; }
     }
 }

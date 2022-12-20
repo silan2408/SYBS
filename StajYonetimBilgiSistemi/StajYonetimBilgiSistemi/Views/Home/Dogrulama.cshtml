@@ -10,27 +10,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="~/Css/font-awesome.min.css" rel="stylesheet" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <link href="~/Css/animate.css" rel="stylesheet" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <link href="~/Css/hamburgers.min.css" rel="stylesheet" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <link href="~/Css/select2.min.css" rel="stylesheet" />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Css/main.css">
-    <!--===============================================================================================-->
+  
 </head>
 <body>
 
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-              
+            
                 <form class="login100-form validate-form" method="post" action="/Home/Dogrulama/">
+                    @Html.AntiForgeryToken()
                     <span class="login100-form-title">
                         Doğrulama Kodunuz
                     </span>
@@ -39,7 +40,7 @@
                         <input class="input100" type="text" name="Kod" placeholder="Kod">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
-                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                            <i class="fa-solid fa-user" aria-hidden="true"></i>
 
                         </span>
 
@@ -52,7 +53,7 @@
                             Doğrula
                         </button>
                     </div>
-                
+                    <h6>Mail adresinize kodunuz iletilmiştir.</h6>
                     <p>@ViewBag.hata5</p>
 
                 </form>
@@ -70,21 +71,22 @@
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <!--===============================================================================================-->
-    <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
-    <script src="~/vendor/bootstrap/js/popper.js"></script>
-    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/popper.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <!--===============================================================================================-->
-    <script src="~/vendor/select2/select2.min.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
     <!--===============================================================================================-->
-    <script src="~/vendor/tilt/tilt.jquery.min.js"></script>
+    <script src="~/Scripts/tilt.jquery.min.js"></script>
     <script>
         $('.js-tilt').tilt({
             scale: 1.1
         })
     </script>
     <!--===============================================================================================-->
-    <script src="~/js/main.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/main1.js"></script>
 
 </body>
 </html>

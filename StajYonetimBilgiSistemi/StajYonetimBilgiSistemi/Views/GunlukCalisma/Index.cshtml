@@ -1,64 +1,85 @@
 ﻿
 @using StajYonetimBilgiSistemi.Models.Entity
-@model List<StajYonetimBilgiSistemi.Models.Entity.GUNLUK_CALISMA>
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.GUNLUK_CALISMA>
 
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+    }
+
+    .webgrid-header {
+        background-color: #d4caca;
+        color: #808080;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-table td, th {
+        border: 1px solid #808080;
+        padding: 3px 7px 2px;
+    }
+
+    .gridhyde {
+        visibility: hidden
+    }
+</style>
+<h2 style="text-align:center;@*font-style:italic;*@">~Günlük Çalışma Listesi~</h2>
+<br />
+@using (Html.BeginForm())
+{
+
+    <div style="margin-right:45px;width:500px;float:right;display:flex;margin-bottom:50px;margin-top:20px;">
+
+        @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Başlık Ara" })
+
+        @*@Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })*@
+
+        <button type="submit" class="btn btn-primary">Ara </button>
+
+    </div>
 }
 
-<h2>Günlük Çalışma Sayfası</h2>
+@grid.GetHtml(
+      tableStyle: "webgrid-table",
+     headerStyle: "webgrid-header",
+    columns: grid.Columns(
+    grid.Column("PK_GUNLUK_CALISMA", "Id"),
+    grid.Column("STAJYER_TANIM.ADI", "Adı"),
+    grid.Column("TARIH", "Tarih"),
+        @*//grid.Column("ACIKLAMA", "Açıklama", format: (item) => @Html.Raw(item.ACIKLAMA.TrimStart().Substring(0, 5))),
+        grid.Column(null, null, format: @<input type="hidden" name="IDHidden" value="@item.ACIKLAMA" />),*@
+grid.Column("Baslik", "Başlık"),
+grid.Column("Sil", header: null, format: @<text>@Html.ActionLink(
+"Seç", "SilBilgiGetir", new { id = item.PK_GUNLUK_CALISMA })</text>),
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <td>
-                ID
-            </td>
-            <td>
-                Stajyer
-            </td>
-            <td>
-                Tarih
-            </td>
-            <td>
-                Açıklama
-            </td>
+grid.Column("Güncelle", header: null, format: @<text>@Html.ActionLink(
+"Seç", "GuncelleBilgiGetir", new { id = item.PK_GUNLUK_CALISMA })</text>),
 
-            <td>
-                Sil
-            </td>
-            <td>
-                Güncelle
-            </td>
-        </tr>
-    </thead>
-    <tbody>
+grid.Column("Pdf Al", header: null, format: @<text>@Html.ActionLink(
+"Seç", "ExportToPdf2", new { id = item.PK_GUNLUK_CALISMA })</text>)
+)
 
-        @foreach (var item in Model)
-        {
-                <tr>
-                    <td>@item.PK_GUNLUK_CALISMA</td>
-                    <td>@item.STAJYER_TANIM.ADI</td>
-                    <td>@item.TARIH</td>
-                    <td>@item.ACIKLAMA</td>
+)
 
-                    <td><a href="/GunlukCalisma/SilBilgiGetir/@item.PK_GUNLUK_CALISMA" class="btn btn-danger">Sil</a></td>
-                    <td><a href="/GunlukCalisma/GuncelleBilgiGetir/@item.PK_GUNLUK_CALISMA" class="btn btn-warning">Güncelle</a></td>
-                    <td><a href="/GunlukCalisma/ExportToPdf2/@item.PK_GUNLUK_CALISMA" class="btn btn-warning">Pdf çıktısını al</a></td>
+<div style="float:left;">
+    <a href="/GunlukCalisma/GunlukCalismaEkle/" class="btn btn-success" style="margin-top:50px;background-color:cornflowerblue;">Günlük Çalışma Ekle</a>
+    <br />
 
-                </tr>
+</div>
+<div style="float:right;">
 
-
-        }
-    </tbody>
-
-
-</table>
-
-<a href="/GunlukCalisma/GunlukCalismaEkle/" class="btn btn-success" style="margin-top:auto">Günlük Çalışma Ekle</a>
-<br />
-<p>
-    @Html.ActionLink("Tüm günleri PDF'e Dönüştür", "ExportToPdf")
-</p>
+    <a href="/GunlukCalisma/ExportToPdf/" class="btn btn-success" style="margin-top:50px;background-color:cornflowerblue;">Tüm günleri PDF'e Dönüştür</a>
+    <br />
+</div>

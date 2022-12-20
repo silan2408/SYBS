@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FluentValidation.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="M:FluentValidation.AspNetCore.CustomizeValidatorAttribute.ToValidatorSelector">
+            <summary>
+            Builds a validator selector from the options specified in the attribute's properties.
+            </summary>
+        </member>
+        <member name="T:FluentValidation.AspNetCore.FluentValidationModelValidatorProvider">
+            <summary>
+            ModelValidatorProvider implementation only used for child properties.
+            </summary>
+        </member>
+        <member name="T:FluentValidation.AspNetCore.FluentValidationMvcConfiguration">
+            <summary>
+            FluentValidation asp.net core configuration
+            </summary>
+        </member>
+        <member name="P:FluentValidation.AspNetCore.FluentValidationMvcConfiguration.ValidatorFactoryType">
+            <summary>
+            The type of validator factory to use. Uses the ServiceProviderValidatorFactory by default.
+            </summary>
+        </member>
+        <member name="P:FluentValidation.AspNetCore.FluentValidationMvcConfiguration.ValidatorFactory">
+            <summary>
+            The validator factory to use. Uses the ServiceProviderValidatorFactory by default. 
+            </summary>
+        </member>
+        <member name="P:FluentValidation.AspNetCore.FluentValidationMvcConfiguration.ClearValidatorProviders">
+            <summary>
+            Whether to remove all of MVC's default validator providers when registering FluentValidation. False by default. 
+            </summary>
+        </member>
+        <member name="P:FluentValidation.AspNetCore.FluentValidationMvcConfiguration.RunDefaultMvcValidationAfterFluentValidationExecutes">
+            <summary>
+            Whether to run MVC's default validation process (including DataAnnotations) after FluentValidation is executed. True by default. 
+            </summary>
+        </member>
+        <member name="P:FluentValidation.AspNetCore.FluentValidationMvcConfiguration.LocalizationEnabled">
+            <summary>
+            Enables or disables localization support within FluentValidation
+            </summary>
+        </member>
+        <member name="P:FluentValidation.AspNetCore.FluentValidationMvcConfiguration.ImplicitlyValidateChildProperties">
+            <summary>
+            Whether or not child properties should be implicitly validated if a matching validator can be found. By default this is false, and you should wire up child validators using SetValidator.
+            </summary>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.FluentValidationMvcConfiguration.RegisterValidatorsFromAssemblyContaining``1">
+            <summary>
+            Registers all validators derived from AbstractValidator within the assembly containing the specified type
+            </summary>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.FluentValidationMvcConfiguration.RegisterValidatorsFromAssemblyContaining(System.Type)">
+            <summary>
+            Registers all validators derived from AbstractValidator within the assembly containing the specified type
+            </summary>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.FluentValidationMvcConfiguration.RegisterValidatorsFromAssembly(System.Reflection.Assembly)">
+            <summary>
+            Registers all validators derived from AbstractValidator within the specified assembly
+            </summary>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.FluentValidationMvcConfiguration.ConfigureClientsideValidation(System.Action{FluentValidation.AspNetCore.FluentValidationClientModelValidatorProvider},System.Boolean)">
+            <summary>
+            Configures clientside vlaidation support
+            </summary>
+            <param name="clientsideConfig"></param>
+            <param name="enabled">Whether clientisde validation integration is enabled</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.FluentValidationMvcExtensions.AddFluentValidation(Microsoft.Extensions.DependencyInjection.IMvcCoreBuilder,System.Action{FluentValidation.AspNetCore.FluentValidationMvcConfiguration})">
+            <summary>
+                Adds Fluent Validation services to the specified
+                <see cref="T:Microsoft.Extensions.DependencyInjection.IMvcBuilder" />.
+            </summary>
+            <returns>
+                An <see cref="T:Microsoft.Extensions.DependencyInjection.IMvcCoreBuilder" /> that can be used to further configure the
+                MVC services.
+            </returns>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.FluentValidationMvcExtensions.AddFluentValidation(Microsoft.Extensions.DependencyInjection.IMvcBuilder,System.Action{FluentValidation.AspNetCore.FluentValidationMvcConfiguration})">
+            <summary>
+                Adds Fluent Validation services to the specified
+                <see cref="T:Microsoft.Extensions.DependencyInjection.IMvcBuilder" />.
+            </summary>
+            <returns>
+                An <see cref="T:Microsoft.Extensions.DependencyInjection.IMvcBuilder" /> that can be used to further configure the
+                MVC services.
+            </returns>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.FluentValidationObjectModelValidatorOriginal.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Collections.Generic.IList{Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidatorProvider})">
+            <summary>
+                Initializes a new instance of <see cref="T:FluentValidation.AspNetCore.FluentValidationObjectModelValidatorOriginal" />.
+            </summary>
+        </member>
+        <member name="P:FluentValidation.AspNetCore.FluentValidationObjectModelValidatorOriginal.RunDefaultMvcValidation">
+            <summary>
+            Whether or not to run the default MVC validation pipeline after FluentValidation has executed. Default is true. 
+            </summary>
+        </member>
+        <member name="P:FluentValidation.AspNetCore.FluentValidationObjectModelValidatorOriginal.ImplicitlyValidateChildProperties">
+            <summary>
+            Whether or not child properties should be implicitly validated if a matching validator can be found. By default this is false, and you should wire up child validators using SetValidator.
+            </summary>
+        </member>
+        <member name="T:FluentValidation.AspNetCore.IValidatorInterceptor">
+            <summary>
+            Specifies an interceptor that can be used to provide hooks that will be called before and after MVC validation occurs.
+            </summary>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.IValidatorInterceptor.BeforeMvcValidation(Microsoft.AspNetCore.Mvc.ControllerContext,FluentValidation.ValidationContext)">
+            <summary>
+            Invoked before MVC validation takes place which allows the ValidationContext to be customized prior to validation.
+            It should return a ValidationContext object.
+            </summary>
+            <param name="controllerContext">Controller Context</param>
+            <param name="validationContext">Validation Context</param>
+            <returns>Validation Context</returns>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.IValidatorInterceptor.AfterMvcValidation(Microsoft.AspNetCore.Mvc.ControllerContext,FluentValidation.ValidationContext,FluentValidation.Results.ValidationResult)">
+            <summary>
+            Invoked after MVC validation takes place which allows the result to be customized.
+            It should return a ValidationResult.
+            </summary>
+            <param name="controllerContext">Controller Context</param>
+            <param name="validationContext">Validation Context</param>
+            <param name="result">The result of validation.</param>
+            <returns>Validation Context</returns>
+        </member>
+        <member name="T:FluentValidation.AspNetCore.RuleSetForClientSideMessagesAttribute">
+            <summary>
+            Specifies which ruleset should be used when deciding which validators should be used to generate client-side messages.
+            </summary>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.ValidationResultExtension.AddToModelState(FluentValidation.Results.ValidationResult,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary,System.String)">
+            <summary>
+            Stores the errors in a ValidationResult object to the specified modelstate dictionary.
+            </summary>
+            <param name="result">The validation result to store</param>
+            <param name="modelState">The ModelStateDictionary to store the errors in.</param>
+            <param name="prefix">An optional prefix. If ommitted, the property names will be the keys. If specified, the prefix will be concatenatd to the property name with a period. Eg "user.Name"</param>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.ValidationVisitorFork.#ctor(Microsoft.AspNetCore.Mvc.ActionContext,Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidatorProvider,Microsoft.AspNetCore.Mvc.Internal.ValidatorCache,Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationStateDictionary)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor"/>.
+            </summary>
+            <param name="actionContext">The <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/> associated with the current request.</param>
+            <param name="validatorProvider">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidatorProvider"/>.</param>
+            <param name="validatorCache">The <see cref="T:Microsoft.AspNetCore.Mvc.Internal.ValidatorCache"/> that provides a list of <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator"/>s.</param>
+            <param name="metadataProvider">The provider used for reading metadata for the model type.</param>
+            <param name="validationState">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationStateDictionary"/>.</param>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.ValidationVisitorFork.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)">
+            <summary>
+            Validates a object.
+            </summary>
+            <param name="metadata">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> associated with the model.</param>
+            <param name="key">The model prefix key.</param>
+            <param name="model">The model object.</param>
+            <returns><c>true</c> if the object is valid, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.ValidationVisitorFork.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object,System.Boolean)">
+            <summary>
+            Validates a object.
+            </summary>
+            <param name="metadata">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> associated with the model.</param>
+            <param name="key">The model prefix key.</param>
+            <param name="model">The model object.</param>
+            <param name="alwaysValidateAtTopLevel">If <c>true</c>, applies validation rules even if the top-level value is <c>null</c>.</param>
+            <returns><c>true</c> if the object is valid, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:FluentValidation.AspNetCore.ValidationVisitorFork.ValidateNode">
+            <summary>
+            Validates a single node in a model object graph.
+            </summary>
+            <returns><c>true</c> if the node is valid, otherwise <c>false</c>.</returns>
+        </member>
+    </members>
+</doc>

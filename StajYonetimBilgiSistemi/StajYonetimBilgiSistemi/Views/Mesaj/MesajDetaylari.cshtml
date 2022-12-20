@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model List<StajYonetimBilgiSistemi.Models.Entity.MesajBilgileri>
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.MesajBilgileri>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,251 +53,99 @@
                                             <h5>Konu :@item.Konu</h5>
                                             <br />
                                             <h6>
-                                                Gönderen Mail:  @item.GönderenMail
+                                                Kime:  @item.AlıcıMail
                                                 <span class="mailbox-read-time float-right">@item.MesajTarihi</span>
                                             </h6>
+
                                         </div>
+                                        <hr />
                                         <div class="mailbox-read-message">
 
 
-                                            @item.MesajIcerigi
-
+                                            @Html.Raw(item.MesajIcerigi)
+                                            <br />
+                                            <br />
                                         </div>
+                                        <hr />
                                         <!-- /.mailbox-read-info -->
                                         <div class="mailbox-controls with-border text-center">
                                             <div class="btn-group">
                                                 <div class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Delete">
-                                                    <i class="far fa-trash-alt">
-                                                        @Html.ActionLink("Sil", "Index3", "Mesaj", new { id = @item.MesajBilgileriId }, null)
+                                                    <i class="bi bi-trash">
+                                                        @Html.ActionLink("Sil", "Index3", "Mesaj", new { id = @item.MesajBilgileriId }, new { onclick = "return confirm('Are sure wants to delete?');" })
                                                     </i>
                                                 </div>
-                                                <a  href="/Mesaj/MesajDetaylari/@ViewBag.NextID" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
-                                                    <i class="fas fa-reply"></i>
-                                                </a>
-                                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
-                                                    <i class="fas fa-share"></i>
-                                                </button>
+                                                @*<a href="/Mesaj/MesajDetaylari/@ViewBag.NextID" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body">
+                                                        <i class="fas fa-reply"></i>
+                                                    </a>
+                                                    <a href="/Mesaj/MesajDetaylari/@ViewBag.NextID" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body">
+                                                        <i class="fas fa-share"></i>
+                                                        </a>*@
                                             </div>
                                             <!-- /.btn-group -->
-                                       
+
                                         </div>
                                         <!-- /.mailbox-controls -->
                                         <!-- /.mailbox-read-message -->
                                     </div>
 
-                                    <div class="card-footer bg-white">
+                                    <div class="card-footer bg-gray-200">
                                         <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
-                                            <li>
-                                                @if (@ViewBag.uzanti == ".pdf")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
-
+                                            @if (@item.Dosyalar != null)
+                                            {
+                                                <li>
                                                     <div class="mailbox-attachment-info">
-                                                        <a href="@Url.Content(item.Dosyalar)" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> @item.Dosyalar.Substring(0, item.Dosyalar.Length - 4)</a>
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar.Length)</span>
+                                                        <a @*href="@Url.Content(item.Dosyalar)"*@ class="mailbox-attachment-name">@item.Dosyalar.Substring(8)</a>
+                                                        <br />
 
-                                                            <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
+                                                        <span class="mailbox-attachment-size clearfix mt-1">
+                                                            <span>@((byte)item.Dosyalar.Length)Byte</span>
+
+                                                            <br />
+                                                            <i class="bi bi-cloud-arrow-down-fill">  @Html.ActionLink("İndir", "Download", new { file = @item.Dosyalar })</i>
                                                         </span>
                                                     </div>
-                                                }
-                                                @if (@ViewBag.uzanti == ".jpg")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-image"></i></span>
+
+
+                                                </li>
+                                            }
+                                            @if (@item.Dosyalar2 != null)
+                                            {
+                                                <li style="margin-left:190px;margin-right:190px;">
 
                                                     <div class="mailbox-attachment-info">
-                                                        <a href="@Url.Content(item.Dosyalar)" class="mailbox-attachment-name">
-                                                            <i class="fas fa-paperclip"></i>@item.Dosyalar.Substring(0, item.Dosyalar.Length - 4)
-                                                        </a>
+                                                        <a @*href="@Url.Content(item.Dosyalar)"*@ class="mailbox-attachment-name">@item.Dosyalar2.Substring(8)</a>
                                                         <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar.Length)</span>
+                                                            <br />
+                                                            <span>@((byte)item.Dosyalar2.Length)Byte</span>
 
-                                                            <a href="@item.Dosyalar" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
+                                                            <br />
+                                                            <i class="bi bi-cloud-arrow-down-fill">  @Html.ActionLink("İndir", "Download", new { file = @item.Dosyalar2 })</i>
                                                         </span>
                                                     </div>
-                                                }
-                                                @if (@ViewBag.uzanti == ".jpeg")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-image"></i></span>
+
+                                                </li>
+                                            }
+                                            @if (@item.Dosyalar3 != null)
+                                            {
+                                                <li>
 
                                                     <div class="mailbox-attachment-info">
-                                                        <img style="resize:initial" src="@Url.Content(item.Dosyalar)" class="mailbox-attachment-name" />
+                                                        <a @*href="@Url.Content(item.Dosyalar)"*@ class="mailbox-attachment-name">@item.Dosyalar3.Substring(8)</a>
                                                         <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar.Length)</span>
+                                                            <br />
+                                                            <span>@((byte)item.Dosyalar3.Length)Byte</span>
 
-                                                            <a href="@item.Dosyalar" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
+                                                            <br />
+                                                            <i class="bi bi-cloud-arrow-down-fill">   @Html.ActionLink("İndir", "Download", new { file = @item.Dosyalar3 })</i>
                                                         </span>
                                                     </div>
-                                                }
-                                                @if (@ViewBag.uzanti == ".png")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-image"></i></span>
 
-                                                    <div class="mailbox-attachment-info">
-                                                        <img style="resize:initial" src="@Url.Content(item.Dosyalar)" class="mailbox-attachment-name" />
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar.Length)</span>
-
-                                                            <a href="@item.Dosyalar" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                                @if (@ViewBag.uzanti == ".docx" || @ViewBag.uzanti == ".doc")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-word"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <a href="@Url.Content(item.Dosyalar)" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> @item.Dosyalar.Substring(0, item.Dosyalar.Length - 4)</a>
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar.Length)</span>
-
-                                                            <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                            </li>
-                                            <li>
-                                                @if (@ViewBag.uzanti2 == ".pdf")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <a href="@Url.Content(item.Dosyalar2)" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> @item.Dosyalar2.Substring(0, item.Dosyalar2.Length - 4)</a>
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar2.Length)</span>
-
-                                                            <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                                @if (@ViewBag.uzanti2 == ".jpg")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-image"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <a href="@Url.Content(item.Dosyalar2)" class="mailbox-attachment-name">
-                                                            <i class="fas fa-paperclip"></i>@item.Dosyalar2.Substring(0, item.Dosyalar2.Length - 3)
-                                                        </a>
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar2.Length)</span>
-
-                                                            <a href="@item.Dosyalar2" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                                @if (@ViewBag.uzanti2 == ".jpeg")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-image"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <img style="resize:initial" src="@Url.Content(item.Dosyalar2)" class="mailbox-attachment-name" />
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar2.Length)</span>
-
-                                                            <a href="@item.Dosyalar2" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                                @if (@ViewBag.uzanti2 == ".png")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-image"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <img style="resize:initial" src="@Url.Content(item.Dosyalar2)" class="mailbox-attachment-name" />
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar2.Length)</span>
-
-                                                            <a href="@item.Dosyalar2" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                                @if (@ViewBag.uzanti2 == ".docx" || @ViewBag.uzanti == ".doc")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-word"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <a href="@Url.Content(item.Dosyalar2)" class=" mailbox-attachment-name"><i class="fas fa-paperclip"></i> @item.Dosyalar2.Substring(0, item.Dosyalar2.Length - 4)"</a>
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar2.Length)</span>
-
-                                                            <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                            </li>
-                                            <li>
-                                                @if (@ViewBag.uzanti3 == ".pdf")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <a href="@Url.Content(item.Dosyalar3)" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> @item.Dosyalar3.Substring(0, item.Dosyalar3.Length - 4)</a>
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar3.Length)</span>
-
-                                                            <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                                @if (@ViewBag.uzanti3 == ".jpg")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-image"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <a href="@Url.Content(item.Dosyalar3)" class="mailbox-attachment-name">
-                                                            <i class="fas fa-paperclip"></i>@item.Dosyalar3.Substring(0, item.Dosyalar3.Length - 4)
-                                                        </a>
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar3.Length)</span>
-
-                                                            <a href="@item.Dosyalar3" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                                @if (@ViewBag.uzanti3 == ".jpeg")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-image"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <img style="resize:initial" src="@Url.Content(item.Dosyalar3)" class="mailbox-attachment-name" />
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar3.Length)</span>
-
-                                                            <a href="@item.Dosyalar3" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                                @if (@ViewBag.uzanti3 == ".png")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-image"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <img style="resize:initial" src="@Url.Content(item.Dosyalar3)" class="mailbox-attachment-name" />
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar3.Length)</span>
-
-                                                            <a href="@item.Dosyalar3" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                                @if (@ViewBag.uzanti3 == ".docx" || @ViewBag.uzanti == ".doc")
-                                                {
-                                                    <span class="mailbox-attachment-icon"><i class="far fa-file-word"></i></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <a href="@Url.Content(item.Dosyalar3)" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> @item.Dosyalar3.Substring(0, item.Dosyalar3.Length - 4)</a>
-                                                        <span class="mailbox-attachment-size clearfix mt-1">
-                                                            <span>@((byte)item.Dosyalar3.Length)</span>
-
-                                                            <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                                                        </span>
-                                                    </div>
-                                                }
-                                            </li>
-
+                                                </li>
+                                            }
                                         </ul>
                                     </div>
-                                }   
+                                }
                             </div>
                             <!-- /.card -->
                         </div>
@@ -308,16 +156,18 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-     
+
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
-    <script src="~/js/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="~/js/adminlte.min.js"></script>
+    <script src="~/Scripts/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
+    <script src="~/Scripts/demo.js"></script>
+    <!-- Bootstrap Font Icon CSS -->
+
 </body>
 </html>

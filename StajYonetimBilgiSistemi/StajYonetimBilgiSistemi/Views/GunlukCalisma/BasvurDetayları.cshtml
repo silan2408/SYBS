@@ -1,0 +1,121 @@
+﻿@model StajYonetimBilgiSistemi.Models.Entity.Basvuru
+@{
+    ViewBag.Title = "StajBilgileri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3 style="justify-content:center;text-align:center;">Başvuru  Bilgileri</h3>
+<div class="container">
+    @Html.HiddenFor(x => x.PK_Basvuru_Id)
+    <div class="form-group" style="margin-left:440px;">
+        @*<label>Resim</label>*@
+        <img src="@Model.Resim" style="width:200px;height:200px;" />
+    </div>
+    <br />
+    <div style="clear:both;"></div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+
+        <label>Staj Başlığı:</label>
+        @Html.DisplayFor(x => x.Stajlar.Baslik, new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>Stajyer :</label>
+        @Html.DisplayFor(x => x.Fk_Stajyer_Id, new { @class = "form-control" })
+    </div>
+    <div style="clear:both;"></div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label> Üniversite :</label>
+        @Html.DisplayFor(x => x.Uni.UniName, new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label> Bölümü:</label>
+        @Html.DisplayFor(x => x.Bolumler.BolumName, new { @class = "form-control" })
+    </div>
+    <div style="clear:both;"></div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>Başvuru Tarihi</label>
+        @Html.DisplayFor(x => x.BasvuruTarihi, "{0:yyyy-MM-dd}", new
+{
+@class = "form-control",
+required = "required",
+@type = "date"
+})
+    </div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>Adı</label>
+        @Html.DisplayFor(x => x.Ad, new { @class = "form-control" })
+    </div>
+    <div style="clear:both;"></div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <b>Soyadı:</b>
+        @Html.DisplayFor(x => x.Soyad, new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <b>Telefon :</b>
+        @Html.DisplayFor(x => x.Tel, new { @class = "form-control" })
+    </div>
+    <div style="clear:both;"></div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <b> Mail:</b>
+        @Html.DisplayFor(x => x.Mail, new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>Adres:</label>
+        @Html.DisplayFor(x => x.Adres, new { @class = "form-control" })
+    </div>
+    <div style="clear:both;"></div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <b>@Html.LabelFor(x => x.DogumTarihi):</b>
+        @Html.DisplayFor(x => x.DogumTarihi, "{0:yyyy-MM-dd}", new
+{
+@class = "form-control",
+required = "required",
+@type = "date"
+})
+    </div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label> Cinsiyet:</label>
+
+        @Html.DisplayFor(x => x.Cinsiyet, new { @class = "form-control" })
+    </div>
+    <div style="clear:both;"></div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>sınıf:</label>
+        @Html.DisplayFor(x => x.Sınıf, new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>Cv</label>
+        @Html.DisplayFor(x => x.Cv, new { @class = "form-control" })
+    </div>
+    <div style="clear:both;"></div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>Yabancı Dil</label>
+        @Html.DisplayFor(x => x.YabanciDil, new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>Seviye</label>
+        @Html.DisplayFor(x => x.Seviye, new { @class = "form-control" })
+    </div>
+    <div style="clear:both;"></div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>Uni NO</label>
+        @Html.DisplayFor(x => x.UniNo, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>Yazı</label>
+        @Html.DisplayFor(x => x.BasvuruYazisi, new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <label>Onay Durumu</label>
+        @Html.DisplayFor(x => x.BasvuruDurumu, new { @class = "form-control" })
+    </div>
+
+
+    <div style="clear:both;"></div>
+    <div style="float:left;">
+
+        <a style="color:deeppink;" href="/GunlukCalisma/Basvurular/">Geri Dön </a>
+    </div>
+
+
+</div>

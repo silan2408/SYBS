@@ -1,39 +1,58 @@
-﻿
-@{
-    ViewBag.Title = "KurumEkle";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model StajYonetimBilgiSistemi.Models.Entity.KURUM_TANIM
 
-<div class="container">
-    <form action="/KurumTanim/KurumEkle2/">
-      
-        <div class="form-group">
-            <label>Firma Adı</label>
-            <input type="text" name="FIRMA_ADI" class="form-control" />
+    @{
+        ViewBag.Title = "KurumEkle";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <h2 style="text-align:center;">Kurum Ekleme Sayfası</h2>
+    &nbsp; &nbsp;
+    <div class="container" style="align-items:center;">
+        <form action="/KurumTanim/KurumEkle2/" method="post">
+            @Html.AntiForgeryToken()
 
-        </div>
-        <div class="form-group">
-            <label>Firma Yetkilisi</label>
-            <input type="text" name="FIRMA_YEKTILISI" class="form-control" />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        </div>
-        <div class="form-group">
-            <label>Firma Adresi</label>
-            <input type="text" name="FIRMA_ADRESİ" class="form-control" />
+            <div class="form-group" style="width:520px;float:left;">
+                <label>Firma Adı</label>
+                <input type="text" name="FIRMA_ADI" class="form-control" required/>
+                @*@Html.EditorFor(model => model.FIRMA_ADI)
 
-        </div>
-        <div class="form-group">
-            <label>Telefon</label>
-            <input type="tel" name="TELEFON" class="form-control" />
+                @Html.ValidationMessageFor(model => model.FIRMA_ADI)*@
+            </div>
+              
+            <div class="form-group" style="width:520px;float:right;">
+                <label>Firma Yetkilisi</label>
+                <input type="text" name="FIRMA_YEKTILISI" class="form-control" required />
+          
 
-        </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="EMAIL" class="form-control" />
+            </div>
+            <div style="clear:both;"></div>
+            <div class="form-group">
+                <label>Firma Adresi</label>
+                <textarea type="text" style="height:100px;" name="FIRMA_ADRESİ" class="form-control" required></textarea>
+     
 
+            </div>
+            <div class="form-group" style="width:520px;float:left;">
+                <label>Telefon</label>
+                <input type="tel" name="TELEFON" class="form-control" placeholder="530-000-00-00" pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" required />
+       
+
+            </div>
+            <div class="form-group" style="width:520px;float:right;">
+                <label>Email</label>
+                <input type="email" name="EMAIL" class="form-control" placeholder="....gmail.com"
+                       required />
+             
+
+            </div>
+            <div style="clear:both;"></div>
+            <div class="form-group">
+                <button class="btn btn-success">Kurum Ekle</button>
+                <a href="/KurumTanim/Index/">Kurum Listesine Dön </a>
+            </div>
+        </form>
+        <div class="w3-panel w3-red" style="float:right;">
+            <h3 style="color:red;">@TempData["mesaj"]</h3>
         </div>
-        <div class="form-group">
-            <button class="btn btn-success">Kurum Ekle</button>
-        </div>
-    </form>
-</div>
+    </div>

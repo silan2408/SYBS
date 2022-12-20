@@ -17,12 +17,15 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Uni()
         {
+            this.Basvuru = new HashSet<Basvuru>();
             this.STAJYER_TANIM = new HashSet<STAJYER_TANIM>();
         }
     
         public int UniId { get; set; }
         public string UniName { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Basvuru> Basvuru { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STAJYER_TANIM> STAJYER_TANIM { get; set; }
     }

@@ -8,7 +8,7 @@
 
 
 
-<p style="text-align:center;font-size:large;">Günlük</p>
+<p style="text-align:center;font-size:large;">Günlük Staj Raporu</p>
 
 <table class="table table-bordered " style="align-self:center;" border="1" cellpadding="3" cellspacing="3">
 
@@ -20,29 +20,40 @@
             <td>
                 @Html.DisplayNameFor(model => model.TARIH)
             </td>
-            <td> 
+            <td style="width:800px;">
                 @Html.DisplayFor(modelItem => item.TARIH)
             </td>
-
         </tr>
+        <tr style="text-align: center; font-size: medium">
 
+            <td>
+                BAŞLIK
+            </td>
+            <td style="width:800px;">
+
+                @Html.DisplayFor(modelItem => item.Baslik)
+
+            </td>
+        </tr>
+       
         <tr style="text-align: center; font-size: medium">
             <td>
-                
-                @Html.DisplayNameFor(model => model.ACIKLAMA)
-              
-            </td>
-            <td>
 
-                @Html.DisplayTextFor(modelItem => item.ACIKLAMA)
+                @Html.DisplayNameFor(model => model.ACIKLAMA)
+
+            </td>
+
+          
+            <td style="width:800px;">
+                @Html.Raw(item.ACIKLAMA)
             </td>
 
         </tr>
-            }
+    }
 
 
 
-    </table>
+</table>
 
 <br />
 

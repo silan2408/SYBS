@@ -1,11 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="SBYSModelStoreContainer" CdmEntityContainer="SBYSEntities14">
+  <EntityContainerMapping StorageEntityContainer="SBYSModelStoreContainer" CdmEntityContainer="SBYSEntities">
+    <EntitySetMapping Name="Basvuru">
+      <EntityTypeMapping TypeName="SBYSModel.Basvuru">
+        <MappingFragment StoreEntitySet="Basvuru">
+          <ScalarProperty Name="BasvuruDurumu" ColumnName="BasvuruDurumu" />
+          <ScalarProperty Name="PK_Basvuru_Id" ColumnName="PK_Basvuru_Id" />
+          <ScalarProperty Name="Fk_Staj_Id" ColumnName="Fk_Staj_Id" />
+          <ScalarProperty Name="Fk_Stajyer_Id" ColumnName="Fk_Stajyer_Id" />
+          <ScalarProperty Name="BasvuruTarihi" ColumnName="BasvuruTarihi" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Uni_Id" ColumnName="Uni_Id" />
+          <ScalarProperty Name="Bolum_Id" ColumnName="Bolum_Id" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Sınıf" ColumnName="Sınıf" />
+          <ScalarProperty Name="YabanciDil" ColumnName="YabanciDil" />
+          <ScalarProperty Name="Seviye" ColumnName="Seviye" />
+          <ScalarProperty Name="DogumTarihi" ColumnName="DogumTarihi" />
+          <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+          <ScalarProperty Name="Cv" ColumnName="Cv" />
+          <ScalarProperty Name="Resim" ColumnName="Resim" />
+          <ScalarProperty Name="BasvuruYazisi" ColumnName="BasvuruYazisi" />
+          <ScalarProperty Name="UniNo" ColumnName="UniNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Bolumler">
       <EntityTypeMapping TypeName="SBYSModel.Bolumler">
         <MappingFragment StoreEntitySet="Bolumler">
           <ScalarProperty Name="BolumId" ColumnName="BolumId" />
           <ScalarProperty Name="BolumName" ColumnName="BolumName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Event">
+      <EntityTypeMapping TypeName="SBYSModel.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="End" ColumnName="End" />
+          <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+          <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -17,6 +57,7 @@
           <ScalarProperty Name="TARIH" ColumnName="TARIH" />
           <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
           <ScalarProperty Name="kullaniciadi" ColumnName="kullaniciadi" />
+          <ScalarProperty Name="Baslik" ColumnName="Baslik" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -92,10 +133,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Stajlar">
+      <EntityTypeMapping TypeName="SBYSModel.Stajlar">
+        <MappingFragment StoreEntitySet="Stajlar">
+          <ScalarProperty Name="Pk_Staj_Id" ColumnName="Pk_Staj_Id" />
+          <ScalarProperty Name="Fk_Kurum_Id" ColumnName="Fk_Kurum_Id" />
+          <ScalarProperty Name="Fk_Kurum_Departman" ColumnName="Fk_Kurum_Departman" />
+          <ScalarProperty Name="Staj_Sınıflar" ColumnName="Staj_Sınıflar" />
+          <ScalarProperty Name="Staj_Bas_Tarihi" ColumnName="Staj_Bas_Tarihi" />
+          <ScalarProperty Name="Staj_Bit_Tarihi" ColumnName="Staj_Bit_Tarihi" />
+          <ScalarProperty Name="Aktiflik" ColumnName="Aktiflik" />
+          <ScalarProperty Name="Fk_Sorumlu_Personel" ColumnName="Fk_Sorumlu_Personel" />
+          <ScalarProperty Name="Fk_Onaylayan_Personel" ColumnName="Fk_Onaylayan_Personel" />
+          <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="STAJYER_TANIM">
       <EntityTypeMapping TypeName="SBYSModel.STAJYER_TANIM">
         <MappingFragment StoreEntitySet="STAJYER_TANIM">
-          <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
           <ScalarProperty Name="PK_STAJYER_TANIM" ColumnName="PK_STAJYER_TANIM" />
           <ScalarProperty Name="ADI" ColumnName="ADI" />
           <ScalarProperty Name="SOYADI" ColumnName="SOYADI" />
@@ -112,6 +168,19 @@
           <ScalarProperty Name="KURUM_ONAY_KISI" ColumnName="KURUM_ONAY_KISI" />
           <ScalarProperty Name="FK_STAJ_KURUM" ColumnName="FK_STAJ_KURUM" />
           <ScalarProperty Name="FK_DEPARTMAN" ColumnName="FK_DEPARTMAN" />
+          <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+          <ScalarProperty Name="StajId" ColumnName="StajId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SBYSModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -120,30 +189,6 @@
         <MappingFragment StoreEntitySet="Uni">
           <ScalarProperty Name="UniId" ColumnName="UniId" />
           <ScalarProperty Name="UniName" ColumnName="UniName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Event">
-      <EntityTypeMapping TypeName="SBYSModel.Event">
-        <MappingFragment StoreEntitySet="Event">
-          <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
-          <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
-          <ScalarProperty Name="End" ColumnName="End" />
-          <ScalarProperty Name="Start" ColumnName="Start" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Subject" ColumnName="Subject" />
-          <ScalarProperty Name="EventID" ColumnName="EventID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="SBYSModel.sysdiagrams">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="definition" ColumnName="definition" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

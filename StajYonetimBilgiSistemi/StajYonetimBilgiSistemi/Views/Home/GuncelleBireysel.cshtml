@@ -6,101 +6,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Kayıt Ol</title>
+    <title>Güncelle</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="~/Css/font-awesome.min.css" rel="stylesheet" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <link href="~/Css/animate.css" rel="stylesheet" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <link href="~/Css/hamburgers.min.css" rel="stylesheet" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <link href="~/Css/select2.min.css" rel="stylesheet" />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Css/main.css">
     <!--===============================================================================================-->
+    <!--===============================================================================================-->
 </head>
 <body>
     @using (Html.BeginForm("GuncelleBireysel", "Home", FormMethod.Post))
-    {
-        <div class="limiter">
-            <div class="container-login100">
-                <div class="wrap-login100">
+    {@Html.AntiForgeryToken()
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
 
-                    <form class="login100-form validate-form" method="post" action="/Home/GuncelleBireysel/">
-                        <span class="login100-form-title">
-                            Bilgilerini Güncelle
-                        </span>
-
-                        <div class="wrap-input100 validate-input" data-validate="Ad Soyad zorunludur !">
-                            <b>Adı Soyadı</b>
-                            @Html.HiddenFor(x=>x.Id ,new {@class ="form-control"})
-
-                            @Html.TextBoxFor(x => x.AdiSoyadi, new { @class = "form-control" })
+                <form class="login100-form validate-form" method="post" action="/Home/GuncelleBireysel/">
+                    <span class="login100-form-title">
+                        Bilgilerini Güncelle
+                    </span>
 
 
-                        </div>
 
-                        <div class="wrap-input100 validate-input" data-validate="Kullanıcı adınız giriniz .">
-                            <b>Kullanıcı Adı</b>
-                            @Html.TextBoxFor(x => x.KullaniciAdi, new { @class = "form-control" })
+                    <div class="wrap-input100 validate-input" data-validate="Kullanıcı adınız giriniz .">
+                        <b>Kullanıcı Adı :</b>
+                        @Html.DisplayFor(x => x.KullaniciAdi, new { @class = "form-control" })
 
-                        </div>
-                        <div class="wrap-input100 validate-input" data-validate="Email zorunludur !">
-                            <b>
-                                Email
-                            </b>
-                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
-                        </div>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Email zorunludur !">
+                        <b>
+                            Email :
+                        </b>
+                        @Html.DisplayFor(x => x.Email, new { @class = "form-control" })
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Ad Soyad zorunludur !">
+                        <b>Adı Soyadı :</b>
+                        @Html.HiddenFor(x => x.Id, new { @class = "form-control" })
 
-                        <div class="wrap-input100 validate-input" data-validate="Şifre Oluşturunuz !">
-                            <b>Şifre</b>
-                            @Html.TextBoxFor(x => x.Sifre , new { @class = "form-control" })
-                        </div>
-                        <div class="wrap-input100 validate-input" data-validate="Şifreyi tekrar giriniz !">
-                            <b>Şifre</b>
-                            @Html.TextBoxFor(x => x.SifreKontrol, new { @class = "form-control" })
-                        </div>
+                        @Html.TextBoxFor(x => x.AdiSoyadi, new { @class = "form-control" })
 
 
-                        <div class="container-login100-form-btn">
-                            <button class="login100-form-btn" id="gnc">
-                                Güncelle
-                            </button>
-                            &nbsp;
-                            <a href="/Home/Index/">Ana Sayfaya Dön </a>
-                        </div>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Şifre Oluşturunuz !">
+                        <b>Şifre :</b>
+                        @Html.PasswordFor(x => x.Sifre, new { @Value = ViewBag.data, @class = "form-control" })
+                    </div>
+                    @*<div class="wrap-input100 validate-input" data-validate="Şifreyi tekrar giriniz !">
+                            <b>Şifre Tekrar :</b>
+                            @Html.TextBoxFor(x => x.SifreKontrol, new { @Value = ViewBag.data, @class = "form-control" })
+                        </div>*@
 
 
-                    </form>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" id="gnc">
+                            Güncelle
+                        </button>
+                        &nbsp;
+                        <a href="/Home/Index/">Ana Sayfaya Dön </a>
+                    </div>
 
 
-                </div>
+                </form>
+
+
             </div>
         </div>
+    </div>
 
-    }
+}
+
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
-    <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/popper.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <!--===============================================================================================-->
-    <script src="~/vendor/bootstrap/js/popper.js"></script>
-    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
     <!--===============================================================================================-->
-    <script src="~/vendor/select2/select2.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="~/vendor/tilt/tilt.jquery.min.js"></script>
+    <script src="~/Scripts/tilt.jquery.min.js"></script>
     <script>
         $('.js-tilt').tilt({
             scale: 1.1
         })
     </script>
     <!--===============================================================================================-->
-    <script src="~/js/main.js"></script>
+    <script src="~/Scripts/main.js"></script>
 
+    <script src="~/Scripts/main1.js"></script>
 </body>
 </html>

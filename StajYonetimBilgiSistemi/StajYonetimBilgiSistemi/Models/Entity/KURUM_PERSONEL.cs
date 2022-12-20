@@ -17,9 +17,11 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KURUM_PERSONEL()
         {
-            this.Kullanicilar = new HashSet<Kullanicilar>();
+            this.Stajlar = new HashSet<Stajlar>();
+            this.Stajlar1 = new HashSet<Stajlar>();
             this.STAJYER_TANIM = new HashSet<STAJYER_TANIM>();
             this.STAJYER_TANIM1 = new HashSet<STAJYER_TANIM>();
+            this.Kullanicilar = new HashSet<Kullanicilar>();
         }
     
         public int PK_KURUM_PERSONEL { get; set; }
@@ -31,13 +33,17 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public string EMAIL { get; set; }
         public Nullable<int> FK_KURUM_TANIM { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Kullanicilar> Kullanicilar { get; set; }
         public virtual KURUM_DEPARTMAN KURUM_DEPARTMAN { get; set; }
         public virtual KURUM_TANIM KURUM_TANIM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Stajlar> Stajlar { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Stajlar> Stajlar1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STAJYER_TANIM> STAJYER_TANIM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STAJYER_TANIM> STAJYER_TANIM1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kullanicilar> Kullanicilar { get; set; }
     }
 }

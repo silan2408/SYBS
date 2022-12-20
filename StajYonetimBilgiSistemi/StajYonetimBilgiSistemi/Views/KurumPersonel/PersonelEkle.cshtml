@@ -3,49 +3,79 @@
     ViewBag.Title = "PersonelEkle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<h2 style="text-align:center;">Personel Bilgileri</h2>
+ <br />
 <div class="container">
-    <form action="/KurumPersonel/PersonelEkle2/">
+    <form action="/KurumPersonel/PersonelEkle2/" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group" style="width:520px;float:left;">
+            <label>Kurum</label>
+            @if (ViewBag.dgr1 != null)
+            {
 
-        <div class="form-group">
+                @Html.DropDownListFor(m => m.FK_KURUM_TANIM, ViewBag.dgr1 as SelectList, "---Seçiniz Kurum---", new { @class = "form-control" })
+
+            }
+
+        </div>
+        <div class="form-group" style="width:520px;float:right;">
             <label>Kurum Departman Seç</label>
 
-            @Html.DropDownListFor(m => m.FK_KURUM_DEPARTMAN, (List<SelectListItem>)ViewBag.dgr, "---Seçiniz---", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.FK_KURUM_DEPARTMAN, new SelectList(" "), "---Seçiniz Departman---", new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <label>Adı</label>
-            <input type="text" name="ADI" class="form-control" />
+            <input type="text" name="ADI" class="form-control" required />
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <label>Soyad</label>
-            <input type="text" name="SOYADI" class="form-control" />
+            <input type="text" name="SOYADI" class="form-control" required />
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <label>Unvan</label>
-            <input type="text" name="UNVAN" class="form-control" />
+            <input type="text" name="UNVAN" class="form-control" required />
 
-        </div>   <div class="form-group">
+        </div>
+        <div class="form-group" style="width:520px;float:right;">
             <label>GSM</label>
-            <input type="text" name="GSM" class="form-control" />
+            <input type="text" name="GSM" class="form-control" placeholder="530-000-00-00" required />
 
-        </div>   <div class="form-group">
+        </div>
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <label>Email</label>
-            <input type="text" name="EMAIL" class="form-control" />
+            <input type="text" name="EMAIL" class="form-control" placeholder="....gmail.com"
+                   required />
 
 
         </div>
-                 <div class="form-group">
-                     <label>Kurum</label>
-                     @Html.DropDownListFor(m => m.FK_KURUM_TANIM, (List<SelectListItem>)ViewBag.dgr1, "---Seçiniz---", new { @class = "form-control" })
 
-
-                 </div>
+        <div style="clear:both;"></div>
+        <div class="w3-panel w3-red" style="float:right;">
+            <h3 style="color:red;">@TempData["mesaj"]</h3>
+        </div>
         <div class="form-group">
             <button class="btn btn-success">Personel Ekle</button>
-            <a href="/KurumPersonel/Index/">Ana Sayfa </a>
+            <a href="/KurumPersonel/Index/">Personel Listesine Dön </a>
         </div>
     </form>
 </div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+ <script>
+     $(document).ready(function () {
+         $("#FK_KURUM_TANIM").change(function () {
+             $.get("/KurumPersonel/GetDepartman", { FK_KURUM_TANIM: $("#FK_KURUM_TANIM").val() }, function (data) {
+                 $("#FK_KURUM_DEPARTMAN").empty();
+                 $.each(data, function (index, row) {
+                     $("#FK_KURUM_DEPARTMAN").append("<option value='" + row.PK_KURUM_DEPARTMAN + "'>" + row.ADI +"</option>")
+                 });
+             
+                   });
+         })
+     });
+ </script>

@@ -23,6 +23,9 @@
     <link href="~/Css/adminlte.min.css" rel="stylesheet" />
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
+
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -50,11 +53,11 @@
                                     <div class="card-tools" style="float:right;">
                                         <div class="input-group input-group-sm ">
                                             <div style="width: 70%; float: right; margin-right: 0px;">
-                                                @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Email " })
+                                                @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Email veya konu" })
                                             </div>
                                             <div style="margin-right:0px;caret-color:blue">
 
-                                                @Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })
+                                                @Html.ActionLink("Ara", "GonderilenKutusu", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })
                                             </div>
                                         </div>
                                     </div>
@@ -64,9 +67,9 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body p-0">
-                                
+
                                 <div class="table-responsive mailbox-messages">
-                                    <table class="table table-hover table-striped">
+                                    <table id="example" class="table table-hover table-striped">
                                         <tbody>
                                             @foreach (var item in Model)
                                             {
@@ -76,17 +79,17 @@
                                                     <td class="mailbox-star"><a href="/Mesaj/MesajDetaylari/"><i class="fas fa-star-o text-warning"></i></a></td>
                                                     <td class="mailbox-name">
                                                         <a href="/Mesaj/MesajDetaylari/@item.MesajBilgileriId">
-                                                            Kime: @item.AlıcıMail
+                                                            Kimden: @item.GönderenMail
                                                         </a>
                                                     </td>
                                                     <td class="mailbox-subject">
-                                                        <b>@item.Konu</b>- @item.MesajIcerigi.Substring(0, 10)......
+                                                        <b>Konu :@item.Konu</b>
                                                     </td>
                                                     <td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
                                                     <td class="mailbox-date">@item.MesajTarihi</td>
                                                     <td>
                                                         <i class="far fa-trash-alt">
-                                                            @Html.ActionLink("Sil", "Index3", "Mesaj", new { id = @item.MesajBilgileriId }, null)
+                                                            @Html.ActionLink("Sil", "Index3", "Mesaj", new { id = @item.MesajBilgileriId },  new { onclick = "return confirm('Are sure wants to delete?');" })
                                                         </i>
 
 
@@ -102,18 +105,65 @@
                                 </div>
                                 <!-- /.mail-box-messages -->
                             </div>
+
                             <!-- /.card-body -->
                             <div class="card-footer p-0">
                                 <div class="mailbox-controls">
-                                    <!-- Check all button -->
-                                  
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm" ><i class="fas fa-reply"></i></button>
-                                        <a role="button"  href="/Mesaj/MesajDetaylari/@ViewBag.NextID" class="btn btn-default btn-sm" ><i class="fas fa-share" ></i></a>
+                                    <div style="margin-right:100px;text-align:right;">
+                                        @{
+                                            double totalPages = ViewBag.totalPages;
+                                            if (ViewBag.PageNumber == 1)
+                                            {
+                                                <lu class="active" style="margin-left:4px;border:revert;border-color:lightgray;">
+                                                    @Html.ActionLink("Önceki", "GonderilenKutusu", new { PageNumber = ViewBag.PageNumber })
+                                                </lu>
+
+                                            }
+                                            else
+                                            {
+                                                <lu class="active" style="margin-left:4px;border:revert;border-color:lightgray;">
+                                                    @Html.ActionLink("Önceki", "GonderilenKutusu", new { PageNumber = ViewBag.PageNumber - 1 })
+                                                </lu>
+                                            }
+
+                                            for (int k = 1; k <= totalPages; k++)
+                                            {
+
+                                                if (k == ViewBag.PageNumber)
+                                                {
+                                                    <lu class="active" style="margin-left:4px;border:revert;border-color:lightgray;">
+                                                        @Html.ActionLink((k).ToString(), "GonderilenKutusu", new { PageNumber = k })
+                                                    </lu>
+                                                }
+                                                else
+                                                {
+                                                    <lu style="margin-left: 4px; border: solid; border-color: lightgray;">
+                                                        @Html.ActionLink((k).ToString(), "GonderilenKutusu", new { PageNumber = k })
+                                                    </lu>
+                                                }
+
+
+                                            }
+                                            if (ViewBag.PageNumber == totalPages)
+                                            {
+                                                <lu class="active" style="margin-left:4px;border:revert;border-color:lightgray;">
+                                                    @Html.ActionLink("Sonraki", "GonderilenKutusu", new { PageNumber = ViewBag.PageNumber  })
+                                                </lu>
+                                            }
+                                            else
+                                            {
+                                                <lu class="active" style="margin-left:4px;border:revert;border-color:lightgray;">
+                                                    @Html.ActionLink("Sonraki", "GonderilenKutusu", new { PageNumber = ViewBag.PageNumber + 1 })
+                                                </lu>
+                                            }
+                                        }
                                     </div>
-                                    <!-- /.btn-group -->
+
+
+
+
                                     <a role="button" href="/Mesaj/GonderilenKutusu/" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></a>
-                                    
+
                                     <!-- /.float-right -->
                                 </div>
                             </div>
@@ -128,15 +178,15 @@
         </div>
 
 
-    
+
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="~/Scripts/adminlte.min.js"></script>
     <!-- Page Script -->
     <script>
         $(function () {
@@ -175,7 +225,15 @@
                 }
             })
         })</script>
+
+    <script>
+        $('#example').dataTable({
+            "pageLength": 5
+        });
+    </script>
+
+
     <!-- AdminLTE for demo purposes -->
-    <script src="~/js/demo.js"></script>
+    <script src="~/Scripts/demo.js"></script>
 </body>
 </html>

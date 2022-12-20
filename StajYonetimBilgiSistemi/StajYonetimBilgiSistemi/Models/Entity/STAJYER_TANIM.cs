@@ -17,6 +17,7 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public STAJYER_TANIM()
         {
+            this.Basvuru = new HashSet<Basvuru>();
             this.GUNLUK_CALISMA = new HashSet<GUNLUK_CALISMA>();
         }
     
@@ -37,15 +38,19 @@ namespace StajYonetimBilgiSistemi.Models.Entity
         public int FK_STAJ_KURUM { get; set; }
         public int FK_DEPARTMAN { get; set; }
         public Nullable<int> kullaniciId { get; set; }
+        public Nullable<int> StajId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Basvuru> Basvuru { get; set; }
         public virtual Bolumler Bolumler { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GUNLUK_CALISMA> GUNLUK_CALISMA { get; set; }
+        public virtual Kullanicilar Kullanicilar { get; set; }
         public virtual KURUM_DEPARTMAN KURUM_DEPARTMAN { get; set; }
         public virtual KURUM_PERSONEL KURUM_PERSONEL { get; set; }
         public virtual KURUM_PERSONEL KURUM_PERSONEL1 { get; set; }
         public virtual KURUM_TANIM KURUM_TANIM { get; set; }
+        public virtual Stajlar Stajlar { get; set; }
         public virtual Uni Uni { get; set; }
-        public virtual Kullanicilar Kullanicilar { get; set; }
     }
 }

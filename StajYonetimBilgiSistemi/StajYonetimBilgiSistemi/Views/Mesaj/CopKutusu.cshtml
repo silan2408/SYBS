@@ -60,12 +60,12 @@
 
                                                
                                                     <td class="mailbox-name">
-                                                        <a href="/Mesaj/MesajDetaylari/@item.MesajBilgileriId">
-                                                            kimden : @item.GönderenMail kime: @item.AlıcıMail
+                                                        <a href="/Mesaj/MesajDetaylari2/@item.MesajBilgileriId">
+                                                            Kimden : @item.GönderenMail 
                                                         </a>
                                                     </td>
                                                     <td class="mailbox-subject">
-                                                        <b>@item.Konu</b>- @item.MesajIcerigi.Substring(0, 10)......
+                                                        <b>@item.Konu</b>
                                                     </td>
                                                     <td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
                                                     <td class="mailbox-date">@item.MesajTarihi</td>
@@ -82,16 +82,54 @@
                             <!-- /.card-body -->
                             <div class="card-footer p-0">
                                 <div class="mailbox-controls">
-                                    <!-- Check all button -->
-                                   
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
+                                    <div style="margin-right:100px;text-align:right;">
+                                        @{
+                                            double totalPages = ViewBag.totalPages;
+                                            if (ViewBag.PageNumber == 1)
+                                            {
+                                                <lu class="active" style="margin-left:4px;border:revert;border-color:lightgray;">
+                                                    @Html.ActionLink("Önceki", "CopKutusu", new { PageNumber = ViewBag.PageNumber })
+                                                </lu>
+
+                                            }
+                                            else
+                                            {
+                                                <lu class="active" style="margin-left:4px;border:revert;border-color:lightgray;">
+                                                    @Html.ActionLink("Önceki", "CopKutusu", new { PageNumber = ViewBag.PageNumber - 1 })
+                                                </lu>
+                                            }
+                                            for (int k = 1; k <= totalPages; k++)
+                                            {
+
+                                                if (k == ViewBag.PageNumber)
+                                                {
+                                                    <lu class="active" style="margin-left:4px;border:revert;border-color:lightgray;">
+                                                        @Html.ActionLink((k).ToString(), "CopKutusu", new { PageNumber = k })
+                                                    </lu>
+                                                }
+                                                else
+                                                {
+                                                    <lu style="margin-left: 4px; border: solid; border-color: lightgray;">
+                                                        @Html.ActionLink((k).ToString(), "CopKutusu", new { PageNumber = k })
+                                                    </lu>
+                                                }
+
+
+                                            }
+                                            if (ViewBag.PageNumber == totalPages)
+                                            {
+                                                <lu class="active" style="margin-left:4px;border:revert;border-color:lightgray;">
+                                                    @Html.ActionLink("Sonraki", "CopKutusu", new { PageNumber = ViewBag.PageNumber })
+                                                </lu>
+                                            }
+                                            else
+                                            {
+                                                <lu class="active" style="margin-left:4px;border:revert;border-color:lightgray;">
+                                                    @Html.ActionLink("Sonraki", "CopKutusu", new { PageNumber = ViewBag.PageNumber + 1 })
+                                                </lu>
+                                            }
+                                        }
                                     </div>
-                                    <!-- /.btn-group -->
-                                  
-                                    
-                                    <!-- /.float-right -->
                                 </div>
                             </div>
                         </div>
@@ -108,12 +146,11 @@
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- Page Script -->
+    <script src="~/Scripts/adminlte.min.js"></script>
     <script>
         $(function () {
             //Enable check and uncheck all functionality
@@ -152,6 +189,6 @@
             })
         })</script>
     <!-- AdminLTE for demo purposes -->
-    <script src="~/js/demo.js"></script>
+    <script src="~/Scripts/demo.js"></script>
 </body>
 </html>

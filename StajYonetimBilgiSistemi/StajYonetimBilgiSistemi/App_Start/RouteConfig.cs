@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Configuration;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace StajYonetimBilgiSistemi
@@ -12,8 +13,10 @@ namespace StajYonetimBilgiSistemi
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Login", id = UrlParameter.Optional }
-            );
+             
+                defaults: new { controller = "Home", action = "OpenPage", id = UrlParameter.Optional }
+            ) ;
         }
     }
 }
+ 

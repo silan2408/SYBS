@@ -23,7 +23,7 @@
     <!-- Theme style -->
     <link href="~/Css/adminlte.min.css" rel="stylesheet" />
     <!-- summernote -->
-    <link href="~/Css/summernote-bs4.css" rel="stylesheet" />
+
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -41,72 +41,82 @@
                 <div class="container-fluid">
                     <div class="row">
                         @Html.Action("MesajListesiMenusu", "Mesaj")
-                        @using (Html.BeginForm("MesajYaz2", "Mesaj", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                        {
-                            <!-- /.col -->
-                            @*<form class="login100-form validate-form" method="post" action="/Mesaj/MesajYaz2/" enctype="multipart/form-data">*@
+                        @using (Html.BeginForm("MesajYaz", "Mesaj", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {@Html.AntiForgeryToken()
+                        <div style="margin-left:20px;color:red;">
+                            @TempData["mesaj"]
+                        </div>
 
-                            <div class="col-md-9">
-                                <div class="card card-primary card-outline">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Yeni bir mesaj oluştur</h3>
+                        <div class="col-md-9">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h3 class="card-title">Yeni bir mesaj oluştur</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body" style="background-color: rgba(0,0,0,.03);">
+                                    <a href="/Mesaj/GetAll/">Kullanıcılar Listesi</a>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" value="@ViewBag.Alıcı" placeholder="Alıcı" name="AlıcıMail" required>
+
                                     </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body" style="background-color: rgba(0,0,0,.03);">
-                                        <a href="/Mesaj/GetAll/">Kullanıcılar Listesi</a>
-                                        <div class="form-group">
-                                            <input class="form-control" placeholder="Alıcı" name="AlıcıMail">
-                                        </div>
-                                        <div class="form-group">
-                                            <input class="form-control" placeholder="Konu:" name="Konu">
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea id="compose-textarea" class="form-control" name="MesajIcerigi" style="height: 300px">
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Konu:" name="Konu" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea id="compose-textarea" class="form-control" name="MesajIcerigi" style="height: 300px" required>
                                        
                                          </textarea>
-                                        </div>
-                                        <h6>Tek seferde en fazla 3 öğe gönderilebilir.</h6>
-                                        <div class="form-group">
-                                            <div class="btn btn-default btn-file">
-                                                <i class="fas fa-paperclip"></i> Gönderi 1
+                                    </div>
+                                    <h6>Tek seferde en fazla 3 öğe gönderilebilir.</h6>
+                                    <div style="display:flex;">
+
+                                        <div class="form-group" style="font-size: medium; justify-content: space-between;margin-left:10px; text-align:left;">
+                                            <div class="btn btn-default btn-file" style="font-size:medium;">
+                                                <i class="fas fa-paperclip" style="margin-left:10px;"></i> Gönderi 1
                                                 <input type="file" name="Dosyalar" accept=".png,.jpg,.jpeg,.gif,.tif,.pdf,.doc,.docx" multiple>
                                             </div>
                                             <p class="help-block">Max. 32MB</p>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="btn btn-default btn-file">
+
+                                        <div class="form-group" style="font-size:medium;">
+                                            <div class="btn btn-default btn-file" style="font-size:medium;">
                                                 <i class="fas fa-paperclip"></i> Gönderi 2
                                                 <input type="file" name="Dosyalar2" accept=".png,.jpg,.jpeg,.gif,.tif,.pdf,.doc,.docx" multiple>
                                             </div>
                                             <p class="help-block">Max. 32MB</p>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="btn btn-default btn-file">
+
+                                        <div class="form-group" style="font-size:medium;">
+                                            <div class="btn btn-default btn-file" style="font-size:medium;">
                                                 <i class="fas fa-paperclip"></i> Gönderi 3
                                                 <input type="file" name="Dosyalar3" accept=".png,.jpg,.jpeg,.gif,.tif,.pdf,.doc,.docx" multiple>
                                             </div>
                                             <p class="help-block">Max. 32MB</p>
                                         </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                    <div class="card-footer">
-                                        <div class="float-right">
-                                        
-                                            <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Gönder</button>
-                                        </div>
-                                        <a href="/Mesaj/MesajYaz/" class="btn btn-default"><i class="fas fa-times"></i> Sil</a>
+
                                     </div>
 
 
-
-
-                                    <!-- /.card-footer -->
                                 </div>
-                                <!-- /.card -->
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    <div class="float-right">
+
+                                        <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Gönder</button>
+                                    </div>
+                                    <a href="/Mesaj/MesajYaz/" class="btn btn-default"><i class="fas fa-times"></i> Sil</a>
+                                </div>
+
+
+
+
+                                <!-- /.card-footer -->
                             </div>
-                            <!-- /.col -->
-                            @*</form>*@
-                        }
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                        @*</form>*@
+                    }
 
                     </div>
                     <!-- /.row -->
@@ -116,24 +126,25 @@
         </div>
 
 
-   
+
     </div>
+
+    <script src="https://cdn.tiny.cloud/1/duer2orh362t0cqj16rbl11puh1oo9t0t1vbkgu40560qdnk/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#compose-textarea'
+        });
+
+    </script>
     <!-- ./wrapper -->
     <!--<!-- jQuery -->
-    <script src="~/js/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="~/js/adminlte.min.js"></script>
+    <script src="~/Scripts/adminlte.min.js"></script>
+
     <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
-    <!-- Summernote -->
-    <script src="~/js/summernote-bs4.min.js"></script>
-    <!-- Page Script -->
-    <script>
-        $(function () {
-            //Add text editor
-            $('#compose-textarea').summernote()
-        })</script>
+    <script src="~/Scripts/demo.js"></script>
 </body>
 </html>

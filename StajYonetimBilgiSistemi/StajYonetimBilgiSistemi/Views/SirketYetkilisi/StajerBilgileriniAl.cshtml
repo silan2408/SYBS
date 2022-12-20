@@ -1,184 +1,130 @@
 ﻿@using StajYonetimBilgiSistemi.Models.Entity
 @*@model List<StajYonetimBilgiSistemi.Models.Entity.STAJYER_TANIM>*@
-@model List<StajYonetimBilgiSistemi.Models.Entity.STAJYER_TANIM>
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.STAJYER_TANIM>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
 }
-<script src="~/vendor/jquery/jquery-1.10.2.min.js"></script>
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1em;
+        width: 100%;
+        display: table;
+    }
 
+    .webgrid-header {
+        background-color: #d4caca;
+        color: #808080;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-table td, th {
+        border: 1px solid #808080;
+        padding: 3px 7px 2px;
+    }
+</style>
+<h3 style="text-align:center;margin-bottom:20px;">~Kurumdaki Stajyerler~</h3>
 @using (Html.BeginForm())
 {
-    <br />
-    <label for="selectoption">Select Option:</label>
-    <select id="SelectOption" name="SelectOption">
-        <option value=null>Seçiniz.....</option>
-        @foreach (var item in Model)
-        {
+    <div style="float:left;margin-left:15px;">
+        <br />
 
-            <option value=@item.UNIVERSITE>@item.Uni.UniName</option>
+        <div>
+            <label for="selectoption2">Üniversite :</label>
+            <select id="SelectOption2" name="SelectOption2">
+                <option value=null>Seçiniz.....</option>
+                @foreach (var item in Model.Select(x => x.Uni.UniName).Distinct())
+                {
 
-        }
+                    <option value=@item>@item</option>
 
-    </select>
-    <div>
-        <button style="width:auto;font-size:medium;" type="submit" class="btn btn-primary">Ara :</button>
+                }
+
+            </select>
+
+        </div>
+        <div>
+            <label for="selectoption">Bölüm :</label> &nbsp; &nbsp; &nbsp;
+            <select id="SelectOption" name="SelectOption">
+                <option value=null>Seçiniz.....</option>
+                @foreach (var item in Model.Select(x => x.Bolumler.BolumName).Distinct())
+                {
+
+                    <option value=@item>@item</option>
+
+                }
+
+            </select>
+
+
+        </div>
+        <button style="width:80px;font-size:medium;float:left;margin-left:85px;margin-bottom:20px;" type="submit" class="btn btn-primary">Ara </button>
+        <br />
     </div>
 
-    <label for="selectoption2">Select Option:</label>
-    <select id="SelectOption2" name="SelectOption2">
-        <option value=null>Seçiniz.....</option>
-        @foreach (var item in Model)
-        {
 
-            <option value=@item.BOLUMU>@item.Bolumler.BolumName</option>
+    <div style="margin-right:45px;width:500px;float:right;display:flex;margin-top:50px;">
 
-        }
+        @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Ad Soyad Ara" })
 
-    </select>
-    <div>
-        <button type="submit" class="btn btn-primary">Ara :</button>
+        @*@Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })*@
+
+        <button type="submit" class="btn btn-primary">Ara </button>
+
     </div>
-    <br />
-
 }
 
-<div class="container left-0">
-    @using (Html.BeginForm())
-    {
-        <div class="form-group" style="width:50%;">
-            <div style="width:50%;float:left;">
-                @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Ad Soyad Ara" })
-            </div>
-            <div style="margin-left:0px">
-
-                @Html.ActionLink("Ara", "StajerBilgileriniAl", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })
-            </div>
-        </div>
-    }
-</div>
-
-@*@grid.GetHtml(
+@grid.GetHtml(
+      tableStyle: "webgrid-table",
+     headerStyle: "webgrid-header",
     columns: grid.Columns(
     grid.Column("PK_STAJYER_TANIM", "Id"),
-    grid.Column("ADI","Adı"),
-    grid.Column("SOYADI","Soyadı"),
-    grid.Column("UNIVERSITE","Üniversite"),
+    grid.Column("ADI", "Adı"),
+    grid.Column("SOYADI", "Soyadı"),
+    grid.Column("Uni.UniName", "Üniversite", format: x => x.Uni.UniName.ToLower()),
     grid.Column("UNIV_NO", "Üniversite Numarası"),
-    grid.Column("BOLUMU", "Bölümü"),
+    grid.Column("Bolumler.BolumName", "Bölümü"),
     grid.Column("SINIFI", "Sınıfı"),
     grid.Column("EMAIL", "Email"),
     grid.Column("TELEFON", "Telefon"),
     grid.Column("STAJ_YILI", "Staj Yılı"),
-    grid.Column("STAJ_BAS_TARIHI", "Staj Başlama Tarihi",format:x=>x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
-    grid.Column("STAJ_BIT_TARIHI", "Staj Bitiş Tarihi", format: x => x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
+    grid.Column("STAJ_BAS_TARIHI", "Staj Başlama Tarihi", format: x => x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
+    grid.Column("STAJ_BIT_TARIHI", "Staj Bitiş Tarihi", format: x => x.STAJ_BIT_TARIHI.ToString("dd.MM.yyyy")),
     grid.Column("KURUM_PERSONEL.ADI", "Kurum Staj Sorumlusu"),
     grid.Column("KURUM_PERSONEL1.ADI", "Kurum Onay Kişi"),
     grid.Column("KURUM_TANIM.FIRMA_ADI", "Staj Kurumu"),
-    grid.Column("KURUM_DEPARTMAN.ADI", "Staj Departmanı")
-    )
-    )*@
-
-<table class="table table-bordered " style=" display: block; overflow-x: auto; white-space: nowrap;">
-    <thead>
-        <tr>
-            <td>
-                ID
-            </td>
-            <td>
-                Adı
-            </td>
-            <td>
-                Soyadı
-            </td>
-            <td>
-                Üniversite
-            </td>
-            <td>
-                Üniversite No
-            </td>
-            <td>
-                Bölümü
-            </td>
-            <td>
-                Sınıfı
-            </td>
-            <td>
-                Email
-            </td>
-            <td>
-                Telefon
-            </td>
-            <td>
-                Staj Yılı
-            </td>
-            <td>
-                Staj Başlama Tarihi
-            </td>
-            <td>
-                Staj Bitiş Tarihi
-            </td>
-            <td>
-                Kurum Staj Sorumlusu
-            </td>
-            <td>
-                Kurum Onaylayan Kisi
-            </td>
-            <td>
-                Staj Kurum
-            </td>
-            <td>
-                Staj Departman
-            </td>
-            <td>
-                Sil
-            </td>
-            <td>
-                Güncelle
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var item in Model)
-        {
-
-            <tr>
-                <td>@item.PK_STAJYER_TANIM</td>
-                <td>@item.ADI</td>
-                <td>@item.SOYADI</td>
-                <td>@item.Uni.UniName.ToString()</td>
-                <td>@item.UNIV_NO</td>
-                <td>@item.Bolumler.BolumName</td>
-                <td>@item.SINIFI</td>
-                <td>@item.EMAIL</td>
-                <td>@item.TELEFON</td>
-                <td>@item.STAJ_YILI</td>
-                <td>@item.STAJ_BAS_TARIHI.Value.ToShortDateString()</td>
-                <td>@item.STAJ_BIT_TARIHI.Value.ToShortDateString()</td>
-                <td>@item.KURUM_PERSONEL.ADI</td>
-                <td>@item.KURUM_PERSONEL.ADI</td>
-                <td>@item.KURUM_TANIM.FIRMA_ADI</td>
-                <td>@item.KURUM_DEPARTMAN.ADI</td>
-                <td><a href="/SirketYetkilisi/SilBilgiGetirStajyer/@item.PK_STAJYER_TANIM" class="btn btn-danger">Sil</a></td>
-                <td><a href="/SirketYetkilisi/GuncelleBilgiGetirStajyer/@item.PK_STAJYER_TANIM" class="btn btn-warning">Güncelle</a></td>
-
-            </tr>
-
-        }
-    </tbody>
+    grid.Column("KURUM_DEPARTMAN.ADI", "Staj Departmanı"),
+    grid.Column("Güncelle", header: null, format: @<text>@Html.ActionLink(
+"Seç", "GuncelleBilgiGetirStajyer", new { id = item.PK_STAJYER_TANIM })</text>),
+grid.Column("Sil", header: null, format: @<text>@Html.ActionLink(
+"Seç", "SilBilgiGetir", new { id = item.PK_STAJYER_TANIM })</text>)
+)
+)
 
 
-</table>
-
-@*<b>Şuan ki stajyer sayısı : @ViewBag.Count</b>*@
 <br />
-<p>
-    @Html.ActionLink("PDF'e Dönüştür", "ExportToPdf")
-</p>
-<a href="/SirketYetkilisi/StajyerEkle/" class="btn btn-success" style="margin-top:auto">Stajyer Ekle</a>
+<div style="float:left;">
+    <a href="/SirketYetkilisi/StajerBilgileriniAl/" class="btn btn-success" style="margin-top:auto">Yenile</a>
+    <a href="/SirketYetkilisi/StajyerEkle/" class="btn btn-success" style="margin-top:auto">Stajyer Ekle</a>
+</div>
+<div style="float:right;">
+  
+    @using (Html.BeginForm("Export", "SirketYetkilisi", FormMethod.Post))
+    {
+        <input type="submit" value="Export Excel" />
+    }
+    <br />
+    @using (Html.BeginForm("ExportToPdf", "SirketYetkilisi", FormMethod.Post))
+    {
+        <input type="submit" value="Export Pdf" />
+    }
+</div>
 
-<a href="/SirketYetkilisi/StajerBilgileriniAl/" class="btn btn-success" style="margin-top:auto">Yenile</a>
+

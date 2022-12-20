@@ -1,40 +1,59 @@
 ﻿@model StajYonetimBilgiSistemi.Models.Entity.GUNLUK_CALISMA
+
 @{
     ViewBag.Title = "GunlukCalismaEkle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <div class="container">
 
     <form action="/GunlukCalisma/GunlukCalismaEkle2/" method="post">
+        <div class="w3-panel w3-red" style="justify-content:flex-end;">
+            <h3 style="color:red;">@TempData["mesaj"]</h3>
+        </div>
         @Html.AntiForgeryToken()
-        <div class="form-group">
-            <b>Stajyer : </b>
-        @ViewBag.stajyer
+        <div class="form-group" style="margin-left:auto;margin-right:auto; border-radius:5px; width:400px;padding:5px;">
 
+            <b class="form-control" style="background-color:#b200ff;color:white;text-align:center;">
+                &nbsp;   &nbsp;   &nbsp;    Stajyer :    @ViewBag.stajyer
+            </b>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="float:left;border-radius:15px;">
             <label for="TARIH">Tarih :</label>
-       
-            <input type="datetime-local" id="TARIH" name="TARIH">
+
+            <input type="datetime-local" class=" form-control" style="width:520px;" id="TARIH" name="TARIH" required>
         </div>
+
+        <div class="form-group" style="float:right;width:520px;">
+            <label for="Baslik">Başlık :</label>
+
+            <input type="text" class=" form-control" id="Baslik" name="Baslik" placeholder="Başlık (3-100 karakter)" required>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="form-group">
+            <textarea id="mytextarea" name="ACIKLAMA" ></textarea>
+
+        </div>
+
 
         <div class="form-group">
-            <label>Açıklama :</label>
-            <br />  &nbsp; &nbsp; &nbsp;
-            <textarea name="ACIKLAMA"
-                      rows="10" cols="100"
-                      tabindex="40"></textarea>
+            <button class="btn btn-success" style="background-color:cornflowerblue;">Gunluk Çalışma Ekle</button>
+            <a style=" border: 1px solid #42e0ea; background-color: #42e0ea; padding: 8px; border-radius: 5px;color:white;" href="/GunlukCalisma/Index/">Geri Dön  </a>
 
         </div>
 
-        <div class="form-group">
-            <button class="btn btn-success">Gunluk Çalışma Ekle</button>
-            <a href="/GunlukCalisma/Index/">Geri Dön </a>
-        </div>
+
+
+
 
     </form>
 </div>
+
+<script src="https://cdn.tiny.cloud/1/duer2orh362t0cqj16rbl11puh1oo9t0t1vbkgu40560qdnk/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#mytextarea'
+    });
+
+</script>

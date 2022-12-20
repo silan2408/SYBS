@@ -6,8 +6,8 @@
     Layout = null;
     WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
 }
-<script src="~/vendor/jquery/jquery-1.10.2.min.js"></script>
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
 <p style="text-align:center;font-size:large;">Günlük Çalışma Listesi</p>
 
@@ -17,6 +17,10 @@
             <td>
                 Tarih
             </td>
+            <td>
+                Başlık
+            </td>
+
             <td>
                 Açıklama
             </td>
@@ -31,7 +35,8 @@
             <tr style="text-align: center; font-size: medium">
 
                 <td>@item.TARIH.ToShortDateString()</td>
-                <td>@item.ACIKLAMA</td>
+                <td>@item.Baslik</td>
+                <td>@Html.Raw(item.ACIKLAMA)</td>
 
 
             </tr>

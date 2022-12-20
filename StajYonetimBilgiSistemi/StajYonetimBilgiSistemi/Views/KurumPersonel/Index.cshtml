@@ -1,64 +1,62 @@
 ﻿@using StajYonetimBilgiSistemi.Models.Entity
-@model List<StajYonetimBilgiSistemi.Models.Entity.KURUM_PERSONEL>
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.KURUM_PERSONEL>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
 }
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+    }
 
-<h3 style="text-align:center;">Kurum Personel Sayfası</h3>
+    .webgrid-header {
+        background-color: #d4caca;
+        color: #808080;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <td>
-                ID
-            </td>
-            <td>
-                Departman
-            </td>
-            <td>
-                Adı
-            </td>
-            <td>
-                Soyadı
-            </td>
-            <td>
-                Unvan
-            </td>
-            <td>
-                GSM
-            </td>
-            <td>
-                Email
-            </td>
-            <td>
-                Kurumu
-            </td>
-            <td>
-                Sil
-            </td>
-            <td>
-                Güncelle
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.PK_KURUM_PERSONEL</td>
-                <td>@item.KURUM_DEPARTMAN.ADI</td>
-                <td>@item.ADI</td>
-                <td>@item.SOYADI</td>
-                <td>@item.UNVAN</td>
-                <td>@item.GSM</td>
-                <td>@item.EMAIL</td>
-                <td>@item.KURUM_TANIM.FIRMA_ADI</td>
-                <td><a href="/KurumPersonel/SilBilgiGetir/@item.PK_KURUM_PERSONEL" class="btn btn-danger">Sil</a></td>
-                <td><a href="/KurumPersonel/GuncelleBilgiGetir/@item.PK_KURUM_PERSONEL" class="btn btn-warning">Güncelle</a></td>
+    .webgrid-table td, th {
+        border: 1px solid #808080;
+        padding: 3px 7px 2px;
+    }
+</style>
+<h2 style="text-align:center;">~Kurum Personel Sayfası~</h2>
+@using (Html.BeginForm())
+{
+    <div style="margin-right:45px;width:500px;float:right;display:flex;margin-top:50px;margin-bottom:15px;">
 
-            </tr>
-        }
-    </tbody>
-</table>
-<a href="/KurumPersonel/PersonelEkle/" class="btn btn-success" >Personel Ekle</a>
+        @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Personel Ara" })
+        <button type="submit" class="btn btn-primary">Ara </button>
+
+    </div>
+}
+<br />
+@grid.GetHtml(
+      tableStyle: "webgrid-table",
+     headerStyle: "webgrid-header",
+    columns: grid.Columns(
+    grid.Column("PK_KURUM_PERSONEL", "Id"),
+
+        grid.Column("KURUM_DEPARTMAN.ADI", "Departman Adı"),
+            grid.Column("ADI", "Ad"),
+    grid.Column("SOYADI", "Soyad"),
+    grid.Column("UNVAN", "Unvan"),
+    grid.Column("GSM", "Telefon"),
+    grid.Column("EMAIL", "Email"),
+
+
+    grid.Column("KURUM_TANIM.FIRMA_ADI", "Firma Adı"),
+    grid.Column("Güncelle", header: null, format: @<text>@Html.ActionLink(
+"Seç", "GuncelleBilgiGetir", new { id = item.PK_KURUM_PERSONEL })</text>),
+grid.Column("Sil", header: null, format: @<text>@Html.ActionLink(
+"Seç", "SilBilgiGetir", new { id = item.PK_KURUM_PERSONEL })</text>)
+)
+)
+<br />
+<a href="/KurumPersonel/PersonelEkle/" class="btn btn-success">Personel Ekle</a>

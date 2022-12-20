@@ -4,22 +4,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GuncelleBilgiGetir</h2>
-
+<h2 style="text-align:center;"> Günlük Çalışma Bilgileri</h2>
+&nbsp; &nbsp;
 
 <div class="container">
-    <form action="/GunlukCalisma/Guncelle/">
-       
+    <form action="/GunlukCalisma/Guncelle/" method="post">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.FK_STAJYER_TANIM, new { @class = "form-control" })
+
         @Html.HiddenFor(x => x.PK_GUNLUK_CALISMA)
-        <div class="form-group">
-            <b>Stajyer : </b>
-            @Html.HiddenFor(m => m.FK_STAJYER_TANIM, new { @class = "form-control" })
-            @Html.DisplayFor(m => m.STAJYER_TANIM.ADI, new { @class = "form-control" })
+        <div class="form-group" style="margin-left:auto;margin-right:auto; border-radius:5px; width:400px;padding:5px;">
+
+            <a class="form-control" style="background-color:#b200ff;color:white;text-align:center;">
+                &nbsp;   &nbsp;   &nbsp;  Stajyer :    @Html.DisplayFor(m => m.STAJYER_TANIM.ADI, new { @class = "form-control" })
+            </a>
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <label for="TARIH">Tarih :</label>
-           
+            <br />
             @Html.TextBoxFor(x => x.TARIH, "{0:yyyy-MM-ddTHH:mm:ss}", new
                         {
                             @class = "form-control",
@@ -28,16 +32,42 @@
                         })
 
         </div>
-        <div class="form-group">
-            <b>Açıklama</b>
 
-            @Html.TextAreaFor(x => x.ACIKLAMA, new { @class = "form-control"  })
+        <div class="form-group" style="width:520px;float:right;">
+            <b>Başlık : </b>
+            <br />
+            <a style="font-size:15px;margin-top:15px;">
+                @Html.TextBoxFor(m => m.Baslik, new { @class = "form-control" })
+            </a>
+
+
+
+        </div>  <div style="clear:both;"></div>
+        <div class="form-group">
+            <textarea id="mytextarea" name="ACIKLAMA">
+
+@Html.DisplayFor(x=>x.ACIKLAMA, new { @class = "form-control" })
+</textarea>
+
 
         </div>
+        <div style="clear:both;"></div>
         <div>
-            <button class="btn btn-primary"> Günlük Çalışma Güncelle</button>
-            <a href="/GunlukCalisma/Index/">Geri Dön </a>
+            <button class="btn btn-primary"> Güncelle</button>
+            <a style=" border: 1px solid #42e0ea; background-color: #42e0ea; padding: 8px; border-radius: 5px;color:white;" href="/GunlukCalisma/Index/">Geri Dön  </a>
+
 
         </div>
     </form>
 </div>
+
+<div class="w3-panel w3-red" style="float:right;margin-right:50px;">
+    <h3 style="color:red;">@TempData["V"]</h3>
+</div>
+<script src="https://cdn.tiny.cloud/1/duer2orh362t0cqj16rbl11puh1oo9t0t1vbkgu40560qdnk/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#mytextarea'
+    });
+
+</script>

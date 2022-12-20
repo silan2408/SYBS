@@ -1,0 +1,58 @@
+﻿@using StajYonetimBilgiSistemi.Models.Entity
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.Stajlar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 5);
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+    }
+
+    .webgrid-header {
+        background-color: #d4caca;
+        color: #808080;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    a {
+        color: palevioletred;
+    }
+
+    .webgrid-table td, th {
+        border: 1px solid #808080;
+        padding: 3px 7px 2px;
+    }
+</style>
+<h2 style="text-align:center;margin-bottom:20px;">~Aktif Stajlar Listesi~</h2>
+
+<br />
+@ViewBag.Bilgi
+@grid.GetHtml(
+      tableStyle: "webgrid-table",
+     headerStyle: "webgrid-header",
+    columns: grid.Columns(
+    grid.Column("Pk_Staj_Id", "Id"),
+    grid.Column("KURUM_TANIM.FIRMA_ADI", "Firma Adı"),
+    grid.Column("KURUM_TANIM.FIRMA_YEKTILISI", "Firma Yetkilisi"),
+    grid.Column("KURUM_DEPARTMAN.ADI", "Departman Adı"),
+    grid.Column("Staj_Sınıflar", "Stajyer Sınıfı"),
+    grid.Column("Staj_Bas_Tarihi", "Başlama Tarihi", format: x => x.Staj_Bas_Tarihi.ToString("dd.MM.yyyy")),
+    grid.Column("Staj_Bit_Tarihi", "Bitiş Tarihi", format: x => x.Staj_Bit_Tarihi.ToString("dd.MM.yyyy")),
+    grid.Column("Aktiflik", "Aktiflik"),
+    grid.Column("Fk_Sorumlu_Personel", "Sorumlu Personel", format: x => x.KURUM_PERSONEL.UNVAN + ": " + x.KURUM_PERSONEL.ADI +" "+ x.KURUM_PERSONEL.SOYADI + " /" + x.KURUM_PERSONEL.KURUM_DEPARTMAN.ADI),
+    grid.Column("Fk_Onaylayan_Personel", "Onay Personel", format: y => y.KURUM_PERSONEL1.UNVAN + ": " + y.KURUM_PERSONEL1.ADI + " "+ y.KURUM_PERSONEL1.SOYADI + " /" + y.KURUM_PERSONEL1.KURUM_DEPARTMAN.ADI),
+
+grid.Column("Başvur", header: null, format: @<text>@Html.ActionLink(
+"Seç", "BasvuruList", new { id = item.Pk_Staj_Id }, new { onclick = "return confirm('Başvurmak istediğinden emin misin?');" })</text>)
+)
+)

@@ -35,7 +35,7 @@ namespace StajYonetimBilgiSistemi.Roller
         {
             throw new NotImplementedException();
         }
-        SBYSEntities14 db = new SBYSEntities14();
+        SBYSEntities db = new SBYSEntities();
         public override string[] GetRolesForUser(string username)
         {
             //var kullanici = db.Kullanicilar.FirstOrDefault(x => x.Email == username);

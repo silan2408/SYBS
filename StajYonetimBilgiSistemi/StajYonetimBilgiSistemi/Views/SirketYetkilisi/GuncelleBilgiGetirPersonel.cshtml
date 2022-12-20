@@ -4,58 +4,69 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GuncelleBilgiGetir</h2>
+<h3 style="text-align:center;">Personel Güncelle</h3>
 
 <div class="container">
-    <form action="/SirketYetkilisi/GuncellePersonel/">
-        @*<div class="form-group">
-                <b>Kurum Departman ID </b>
-
-                @Html.TextBoxFor(x => x.PK_KURUM_DEPARTMAN, new { @class = "form-control" })
-
-            </div>*@
+    <form action="/SirketYetkilisi/GuncellePersonel/" method="post">
+        @Html.AntiForgeryToken()
         @Html.HiddenFor(x => x.PK_KURUM_PERSONEL)
-        <div class="form-group">
-            <b>Kurum Departmanı </b>
-
-            @Html.DropDownListFor(m => m.FK_KURUM_DEPARTMAN, (List<SelectListItem>)ViewBag.dgr, "---Seçiniz---", new { @class = "form-control" })
+        <div class="form-group" style="width: 520px; float: left; ">
+            <b>Firma Adı:</b>
+            <br />
+            <b class="form-control" style="margin-left: 0px; font-size: large; border-radius: 5px; border-style: groove; width: 520px; background-color: white; background-color: #b200ff; color: white; text-align: center;">
+                @Html.DisplayFor(x => x.KURUM_TANIM.FIRMA_ADI, new { @class = "form-control" })
+            </b>
 
 
         </div>
-        <div class="form-group">
-            <b>Adı </b>
+        <div class="form-group" style="width:520px;float:right;">
+
+            <b> Departmanı </b>
+
+            @Html.DropDownListFor(m => m.FK_KURUM_DEPARTMAN, (List<SelectListItem>)ViewBag.dgr, "---Seçiniz---", new { @class = "form-control" })
+
+        </div>
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
+            <b>Soyadı</b>
 
             @Html.TextBoxFor(x => x.ADI, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <b>Soyadı</b>
 
             @Html.TextBoxFor(x => x.SOYADI, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <b>Unvan </b>
 
             @Html.TextBoxFor(x => x.UNVAN, new { @class = "form-control" })
 
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <b>Telefon </b>
 
             @Html.TextBoxFor(x => x.GSM, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <b>Email</b>
 
             @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control" })
 
         </div>
+        <div style="clear:both;"></div>
+        <div class="w3-panel w3-red" style="float:right;margin-right:50px;">
+            <h3 style="color:red;">@TempData["V"]</h3>
+        </div>
         <div>
-            <button class="btn btn-primary"> Kurum Personel Güncelle</button>
-            <a href="/SirketYetkilisi/PersonelBilgileriniAl/">Ana Sayfa </a>
+            <button class="btn btn-primary">Güncelle</button>
+            <a href="/SirketYetkilisi/PersonelBilgileriniAl/">Personel Listesi</a>
         </div>
 
     </form>

@@ -1,0 +1,30 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<canvas id="barChart" width="200" height="50"></canvas>
+<br />
+<script>
+    var c = document.getElementById("barChart");
+    var ctx = c.getContext("2d");
+    var tData = $.getValues("/Calisan/BarChartDataEF");
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: tData
+    });
+</script>
+<br />
+<br />
+
+<canvas id="barChart1" width="200" height="50"></canvas>
+<br />
+<script>
+    var c = document.getElementById("barChart1");
+    var ctx = c.getContext("2d");
+    var tData = $.getValues("/Calisan/BarChartDataEFUni");
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: tData
+    });
+</script>

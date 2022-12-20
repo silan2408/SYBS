@@ -4,47 +4,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GuncelleBilgiGetir</h2>
+<h2 style="text-align:center;">Kurum Bilgileri</h2>
+&nbsp; &nbsp;
 
-<div class="container">
-    <form action="/KurumTanim/Guncelle/">
-        @*<div class="form-group">
-            <b>Kurum Departman ID </b>
-
-            @Html.TextBoxFor(x => x.PK_KURUM_DEPARTMAN, new { @class = "form-control" })
-
-        </div>*@
+<div class="w3-panel w3-red" style="float:right;margin-right:50px;">
+    <h3 style="color:red;">@TempData["V"]</h3>
+</div>
+<div class="container" style="align-items:center;">
+    <form action="/KurumTanim/Guncelle/" method="post">
+        @Html.AntiForgeryToken()
         @Html.HiddenFor(x => x.PK_KURUM_TANIM)
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:left;">
             <b>Firma Adı </b>
 
             @Html.TextBoxFor(x => x.FIRMA_ADI, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <b>Firma Yektilisi </b>
 
             @Html.TextBoxFor(x => x.FIRMA_YEKTILISI, new { @class = "form-control" })
 
         </div>
+        <div style="clear:both;"></div>
         <div class="form-group">
             <b>Firma Adresi</b>
 
-            @Html.TextBoxFor(x => x.FIRMA_ADRESİ, new { @class = "form-control" })
+            @Html.TextAreaFor(x => x.FIRMA_ADRESİ, new { @class = "form-control", @style = "height:70px;" })
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:left;">
             <b>Telefon </b>
 
-            @Html.TextBoxFor(x => x.TELEFON, new { @class = "form-control" }) 
+            @Html.TextBoxFor(x => x.TELEFON, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <b>Email</b>
 
             @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control" })
 
         </div>
-        <div><button class="btn btn-primary">Kurum Tanım Güncelle</button></div>
+        <div style="clear:both;"></div>
+        <div>
+            <button class="btn btn-primary">Güncelle</button>
+            &nbsp;
+            <a href="/KurumTanim/Index/">Kurum Listesine Dön </a>
+        </div>
     </form>
 </div>

@@ -5,56 +5,62 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h3 style="text-align:center;">Personel Bilgileri</h3>
 <br />
 <br />
 
 <div class="container">
     @using (Html.BeginForm("SilPersonel", "SirketYetkilisi"))
-    {
-        <div class="form-group">
-            <b>Firma :</b>
-            @Html.DisplayFor(x => x.KURUM_TANIM.FIRMA_ADI, new { @class = "form-control" })
-        </div>
-        <br />
+    {@Html.HiddenFor(x => x.PK_KURUM_PERSONEL)
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <b>Firma :</b>
+        @Html.DisplayFor(x => x.KURUM_TANIM.FIRMA_ADI, new { @class = "form-control" })
+    </div>
+    <br />
 
-        <div class="form-group">
-            @Html.HiddenFor(x => x.PK_KURUM_PERSONEL)
-            <b>Kurum Departman Adı:</b>
-            @Html.DisplayFor(x => x.KURUM_DEPARTMAN.ADI, new { @class = "form-control" })
-        </div>
-        <br />
-        <div class="form-group">
-            <b>Personel Adı:</b>
-            @Html.DisplayFor(x => x.ADI, new { @class = "form-control" })
-        </div>
-        <br />
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
 
-        <div class="form-group">
-            <b>Personel Soyadı:</b>
-            @Html.DisplayFor(x => x.SOYADI, new { @class = "form-control" })
-        </div>
-        <br />
+        <b>Kurum Departman Adı:</b>
+        @Html.DisplayFor(x => x.KURUM_DEPARTMAN.ADI, new { @class = "form-control" })
+    </div>
+    <div style="clear:both;"></div>
+    <br />
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        <b>Personel Adı:</b>
+        @Html.DisplayFor(x => x.ADI, new { @class = "form-control" })
+    </div>
+    <br />
 
-        <div class="form-group">
-            <b>Personel Unvanı:</b>
-            @Html.DisplayFor(x => x.UNVAN, new { @class = "form-control" })
-        </div>
-        <br />
-        <div class="form-group">
-            <b>Personel Telefonu:</b>
-            @Html.DisplayFor(x => x.GSM, new { @class = "form-control" })
-        </div>
-        <br />
-        <div class="form-group">
-            <b>Personel Emaili:</b>
-            @Html.DisplayFor(x => x.EMAIL, new { @class = "form-control" })
-        </div>
-        <br />
-
-        <div>
-            <button class="btn btn-danger">Personel Sil </button>
-            &nbsp;
-            <a href="/SirketYetkilisi/PersonelBilgileriniAl/">Ana Sayfa </a>
-        </div>
-    }
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 2 ;width:500px; grid-row: 1; text-align: left; ">
+        <b>Personel Soyadı:</b>
+        @Html.DisplayFor(x => x.SOYADI, new { @class = "form-control" })
+    </div>
+    <br />
+    <div style="clear:both;"></div>
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        
+        <b>Personel Unvanı:</b>
+        @Html.DisplayFor(x => x.UNVAN, new { @class = "form-control" })
+    </div>
+    <br />
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        
+        <b>Personel Telefonu:</b>
+        @Html.DisplayFor(x => x.GSM, new { @class = "form-control" })
+    </div>
+    <div style="clear:both;"></div>
+    <br />
+    <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+        
+        <b>Personel Emaili:</b>
+        @Html.DisplayFor(x => x.EMAIL, new { @class = "form-control" })
+    </div>
+    <br />
+    <div style="clear:both;"></div>
+    <div>
+        <button class="btn btn-danger"  onclick = "return confirm('Are sure wants to delete?');"> Sil </button>
+        &nbsp;
+        <a href="/SirketYetkilisi/PersonelBilgileriniAl/">Personel Listesi</a>
+    </div>
+}
 </div>

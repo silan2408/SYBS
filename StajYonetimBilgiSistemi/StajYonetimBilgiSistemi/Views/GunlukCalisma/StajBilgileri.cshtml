@@ -1,0 +1,66 @@
+﻿@model StajYonetimBilgiSistemi.Models.Entity.Stajlar
+
+@{
+    ViewBag.Title = "StajBilgileri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3 style="justify-content:center;text-align:center;">Staj Bilgileri</h3>
+@if (Model != null)
+{
+    <div class="container">
+
+        @Html.HiddenFor(x => x.Pk_Staj_Id)
+        <div class="form-group" style="background-color: #d59b9b; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+
+            <b>Kurum:</b>
+            @Html.DisplayFor(x => x.KURUM_TANIM.FIRMA_ADI, new { @class = "form-control" })
+        </div>
+        <div class="form-group" style="background-color: #d59b9b; color: #fff; border-radius: 30px; padding: 10px; float: right; font-size: 100%; grid-column: 1; width: 500px; grid-row: 1; text-align: left; ">
+            <b>Departman:</b>
+            @Html.DisplayFor(x => x.KURUM_DEPARTMAN.ADI, new { @class = "form-control" })
+        </div>
+        <div style="clear:both;"></div>
+        <div class="form-group" style="background-color: #d59b9b; color: #fff; border-radius: 30px; padding: 10px; float: left; font-size: 100%; grid-column: 1; width: 500px; grid-row: 1; text-align: left; ">
+            <b>Sınıf:</b>
+            @Html.DisplayFor(x => x.Staj_Sınıflar, new { @class = "form-control" })
+        </div>
+        <div class="form-group" style="background-color: #d59b9b; color: #fff; border-radius: 30px; padding: 10px; float: right; font-size: 100%; grid-column: 1; width: 500px; grid-row: 1; text-align: left; ">
+            <b> Staj Başlama Tarihi:</b>
+            @Html.DisplayFor(x => x.Staj_Bas_Tarihi, new { @class = "form-control" })
+        </div>
+        <div style="clear:both;"></div>
+        <div class="form-group" style="background-color: #d59b9b; color: #fff; border-radius: 30px; padding: 10px; float: left; font-size: 100%; grid-column: 1; width: 500px; grid-row: 1; text-align: left; ">
+            <b>Staj Bitiş Tarihi:</b>
+            @Html.DisplayFor(x => x.Staj_Bit_Tarihi, new { @class = "form-control" })
+        </div>
+        <div class="form-group" style="background-color: #d59b9b; color: #fff; border-radius: 30px; padding: 10px; float: right; font-size: 100%; grid-column: 1; width: 500px; grid-row: 1; text-align: left; ">
+            <b>Başlık:</b>
+            @Html.DisplayFor(x => x.Baslik, new { @class = "form-control" })
+        </div>
+        <div style="clear:both;"></div>
+        <div class="form-group" style="background-color: #d59b9b; color: #fff; border-radius: 30px; padding: 10px; float: left; font-size: 100%; grid-column: 1; width: 500px; grid-row: 1; text-align: left; ">
+            <b> @Html.LabelFor(x => x.Aktiflik):</b>
+            @Html.DisplayFor(x => x.Aktiflik, new { @class = "form-control" })
+        </div>
+        <div class="form-group" style="background-color: #d59b9b; color: #fff; border-radius: 30px; padding: 10px; float: right; font-size: 100%; grid-column: 1; width: 500px; grid-row: 1; text-align: left; ">
+            <b> Onaylayan Personel:</b>
+            @Html.DisplayFor(x => x.KURUM_PERSONEL1.ADI , new { @class = "form-control" })
+        </div>
+        <div style="clear:both;"></div>
+        <div class="form-group" style="background-color: #d59b9b; color: #fff; border-radius: 30px; padding: 10px; float: left; font-size: 100%; grid-column: 1; width: 500px; grid-row: 1; text-align: left; ">
+            <b> Sorumlu Personel:</b>
+            @Html.DisplayFor(x => x.KURUM_PERSONEL.ADI, new { @class = "form-control" })
+        </div>
+
+        <div style="clear:both;"></div>
+     
+
+    </div>
+}
+
+else
+{
+
+    <b>
+        Aktif Stajınız yoktur
+    </b>} 

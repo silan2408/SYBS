@@ -1,0 +1,127 @@
+﻿@using StajYonetimBilgiSistemi.Models.Entity
+@*@model List<StajYonetimBilgiSistemi.Models.Entity.STAJYER_TANIM>*@
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.STAJYER_TANIM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1em;
+        width: 100%;
+        display: table;
+    }
+
+    .webgrid-header {
+        background-color: #d4caca;
+        color: #808080;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-table td, th {
+        border: 1px solid #808080;
+        padding: 3px 7px 2px;
+    }
+</style>
+<h4> @ViewBag.Data</h4>
+<h3 style="text-align:center;margin-bottom:20px;">~Staj Programındaki Stajyerler~</h3>
+@using (Html.BeginForm())
+{
+    <div style="float:left;margin-left:15px;">
+        <br />
+
+        <div>
+            <label for="selectoption2">Üniversite :</label>
+            <select id="SelectOption2" name="SelectOption2">
+                <option value=null>Seçiniz.....</option>
+                @foreach (var item in Model.Select(x => x.Uni.UniName).Distinct())
+                {
+
+                    <option value=@item>@item</option>
+
+                }
+
+            </select>
+
+        </div>
+        <div>
+            <label for="selectoption">Bölüm :</label> &nbsp; &nbsp; &nbsp;
+            <select id="SelectOption" name="SelectOption">
+                <option value=null>Seçiniz.....</option>
+                @foreach (var item in Model.Select(x => x.Bolumler.BolumName).Distinct())
+                {
+
+                    <option value=@item>@item</option>
+
+                }
+
+            </select>
+
+
+        </div>
+        <button style="width:80px;font-size:medium;float:left;margin-left:85px;margin-bottom:20px;" type="submit" class="btn btn-primary">Ara </button>
+        <br />
+    </div>
+
+
+    <div style="margin-right:45px;width:500px;float:right;display:flex;margin-top:50px;">
+
+        @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Ad Soyad Ara" })
+
+        @*@Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })*@
+
+        <button type="submit" class="btn btn-primary">Ara </button>
+
+    </div>
+}
+
+@grid.GetHtml(
+      tableStyle: "webgrid-table",
+     headerStyle: "webgrid-header",
+    columns: grid.Columns(
+    grid.Column("PK_STAJYER_TANIM", "Id"),
+    grid.Column("ADI", "Adı"),
+    grid.Column("SOYADI", "Soyadı"),
+    grid.Column("Uni.UniName", "Üniversite", format: x => x.Uni.UniName.ToLower()),
+    grid.Column("UNIV_NO", "Üniversite Numarası"),
+    grid.Column("Bolumler.BolumName", "Bölümü"),
+    grid.Column("SINIFI", "Sınıfı"),
+    grid.Column("EMAIL", "Email"),
+    grid.Column("TELEFON", "Telefon"),
+    grid.Column("STAJ_YILI", "Staj Yılı"),
+    grid.Column("STAJ_BAS_TARIHI", "Staj Başlama Tarihi", format: x => x.STAJ_BAS_TARIHI.ToString("dd.MM.yyyy")),
+    grid.Column("STAJ_BIT_TARIHI", "Staj Bitiş Tarihi", format: x => x.STAJ_BIT_TARIHI.ToString("dd.MM.yyyy")),
+    //grid.Column("KURUM_PERSONEL.ADI", "Kurum Staj Sorumlusu" , format: x => x.KURUM_PERSONEL.UNVAN + ": " + x.KURUM_PERSONEL.ADI + x.KURUM_PERSONEL.SOYADI + " /" + x.KURUM_PERSONEL.KURUM_DEPARTMAN.ADI),
+    //grid.Column("KURUM_PERSONEL1.ADI", "Kurum Onay Kişi" , format: y => y.KURUM_PERSONEL1.UNVAN + ": " + y.KURUM_PERSONEL1.ADI + y.KURUM_PERSONEL1.SOYADI + " /" + y.KURUM_PERSONEL1.KURUM_DEPARTMAN.ADI),
+    grid.Column("KURUM_TANIM.FIRMA_ADI", "Staj Kurumu"),
+    grid.Column("KURUM_DEPARTMAN.ADI", "Staj Departmanı")
+)
+)
+
+
+<br />
+
+<div style="float:left;">
+
+    @using (Html.BeginForm("Export", "SirketYetkilisi", FormMethod.Post))
+    {
+        <input type="submit" value="Export Excel" />
+    }
+    <br />
+    @using (Html.BeginForm("ExportToPdf", "SirketYetkilisi", FormMethod.Post))
+    {
+        <input type="submit" value="Export Pdf" />
+    }
+</div>
+<div style="float:right;margin-right:50px;">
+    <a href="/Calisan/StajyerleriAl/">Yenile</a>
+</div>
+
+

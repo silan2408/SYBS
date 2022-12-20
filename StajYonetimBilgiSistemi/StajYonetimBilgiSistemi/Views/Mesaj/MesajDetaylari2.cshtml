@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "MesajOku";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.MesajBilgileri>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Read Mail</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link href="~/Css/all.min.css" rel="stylesheet" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link href="~/Css/adminlte.min.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- /.navbar -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        @Html.Action("MesajListesiMenusu", "Mesaj")
+                        <!-- /.col -->
+                        <div class="col-md-9">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h3 class="card-title">Mail Oku</h3>
+
+                                </div>
+                                @foreach (var item in Model)
+                                {
+
+
+                                    <!-- /.card-header -->
+                                    <div class="card-body p-0">
+                                        <div class="mailbox-read-info">
+                                            <h5>Konu :@item.Konu</h5>
+                                            <br />
+                                            <h6>
+                                                Kime:  @item.AlıcıMail
+                                                <span class="mailbox-read-time float-right">@item.MesajTarihi</span>
+                                            </h6>
+
+                                        </div>
+                                        <hr />
+                                        <div class="mailbox-read-message">
+
+
+                                            @Html.Raw(item.MesajIcerigi)
+                                            <br />
+                                            <br />
+                                        </div>
+                                        <hr />
+                                        <!-- /.mailbox-read-info -->
+                                        <!--<div class="mailbox-controls with-border text-center">
+                                            <div class="btn-group">
+                                                <div class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Delete">
+                                                    <i class="bi bi-trash">
+                                                        @Html.ActionLink("Sil", "Index3", "Mesaj", new { id = @item.MesajBilgileriId }, new { onclick = "return confirm('Are sure wants to delete?');" })
+                                                    </i>
+                                                </div>-->
+                                                @*<a href="/Mesaj/MesajDetaylari/@ViewBag.NextID" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body">
+                                                        <i class="fas fa-reply"></i>
+                                                    </a>
+                                                    <a href="/Mesaj/MesajDetaylari/@ViewBag.NextID" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body">
+                                                        <i class="fas fa-share"></i>
+                                                        </a>*@
+                                            <!--</div>-->
+                                            <!-- /.btn-group -->
+
+                                        <!--</div>-->
+                                        <!-- /.mailbox-controls -->
+                                        <!-- /.mailbox-read-message -->
+                                    </div>
+
+                                    <div class="card-footer bg-gray-200">
+                                        <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+                                            @if (@item.Dosyalar != null)
+                                            {
+                                                <li>
+                                                    <div class="mailbox-attachment-info">
+                                                        <a @*href="@Url.Content(item.Dosyalar)"*@ class="mailbox-attachment-name">@item.Dosyalar.Substring(8)</a>
+                                                        <br />
+
+                                                        <span class="mailbox-attachment-size clearfix mt-1">
+                                                            <span>@((byte)item.Dosyalar.Length)Byte</span>
+
+                                                            <br />
+                                                            <i class="bi bi-cloud-arrow-down-fill">  @Html.ActionLink("İndir", "Download", new { file = @item.Dosyalar })</i>
+                                                        </span>
+                                                    </div>
+
+
+                                                </li>
+                                            }
+                                            @if (@item.Dosyalar2 != null)
+                                            {
+                                                <li style="margin-left:190px;margin-right:190px;">
+
+                                                    <div class="mailbox-attachment-info">
+                                                        <a @*href="@Url.Content(item.Dosyalar)"*@ class="mailbox-attachment-name">@item.Dosyalar2.Substring(8)</a>
+                                                        <span class="mailbox-attachment-size clearfix mt-1">
+                                                            <br />
+                                                            <span>@((byte)item.Dosyalar2.Length)Byte</span>
+
+                                                            <br />
+                                                            <i class="bi bi-cloud-arrow-down-fill">  @Html.ActionLink("İndir", "Download", new { file = @item.Dosyalar2 })</i>
+                                                        </span>
+                                                    </div>
+
+                                                </li>
+                                            }
+                                            @if (@item.Dosyalar3 != null)
+                                            {
+                                                <li>
+
+                                                    <div class="mailbox-attachment-info">
+                                                        <a @*href="@Url.Content(item.Dosyalar)"*@ class="mailbox-attachment-name">@item.Dosyalar3.Substring(8)</a>
+                                                        <span class="mailbox-attachment-size clearfix mt-1">
+                                                            <br />
+                                                            <span>@((byte)item.Dosyalar3.Length)Byte</span>
+
+                                                            <br />
+                                                            <i class="bi bi-cloud-arrow-down-fill">   @Html.ActionLink("İndir", "Download", new { file = @item.Dosyalar3 })</i>
+                                                        </span>
+                                                    </div>
+
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Scripts/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Scripts/demo.js"></script>
+    <!-- Bootstrap Font Icon CSS -->
+
+</body>
+</html>

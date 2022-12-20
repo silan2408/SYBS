@@ -5,70 +5,75 @@
 }
 
 <div class="container">
-    <form action="/Kullanici/Guncelle/">
-
+    <form action="/Kullanici/Guncelle/" method="post">
+        @Html.AntiForgeryToken()
         @Html.HiddenFor(x => x.Id)
 
-        <div class="form-group">
+        <div class="form-group" style="width: 520px; float: left; ">
             <b>Kullanıcı Adı </b>
 
             @Html.TextBoxFor(x => x.KullaniciAdi, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 520px; float: right; ">
             <b> Adı Soyadı</b>
 
             @Html.TextBoxFor(x => x.AdiSoyadi, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width: 520px; float: left; ">
             <b>Email </b>
 
             @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
 
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 520px; float: right; ">
             <b>Şifre </b>
-
-            @Html.TextBoxFor(x => x.Sifre, new { @class = "form-control" })
+            <br />
+            @Html.DisplayFor(x => x.Sifre, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width: 520px; float: left; ">
             <b>Şifre Tekrar</b>
-
-            @Html.TextBoxFor(x => x.SifreKontrol, new { @class = "form-control" })
+            <br />
+            @Html.DisplayFor(x => x.SifreKontrol, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 520px; float: right; ">
             <b>Rol </b>
 
             @Html.TextBoxFor(x => x.Rol, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width: 520px; float: left; ">
             <b>Kayıt Tarihi </b>
 
             @Html.DisplayFor(x => x.KayitTarihi, new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 520px; float: right; ">
             <b>Çalışan Kurum</b>
 
             @Html.DropDownListFor(m => m.CalisanKurumTanim, (List<SelectListItem>)ViewBag.dgr, "---Seçiniz---", new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width: 520px; float: left; ">
             <b>Çalışan Departman </b>
 
             @Html.DropDownListFor(m => m.CalisanDepartman, (List<SelectListItem>)ViewBag.dgr2, "---Seçiniz---", new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 520px; float: right; ">
             <b>Çalışan Personel </b>
             @Html.DropDownListFor(m => m.CalisanPersonel, (List<SelectListItem>)ViewBag.dgr3, "---Seçiniz---", new { @class = "form-control" })
 
         </div>
+        <div style="clear:both;"></div>
         <div>
             <button class="btn btn-primary"> Bilgilerini Güncelle</button>
             <a href="/Kullanici/KullaniciList/">Geri Dön </a>

@@ -3,35 +3,40 @@
     ViewBag.Title = "SilBilgiGetir";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<h2 style="text-align:center;">Kurum Silme Sayfası</h2>
+&nbsp; &nbsp;
 
 <div class="container">
     @using (Html.BeginForm("Sil", "KurumTanim"))
     {
-        <div class="form-group">
+        <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
             @Html.HiddenFor(x => x.PK_KURUM_TANIM)
-            <b>@Html.LabelFor(x => x.FIRMA_ADI):</b>  
+            <b>Firma Adı:  </b>   &nbsp;
             @Html.DisplayFor(x => x.FIRMA_ADI, new { @class = "form-control" })
         </div>
-        <div class="form-group">
-            <b> @Html.LabelFor(x => x.FIRMA_YEKTILISI):</b>
+        <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+            <b>Firma Yetkilisi:  </b>   &nbsp;
             @Html.DisplayFor(x => x.FIRMA_YEKTILISI, new { @class = "form-control" })
         </div>
-        <div class="form-group">
-            <b> @Html.LabelFor(x => x.FIRMA_ADRESİ):</b>
+        <div style="clear:both;"></div>
+        <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+            <b>Firma Adresi:  </b>   &nbsp;
             @Html.DisplayFor(x => x.FIRMA_ADRESİ, new { @class = "form-control" })
         </div>
-        <div class="form-group">
-            <b>@Html.LabelFor(x => x.TELEFON):</b> 
+        <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:right; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+            <b>Telefon:  </b>   &nbsp;
             @Html.DisplayFor(x => x.TELEFON, new { @class = "form-control" })
         </div>
-        <div class="form-group">
-            <b>@Html.LabelFor(x => x.EMAIL):</b> 
+        <div style="clear:both;"></div>
+        <div class="form-group" style="background-color: #808080; color: #fff; border-radius: 30px; padding: 10px;float:left; font-size: 100%; grid-column: 1 ;width:500px; grid-row: 1; text-align: left; ">
+            <b>Email:  </b>   &nbsp;
             @Html.DisplayFor(x => x.EMAIL, new { @class = "form-control" })
         </div>
-        <div>
-            <button class="btn btn-danger">Kurum Sil</button>
-            <a href="/GunlukCalisma/Index/">Ana Sayfa </a>
+        <div style="clear:both;"></div>
+        <div style="font-size:large;">
+            <button class="btn btn-danger"  onclick = "return confirm('Are sure wants to delete?');">Sil</button>
+            &nbsp;
+            <a href="/KurumTanim/Index/">Kurum Listesine Dön</a>
         </div>
     }
 </div>

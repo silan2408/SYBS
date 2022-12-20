@@ -1,58 +1,58 @@
 ﻿@using StajYonetimBilgiSistemi.Models.Entity
-@model List<StajYonetimBilgiSistemi.Models.Entity.KURUM_DEPARTMAN>
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.KURUM_DEPARTMAN>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
+
 }
 
-<h3 style="text-align:center;">Kurum Departman Sayfası</h3>
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+    }
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <td>
-                 ID
-            </td>
-            <td>
-                Kurum 
-            </td>
-            <td>
-                Adı
-            </td>
-            <td>
-                Aktif
-            </td>
-            <td>
-                Sil
-            </td>
-            <td>
-                Güncelle
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.PK_KURUM_DEPARTMAN</td>
-                <td>@item.KURUM_TANIM.FIRMA_ADI</td>
-                <td>@item.ADI</td>
-               
-                <td >
-                    @if(@item.AKTIF==1)
-                {
-                    <b>açık</b>
-                } else { 
-                    <b>kapalı</b>
-                    }
+    .webgrid-header {
+        background-color: #d4caca;
+        color: #808080;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
 
-                </td>
-           
-                <td><a href="/KurumDepartman/SilBilgiGetir/@item.PK_KURUM_DEPARTMAN" class="btn btn-danger">Sil</a></td>
-                <td><a href="/KurumDepartman/GuncelleBilgiGetir/@item.PK_KURUM_DEPARTMAN" class="btn btn-warning">Güncelle</a></td>
+    .webgrid-table td, th {
+        border: 1px solid #808080;
+        padding: 3px 7px 2px;
+    }
+</style>
+<h2 style="text-align:center;">~Kurum Departman Sayfası~</h2>
+@using (Html.BeginForm())
+{
+    <div style="margin-right:45px;width:500px;float:right;display:flex;margin-top:50px;margin-bottom:15px;">
 
-            </tr>
-        }
-    </tbody>
-</table>
+        @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Departman Ara" })
+        <button type="submit" class="btn btn-primary">Ara </button>
+
+    </div>
+}
+
+@grid.GetHtml(
+    tableStyle: "webgrid-table",
+     headerStyle: "webgrid-header",
+    columns: grid.Columns(
+
+grid.Column("PK_KURUM_DEPARTMAN", "Id"),
+grid.Column("KURUM_TANIM.FIRMA_ADI", "Kurum Adı"),
+grid.Column("ADI", "Adı"),
+grid.Column("AKTIF", "Aktif"),
+grid.Column("Güncelle", header: null, format: @<text>@Html.ActionLink(
+"Seç", "GuncelleBilgiGetir", new { id = item.PK_KURUM_DEPARTMAN })</text>),
+grid.Column("Sil", header: null, format: @<text>@Html.ActionLink(
+"Seç", "SilBilgiGetir", new { id = item.PK_KURUM_DEPARTMAN })</text>)
+)
+)
+ <br />
 <a href="/KurumDepartman/DepartmanEkle/" class="btn btn-success" style="margin-top">Departman Ekle</a>

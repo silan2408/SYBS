@@ -38,10 +38,10 @@ namespace StajYonetimBilgiSistemi.Models.Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GUNLUK_CALISMA> GUNLUK_CALISMA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<STAJYER_TANIM> STAJYER_TANIM { get; set; }
         public virtual KURUM_DEPARTMAN KURUM_DEPARTMAN { get; set; }
         public virtual KURUM_PERSONEL KURUM_PERSONEL { get; set; }
         public virtual KURUM_TANIM KURUM_TANIM { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<STAJYER_TANIM> STAJYER_TANIM { get; set; }
     }
 }

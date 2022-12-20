@@ -1,0 +1,91 @@
+﻿@model StajYonetimBilgiSistemi.Models.Entity.Stajlar
+@{
+    ViewBag.Title = "StajyerEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <form action="/SirketYetkilisi/StajEkle/" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group" style="width:520px;float:left;">
+            <label>Kurum:</label>
+            <br />
+            @ViewBag.dgr10
+
+        </div>
+        <div class="form-group" style="width:520px;float:right;">
+            <label>Departman</label>
+            @Html.DropDownListFor(m => m.Fk_Kurum_Departman, (List<SelectListItem>)ViewBag.dgr3, "---Seçiniz---", new { @class = "form-control" })
+
+        </div>
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
+            <label>Sınıf</label>
+            <br />
+            <select name="Staj_Sınıflar">
+                <option value=null>Seçiniz.....</option>
+                <option value="lise 1">lise 1</option>
+                <option value="lise 2">lise 2</option>
+                <option value="lise 3">lise 3</option>
+                <option value="lise 4">lise 4</option>
+                <option value="Hazırlık">hazırlık</option>
+                <option value="Üniversite 1">1. sınıf</option>
+                <option value="Üniversite 2">2. sınıf</option>
+                <option value="Üniversite 3">3. sınıf</option>
+                <option value="Üniversite 4">4. sınıf</option>
+
+
+            </select>
+
+        </div>
+
+        <div class="form-group" style="width:520px;float:right;">
+            <label>Staj Başlama Tarihi</label>
+            <input type="date" name="Staj_Bas_Tarihi" class="form-control" required />
+
+        </div>
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
+            <label>Staj Bitiş Tarihi</label>
+            <input type="date" name="Staj_Bit_Tarihi" class="form-control" required />
+
+        </div>
+        <div class="form-group" style="width:520px;float:right;">
+            <label>Aktiflik</label>
+            <br />
+            <select name="Aktiflik">
+                <option value=null>Seçiniz.....</option>
+                <option value=true>Açık</option>
+                <option value=false>Kapalı</option>
+
+            </select>
+
+        </div>
+            <div style="clear:both;"></div>
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
+            <label>Sorumlu Personel</label>
+
+            @Html.DropDownListFor(m => m.Fk_Sorumlu_Personel, (List<SelectListItem>)ViewBag.dgr4, "---Seçiniz---", new { @class = "form-control" })
+
+
+        </div>
+        <div class="form-group" style="width:520px;float:right;">
+            <label>Onaylayan Personel</label>
+
+            @Html.DropDownListFor(m => m.Fk_Onaylayan_Personel, (List<SelectListItem>)ViewBag.dgr4, "---Seçiniz---", new { @class = "form-control" })
+
+
+        </div>
+
+
+        <div style="clear:both;"></div>
+        <div class="w3-panel w3-red" style="float:left;">
+            <h3 style="color:red;">@TempData["mesaj"]</h3>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success"> Ekle</button>
+            <a style="color:deeppink;" href="/SirketYetkilisi/Stajlar/">Geri Dön </a>
+        </div>
+    </form>
+</div>

@@ -1,100 +1,70 @@
 ﻿
 @using StajYonetimBilgiSistemi.Models.Entity
-@model List<StajYonetimBilgiSistemi.Models.Entity.Kullanicilar>
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.Kullanicilar>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
 }
 
 <h3 style="text-align:center;">Kullanıcı Listesi</h3>
 
-<table class="table table-bordered"  style=" display: block; overflow-x: auto; white-space: nowrap;">
-    <thead>
-        <tr>
-            <td>
-                ID
-            </td>
-            <td>
-                Kullanıcı Adı
-            </td>
-            <td>
-                Ad Soyad
-            </td>
-            <td>
-                Email
-            </td>
-            <td>
-                Sifre
-            </td>
-            <td>
-                Sifre Kontrol
-            </td>
-            <td>
-                Kayıt Tarihi
-            </td>
-            <td>
-                Rol
-            </td>
-            <td>
-               Şirketi
-            </td>
-            <td>
-                Departmanı
-            </td>
-            <td>
-                Personel İsmi
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.KullaniciAdi</td>
-                <td>@item.AdiSoyadi</td>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1em;
+        width: 100%;
+        display: table;
+    }
+
+    .webgrid-header {
+        background-color: #d4caca;
+        color: #808080;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-table td, th {
+        border: 1px solid #808080;
+        padding: 3px 7px 2px;
+    }
+</style>
 
 
-                <td>@item.Email</td>
-                <td>@item.Sifre</td>
-                <td>@item.SifreKontrol</td>
 
-                <td>@item.KayitTarihi.ToShortDateString()</td>
-                <td>@item.Rol</td>
+    <div style="margin-right:45px;width:500px;float:right;display:flex;margin-top:50px;">
 
-                @if (@item.CalisanKurumTanim != null)
-                {
-                    <td>@item.KURUM_TANIM.FIRMA_ADI</td>
+        @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Ad Soyad Ara" })
 
-                }
-                @if (@item.CalisanKurumTanim == null)
-                {
-                    <td></td>
-                }
-                @if (@item.CalisanDepartman != null)
-                {
-                    <td>@item.KURUM_DEPARTMAN.ADI</td>
+        @*@Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })*@
 
-                }
-                @if (@item.CalisanDepartman == null)
-                {
-                    <td></td>
-                }
-                @if (@item.CalisanPersonel != null)
-                {
-                    <td>@item.KURUM_PERSONEL.ADI</td>
+        <button type="submit" class="btn btn-primary">Ara </button>
 
-                }
-                @if (@item.CalisanPersonel == null)
-                {
-                    <td></td>
-                }
+    </div>
 
-                <td><a href="/Kullanici/SilBilgiGetir/@item.Id" class="btn btn-warning">Sil</a></td>
-                <td><a href="/Kullanici/GuncelleBilgiGetir/@item.Id" class="btn btn-warning">Güncelle</a></td>
-            </tr>
-        }
 
-    </tbody>
+@grid.GetHtml(
+      tableStyle: "webgrid-table",
+     headerStyle: "webgrid-header",
+    columns: grid.Columns(
+    grid.Column("Id", "Id"),
+    grid.Column("KullaniciAdi", "Kullanıcı Adı"),
+    grid.Column("AdiSoyadi", "Adı Soyadı"),
+    grid.Column("Email", "Email"),
+    grid.Column("Rol", "Rol"),
+    grid.Column("KayitTarihi", "Kayıt Tarihi"),
+    grid.Column("CalisanKurumTanim", "Çalıştığı Kurum"),
+    grid.Column("CalisanDepartman", "Çalıştığı Departman"),
+    grid.Column("CalisanPersonel", "Çalışan"),
+    grid.Column("Sifre", "Şifre"),
+    grid.Column("SifreKontrol", "Şifre Kontrol"),
 
-</table>
+    grid.Column("Güncelle", header: null, format: @<text>@Html.ActionLink(
+"Seç", "GuncelleBilgiGetir", new { id = item.Id })</text>),
+grid.Column("Sil", header: null, format: @<text>@Html.ActionLink(
+"Seç", "SilBilgiGetir", new { id = item.Id })</text>)
+)
+)

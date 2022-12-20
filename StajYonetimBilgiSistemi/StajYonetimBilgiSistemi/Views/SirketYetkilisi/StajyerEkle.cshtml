@@ -3,93 +3,106 @@
     ViewBag.Title = "StajyerEkle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h2 style="text-align:center">
 
+  
+        @ViewBag.dgr10 Stajyeri
+
+  
+</h2>
 <div class="container">
-    <form action="/SirketYetkilisi/StajyerEkle2/">
-
-        <div class="form-group">
+    <form action="/SirketYetkilisi/StajyerEkle2/" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group" style="width:520px;float:left;">
             <label>Adı</label>
-            <input type="text" name="ADI" class="form-control" />
+            <input type="text" name="ADI" class="form-control" required />
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <label>Soyad</label>
-            <input type="text" name="SOYADI" class="form-control" />
+            <input type="text" name="SOYADI" class="form-control" required />
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <label>Üniversite</label>
             @Html.DropDownListFor(m => m.UNIVERSITE, (List<SelectListItem>)ViewBag.dgr4, "---Seçiniz---", new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <label>üniversite No</label>
-            <input type="text" name="UNIV_NO" class="form-control" />
+            <input type="text" name="UNIV_NO" class="form-control" required />
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <label>Bölümü</label>
 
             @Html.DropDownListFor(m => m.BOLUMU, (List<SelectListItem>)ViewBag.dgr5, "---Seçiniz---", new { @class = "form-control" })
 
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <label>Sınıfı</label>
-            <input type="text" name="SINIFI" class="form-control" />
+            <input type="text" name="SINIFI" class="form-control" required />
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <label>Email</label>
-            <input type="text" name="EMAIL" class="form-control" />
+            <input type="email" name="EMAIL" class="form-control" required />
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <label>Telefon</label>
-            <input type="text" name="TELEFON" class="form-control" />
+            <input type="text" name="TELEFON" class="form-control" required />
 
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <label>Staj Yılı</label>
-            <input type="text" name="STAJ_YILI" class="form-control" />
+            <input type="text" name="STAJ_YILI" class="form-control" required />
 
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <label>Staj Başlama Tarihi</label>
             @*@Html.TextBoxFor(x => x.STAJ_BAS_TARIHI, new { @class = "form-control", type = "date" })*@
             @Html.TextBoxFor(m => m.STAJ_BAS_TARIHI, "{0:dd/MM/yyyy}", new { @class = "form-control", type = "date" })
             @*<input type="date" name="STAJ_BAS_TARIHI" class="form-control" />*@
         </div>
-        <div class="form-group">
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <label>Staj Bitiş Tarihi</label>
             @Html.TextBoxFor(m => m.STAJ_BIT_TARIHI, "{0:dd/MM/yyyy}", new { @class = "form-control", type = "date" })
             @*@Html.TextBoxFor(x => x.STAJ_BIT_TARIHI, new { @class = "form-control", type = "date" })*@
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="width:520px;float:right;">
             <label>Kurum Staj Sorumlusu</label>
             @Html.DropDownListFor(m => m.KURUM_ST_SORUMLUSU, (List<SelectListItem>)ViewBag.dgr, "---Seçiniz---", new { @class = "form-control" })
 
         </div>
-        <div class="form-group">
+
+        <div style="clear:both;"></div>
+        <div class="form-group" style="width:520px;float:left;">
             <label>Kurum Onaylayan Kişi</label>
             @Html.DropDownListFor(m => m.KURUM_ONAY_KISI, (List<SelectListItem>)ViewBag.dgr1, "---Seçiniz---", new { @class = "form-control" })
 
 
         </div>
-        <div class="form-group">
-            <label>Kurum:</label>
-            @ViewBag.dgr10
+        <div class="form-group" style="width:520px;float:right;">
 
-        </div>
-        <div class="form-group">
             <label>Departman</label>
             @Html.DropDownListFor(m => m.FK_DEPARTMAN, (List<SelectListItem>)ViewBag.dgr3, "---Seçiniz---", new { @class = "form-control" })
 
+        </div>
 
+        <div style="clear:both;"></div>
+        <div class="w3-panel w3-red" style="float:right;">
+            <h3 style="color:red;">@TempData["mesaj"]</h3>
         </div>
         <div class="form-group">
-            <button class="btn btn-success">Stajyer Ekle</button>
+            <button class="btn btn-success"> Ekle</button>
             <a href="/SirketYetkilisi/StajerBilgileriniAl/">Geri Dön </a>
         </div>
     </form>

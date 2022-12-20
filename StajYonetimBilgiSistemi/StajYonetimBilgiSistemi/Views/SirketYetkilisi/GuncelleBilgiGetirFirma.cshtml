@@ -7,13 +7,8 @@
 <h2>GuncelleBilgiGetir</h2>
 
 <div class="container">
-    <form action="/SirketYetkilisi/GuncelleFirma/">
-        @*<div class="form-group">
-                <b>Kurum Departman ID </b>
-
-                @Html.TextBoxFor(x => x.PK_KURUM_DEPARTMAN, new { @class = "form-control" })
-
-            </div>*@
+    <form action="/SirketYetkilisi/GuncelleFirma/" method="post">
+        @Html.AntiForgeryToken()
         @Html.HiddenFor(x => x.PK_KURUM_TANIM)
         <div class="form-group">
             <b>Firma Adı </b>

@@ -29,6 +29,8 @@
             <td>
                 Çalıştığı Departman
             </td>
+            <td>
+            </td>
         </tr>
     </thead>
     <tbody>
@@ -59,6 +61,7 @@
                 {
                     <td></td>
                 }
+                <td>  @Html.ActionLink("Seç", "MesajYaz", new { alıcı = item.Email })</td>
             </tr>
 
         }
@@ -67,7 +70,20 @@
 
 </table>
 
+@*@grid.GetHtml(
+      tableStyle: "webgrid-table",
+     headerStyle: "webgrid-header",
+    columns: grid.Columns(
+    grid.Column("AdiSoyadi", "Id"),
+    grid.Column("Email", "Adı"),
+    grid.Column("Rol", "Tarih"),
+        //grid.Column("ACIKLAMA", "Açıklama", format: (item) => @Html.Raw(item.ACIKLAMA.TrimStart().Substring(0, 5))),
+        //grid.Column(null, null, format: @<input type="hidden" name="IDHidden" value="@item.ACIKLAMA" />),
+        grid.Column("CalisanKurumTanim", header: "Name", format: (item) => item.CalisanKurumTanim.Equals(null) ?  null :item.CalisanKurumTanim)
 
+)
+
+)*@
 @*<b>Şuan ki stajyer sayısı : @ViewBag.Count</b>*@
 <br />
 <a href="/Mesaj/MesajYaz/" style="color:deeppink;margin-left:400px;">Geriye Dön</a>

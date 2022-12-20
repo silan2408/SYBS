@@ -1,53 +1,54 @@
 ﻿@using StajYonetimBilgiSistemi.Models.Entity
-@model List<StajYonetimBilgiSistemi.Models.Entity.KURUM_PERSONEL>
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.KURUM_PERSONEL>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+    }
+
+    .webgrid-header {
+        background-color: #d4caca;
+        color: #808080;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-table td, th {
+        border: 1px solid #808080;
+        padding: 3px 7px 2px;
+    }
+</style>
+<h3 style="text-align:center;margin-bottom:20px;margin-left:0px;margin-right:0px;">Kurumdaki Personeller</h3>
+@using (Html.BeginForm())
+{
+    <div style="margin-right:45px;width:500px;float:right;display:flex;margin-top:50px;margin-bottom:15px;">
+
+        @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Ad Soyad Ara" })
+        <button type="submit" class="btn btn-primary">Ara </button>
+
+    </div>
 }
 
-<h2>Kurumunuzdaki Personel Bilgileri</h2>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <td>
-                Şirket
-            </td>
-            <td>
-                Departman
-            </td>
-            <td>
-                Adı
-            </td>
-            <td>
-                Soyadı
-            </td>
-            <td>
-                Unvan
-            </td>
-            <td>
-                GSM
-            </td>
-            <td>
-                Email
-            </td>
-      
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.KURUM_TANIM.FIRMA_ADI</td>
-                <td>@item.KURUM_DEPARTMAN.ADI</td>
-                <td>@item.ADI</td>
-                <td>@item.SOYADI</td>
-                <td>@item.UNVAN</td>
-                <td>@item.GSM</td>
-                <td>@item.EMAIL</td>
-               
-
-            </tr>
-        }
-    </tbody>
-</table>
+@grid.GetHtml(
+    tableStyle: "webgrid-table",
+     headerStyle: "webgrid-header",
+    columns: grid.Columns(
+    grid.Column("KURUM_TANIM.FIRMA_ADI", "Firma Adı"),
+    grid.Column("KURUM_DEPARTMAN.ADI", "Departman Adı"),
+    grid.Column("ADI", "Adı"),
+    grid.Column("SOYADI", "Soyadı"),
+    grid.Column("UNVAN", "Ünvan"),
+    grid.Column("GSM", "GSM"),
+    grid.Column("EMAIL", "Email")
+    )
+    )

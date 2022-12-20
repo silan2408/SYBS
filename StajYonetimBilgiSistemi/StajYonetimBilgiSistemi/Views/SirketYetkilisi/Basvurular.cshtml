@@ -1,0 +1,76 @@
+﻿
+@using StajYonetimBilgiSistemi.Models.Entity
+@model IEnumerable<StajYonetimBilgiSistemi.Models.Entity.Basvuru>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<style>
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+    }
+
+    .webgrid-header {
+        background-color: #d4caca;
+        color: #808080;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+    a{
+        color:deeppink;
+    }
+    .webgrid-table td, th {
+        border: 1px solid #808080;
+        padding: 3px 7px 2px;
+    }
+
+    .gridhyde {
+        visibility: hidden
+    }
+</style>
+<h4 style="text-align:center;">Tüm Başvurular</h4>
+
+@grid.GetHtml(
+      tableStyle: "webgrid-table",
+     headerStyle: "webgrid-header",
+    columns: grid.Columns(
+    grid.Column("PK_Basvuru_Id", "Id"),
+    grid.Column("Stajlar.Baslik", "Staj Başlığı"),   
+    grid.Column("Stajlar.KURUM_TANIM.FIRMA_ADI", "Firma Adı"),
+    //grid.Column("Fk_Stajyer_Id", "Stajyer Id"),
+    grid.Column("BasvuruTarihi", "Başvuru Tarihi", format: x => x.BasvuruTarihi.ToString("dd/MM/yyyy")),
+    grid.Column("Ad", "Adı"),
+    grid.Column("Soyad", "Soyadı"),
+    grid.Column("Uni.UniName", "Üniversite"),
+    grid.Column("Bolumler.BolumName", "Bölüm"),
+    //grid.Column("UniNo", "Uni No"),
+    //grid.Column("Tel", "Telefon"),
+    //grid.Column("Mail", "Mail"),
+    //grid.Column("Adres", "Adresi"),
+    grid.Column("Sınıf", "Sınıfı"),
+    //grid.Column("YabanciDil", "Yabancı Dil"),
+    //grid.Column("Seviye", "Seyiyesi"),
+    //grid.Column("DogumTarihi", "Doğum Tarihi"),
+    //grid.Column("Cinsiyet", "Cinsiyet"),
+    //grid.Column("Cv", "Cv"),
+    //grid.Column("Resim", "Resim url"),
+    //grid.Column("BasvuruYazisi", "Başvuru Yazısı"),
+
+    grid.Column("BasvuruDurumu", "Onay Durumu"),
+    grid.Column("Detaylar ", header: null, format: @<text>@Html.ActionLink(
+"Görüntüle", "BasvurDetayları", new { id = item.PK_Basvuru_Id })</text>),
+        grid.Column("  ", header: null, format: @<text>@Html.ActionLink(
+"RedEt", "Redet", new { id = item.PK_Basvuru_Id })</text>)
+
+)
+
+)
